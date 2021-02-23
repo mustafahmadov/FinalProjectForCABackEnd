@@ -81,3 +81,4 @@ C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netco
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Modal\Default.cshtml.g.cs
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\ProductCarousel\Default.cshtml.g.cs
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_QuickViewPartial.cshtml.g.cs
+C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\ProductSimple\Default.cshtml.g.cs

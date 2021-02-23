@@ -1,0 +1,48 @@
+﻿@model List<Product>
+@foreach (Product product in Model)
+{
+    <div class="product-item d-flex">
+        <div class="image ">
+            <a href="#">
+                <img width="145" height="145" alt="MF0029G-03..." title="MF0029G-03"
+                     class="swiper-lazy img-responsive img-mod-170-923 swiper-lazy-loaded"
+                     src="~/assets/images/@product.Image">
+            </a>
+
+        </div>
+        <div class="caption">
+            <div class="inner d-flex">
+                <div class="product-head">
+                    <h4>
+                        <a href="#">@product.Model</a>
+                    </h4>
+                    <p class="price">
+                        @if (product.Discount > 0)
+                        {
+                            <span class="product-price">
+                                <del class="text-muted">₼@product.Price</del>
+                                ₼@(product.Price-(product.Price*product.Discount/100))
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="product-price">
+                                <del class="text-muted"></del>
+                                ₼@product.Price
+                            </span>
+                        }
+                    </p>
+                </div>
+                <div class="button-group">
+                    <div class="inner">
+                        <button type="button" class="button-cart" title="Səbətə at">
+                            <span>
+                                <i class="fas fa-shopping-bag"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
