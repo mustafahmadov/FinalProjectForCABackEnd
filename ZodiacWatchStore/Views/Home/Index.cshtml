@@ -1,5 +1,7 @@
-﻿@{
+﻿@model HomeVM
+@{
     ViewData["Title"] = "Home Page";
+    bool isActive = true;
 }
 
 
@@ -11,24 +13,15 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="~/assets/images/hisseli-denis-web-780x508.png"
-                                 alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="~/assets/images/hədiyyə-kuponuWEB-780x508.png"
-                                 alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="~/assets/images/web-ucun-kampaniya-780x508.png"
-                                 alt="Third slide">
-                        </div>
+                        @foreach (Slider slider in Model.Sliders)
+                        {
+                            <div class=" carousel-item @(isActive ? "active" : "")">
+                                <img class="d-block w-100" src="~/assets/images/@slider.Image"
+                                     alt="First slide">
+                            </div>
+                            isActive = false;
+                        }
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
                        data-slide="prev">

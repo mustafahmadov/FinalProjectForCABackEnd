@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ZodiacWatchStore.Models
 {
-    public class Slider
+    public class Guarantee
     {
         public int Id { get; set; }
         [Required]
-        public string Image { get; set; }
-        public bool HasDeleted { get; set; }
-        public DateTime? DeletedTime { get; set; }
+        public string Icon { get; set; }
+        [Required,StringLength(maximumLength:25)]
+        public string Title { get; set; }
     }
 }
