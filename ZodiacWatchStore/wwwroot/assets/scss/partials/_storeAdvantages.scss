@@ -1,0 +1,12 @@
+.storeAdvantage{
+    text-align: center;
+    padding: 10px 0;
+    .col-md-12{
+        @include lg{
+            display: none;
+        }
+    }
+    img{
+        height: 200px!important;
+    }
+}

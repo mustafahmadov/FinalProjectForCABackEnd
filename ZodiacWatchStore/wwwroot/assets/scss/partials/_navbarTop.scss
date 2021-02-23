@@ -1,0 +1,73 @@
+.navbar-top{
+    border-bottom: 1px solid #ebebeb;
+    background: #fff;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .topbar{
+        float: right!important;
+        @include md{
+          float: none!important;
+        }
+        .dropdown{
+          button{
+            background: white;
+            color: #222;
+            outline: none;
+            border: none;
+            box-shadow: none;
+            @include md{
+              font-size: 0;
+            }
+          }
+          
+          .dropdown-menu{
+            z-index: 100000000000;
+          }
+          
+        }
+        
+        ul{
+            margin-bottom: 0!important;
+            @include md{
+              text-align: center;
+              
+            }
+            li{
+                
+                span,a,i{
+                  color: #888;
+                }
+                display: inline-block;
+                margin-right: 15px;
+                @include md{
+                  margin-right: 0;
+                  i{
+                    font-size: 0.9rem;
+                  }
+                  &:nth-child(2){
+                      border-left: 2px solid #888;
+                      border-right: 2px solid #888;
+                      padding: 0 10px;
+                  }
+                  &:nth-child(3){
+                    border-right: 2px solid #888;
+                    padding: 0 12px 0 10px;
+                  }
+                  &:nth-child(4){
+                    padding-left: 10px;
+                  }
+
+                  span{
+                    font-size: 0;
+                    i{
+                      color: #888;
+                    }
+                  }
+                }
+            }
+            
+        }
+    }
+}

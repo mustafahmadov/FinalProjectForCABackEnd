@@ -1,0 +1,21 @@
+.carousel-section{
+    margin-top: 2%;
+    @include lg{
+      display: block!important;
+    }
+    .row{
+      @include lg{
+        flex-direction: row!important;
+        display: flex;
+      }
+    }
+    .pay-image{
+      @include lg{
+        margin-top: 25px;
+        text-align: center;
+      }
+      @include sm{
+        margin-top: 10px!important;
+      }
+    }
+  }

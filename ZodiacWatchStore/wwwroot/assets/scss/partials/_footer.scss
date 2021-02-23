@@ -1,0 +1,16 @@
+footer{
+    padding: 60px 10px 20px 10px;
+    .footer-social{
+      width: 55px;
+      height: 55px;
+      line-height: 55px;
+      text-align: center;
+      background-color: white;
+      border-radius: 50%;
+      
+      a{
+        font-size: 1.9rem;
+        color: #e03d10!important;
+      }
+    }
+  }

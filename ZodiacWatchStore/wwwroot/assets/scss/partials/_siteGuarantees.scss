@@ -1,0 +1,33 @@
+.site-guarantees{
+    margin-top: 5%;
+    padding: 70px 0;
+    background-color: ghostwhite;
+    h1{
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .col-md-3{
+      padding: 0!important;
+    }
+    .icon-area{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border: 1px solid #fe4c1c;
+      padding: 30px;
+      i{
+        font-size: 2.8rem;
+        color: #fe4c1c;
+      }
+      p{
+        margin-bottom: 0!important;
+        color: #222;
+        font-weight: 600;
+        font-size: 1rem;
+        text-transform: uppercase;
+        margin-top: 15px;
+      }
+    }
+  }

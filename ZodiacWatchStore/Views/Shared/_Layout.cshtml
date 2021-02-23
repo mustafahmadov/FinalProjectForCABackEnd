@@ -1,48 +1,607 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ZodiacWatchStore</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="assets/css/reset.css"> <!-- CSS reset -->
+    <link href="assets/css/theme.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+    <title>Zodiac</title>
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="page-wrapper">
+        <nav class="navbar-top">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ZodiacWatchStore</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <div class="topbar">
+                    <ul class="box-top box-top-right pull-right">
+
+                        <li class="language-select">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="assets/images/az-az.png" alt="aze">
+                                    Azərbaycan
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">
+                                        <img src="assets/images/az-az.png" alt="aze">
+                                        Azərbaycan
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <img src="assets/images/ru-ru.png" alt="aze">
+                                        Русский
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <img src="assets/images/en-gb.png" alt="aze">
+                                        English
+                                    </a>
+                                </div>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>Əlaqə : +994709403125</span>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span>
+                                    <i class="fas fa-shopping-basket"></i>
+                                    Səbət
+                                </span>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span>
+                                    <i class="fa fa-share"></i>
+                                    Sifarişi rəsmiləşdir
+                                </span>
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+        <!-- ===========HEADER START =========== -->
+        <header id="header">
+            <div class="wrap">
+                <nav class="navbar navbar-expand-lg navbar-light shadow-sm relative navbar-main">
+                    <div class="container relative">
+                        <div class="page-logo relative">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                                    aria-label="Toggle navigation">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <a class="navbar-brand" href="index.html">
+                                <img src="assets/images/5a5dd993-5b7c-45ed-9f6e-969901fa048b_200x200 (1).png"
+                                     alt="page-logo" class="img-fluid">
+                            </a>
+                        </div>
+                        <div class="collapse navbar-collapse navbar-hover" id="navbarNavDropdown">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a href="productGrid.html" class="nav-link">KİŞİ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="productGrid.html" class="nav-link">Qadın</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="productGrid.html" class="nav-link">Uşaq</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="productGrid.html" class="nav-link">Brendlər</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="productGrid.html" class="nav-link">DİVAR Saatı</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="about.html" class="nav-link">Haqqımızda</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="contact.html" class="nav-link">Əlaqə</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="navbar-right">
+                            <ul>
+                                <li class="user">
+                                    <a href="#">
+                                        <i class="far fa-user"></i>
+                                    </a>
+                                    <ul class="d-none">
+                                        <li>Hesabım</li>
+                                        <li>Qeydiyyat</li>
+                                        <li>Giriş</li>
+                                    </ul>
+                                </li>
+                                <li class="heart">
+                                    <a href="#">
+                                        <i class="far fa-heart"></i>
+                                        <span class="heart-count">0</span>
+                                    </a>
+                                </li>
+                                <li class="shop">
+                                    <a href="#">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span>0</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+        </header>
+
+        <div class="second-wrap">
+            <div class="container">
+                <div class="d-flex">
+                    <div class="brands">
+                        <div class="brands-btn">
+                            brendlər
+                            <i class="fas fa-clock ml-1"></i>
+                        </div>
+                        <ul id="brands" class="brandsList">
+                            <li>
+                                <a href="#">casio</a>
+                            </li>
+                            <li>
+                                <a href="#">naviforce</a>
+                            </li>
+                            <li>
+                                <a href="#">tissot</a>
+                            </li>
+                            <li>
+                                <a href="#">citizen</a>
+                            </li>
+                            <li>
+                                <a href="#">casio</a>
+                            </li>
+                            <li>
+                                <a href="#">naviforce</a>
+                            </li>
+                            <li>
+                                <a href="#">tissot</a>
+                            </li>
+                            <li>
+                                <a href="#">citizen</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="search-container">
+                        <input type="text" name="search" id="text-search" value=""
+                               placeholder="Bütün mağaza üzrə axtarış..." class="searchText">
+                        <div id="sp-btn-search" class="btn-search">
+                            <button type="button" id="btn-search-category" class="btn btn-default btn-lg">
+                                <span class="hidden-xs">Axtar <i class="fas fa-search"></i></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="specials">
+                        <a href="#">Xüsusİ təklİf <i class="fa fa-store-alt"></i></a>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!--multi sec start-->
+        @RenderBody()
+        <section class="bg-light subscribe-section">
+            <div class="container">
+                <div class="row justify-content-center text-center mb-8">
+                    <div class="col-lg-6 col-md-10">
+                        <div class="section-heading">
+                            <h1>Abunə ol</h1>
+                            <h3>
+                                Email ünvanını qeyd et və yeniliklərdən həmişə ilk sən xəbərdar ol
+                            </h3>
+                            <hr>
+                        </div>
+                        <div class="subscribe-form">
+                            <form id="mc-form" class="row align-items-center no-gutters ">
+                                <div class="col">
+                                    <input value="" name="EMAIL" class="email form-control input-2 bg-white"
+                                           id="mc-email" placeholder="Email Ünvanı" required="" type="email">
+                                </div>
+                                <div class="col-auto">
+                                    <input class="btn btn-primary overflow-auto" name="subscribe" value="Göndər"
+                                           type="submit">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="p-0 mt-n11">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex flex-wrap align-items-center text-center bg-white shadow">
+                            <div class="clients-logo">
+                                <img class="img-fluid" src="assets/images/naviforce-watch-logo-large.jpg" alt="">
+                            </div>
+                            <div class="clients-logo">
+                                <img class="img-fluid" src="assets/images/TAG-Heuer-logo.jpg" alt="">
+                            </div>
+                            <div class="clients-logo">
+                                <img class="img-fluid" src="assets/images/rolex-logo.jpg" alt="">
+                            </div>
+                            <div class="clients-logo">
+                                <img class="img-fluid" src="assets/images/hublot-logo-png-6.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--multi sec end-->
+
+        <footer class="py-11 bg-dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-3">
+                        <a class="footer-logo text-white h2 mb-0" href="index.html">
+                            Zod<span class="text-primary">iac</span>
+                        </a>
+                        <p class="my-3 text-muted">
+                            Zodiac Watch Store - Azərbaycanda dünya brendlərinin original
+                            məhsullarının satışını
+                            həyata keçirən qurumdur.Məqsədimiz sizə ən keyfiyyətli saatları təqdim etməkdir.
+                        </p>
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item footer-social">
+                                <a class="text-light ic-2x" href="#">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item footer-social">
+                                <a class="text-light ic-2x" href="#">
+                                    <i class="fa fa-instagram"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item footer-social">
+                                <a class="text-light ic-2x" href="#">
+                                    <i class="fa fa-youtube"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-lg-6 mt-6 mt-lg-0">
+                        <div class="row">
+                            <div class="col-12 col-sm-4 navbar-dark">
+                                <h5 class="mb-4 text-white">Səhifə</h5>
+                                <ul class="navbar-nav list-unstyled mb-0">
+                                    <li class=" nav-item">
+                                        <a class="nav-link" href="index.html">Əsas Səhifə</a>
+                                    </li>
+                                    <li class=" nav-item">
+                                        <a class="nav-link" href="about.html">Haqqımızda</a>
+                                    </li>
+                                    <li class=" nav-item">
+                                        <a class="nav-link" href="faq.html">
+                                            Ən çox verilən
+                                            suallar
+                                        </a>
+                                    </li>
+                                    <li class=" nav-item">
+                                        <a class="nav-link" href="blog.html">Xəbərlər</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="shipping.html">Çatdırılma</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-12 col-sm-4 mt-6 mt-sm-0 navbar-dark">
+                                <h5 class="mb-4 text-white">Hesabım</h5>
+                                <ul class="navbar-nav list-unstyled mb-0">
+                                    <li class=" nav-item">
+                                        <a class="nav-link" href="#">Şəxsi Kabinet</a>
+                                    </li>
+                                    <li class=" nav-item">
+                                        <a class="nav-link" href="#">Sifariş Tarixçəsi</a>
+                                    </li>
+                                    <li class=" nav-item">
+                                        <a class="nav-link" href="#">Arzu siyahısı</a>
+                                    </li>
+                                    <li class=" nav-item">
+                                        <a class="nav-link" href="#">Səbətim</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-12 col-sm-4 mt-6 mt-sm-0 navbar-dark">
+                                <h5 class="mb-4 text-white">Brendlər</h5>
+                                <ul class="navbar-nav list-unstyled mb-0">
+                                    <li class=" nav-item">
+                                        <a class="nav-link" href="terms-and-conditions.html">
+                                            Casio
+                                        </a>
+                                    </li>
+                                    <li class=" nav-item">
+                                        <a class="nav-link" href="privacy-policy.html">Tissot</a>
+                                    </li>
+                                    <li class=" nav-item">
+                                        <a class="nav-link" href="#">Naviforce</a>
+                                    </li>
+                                    <li class=" nav-item">
+                                        <a class="nav-link" href="#">Tag Heuer</a>
+                                    </li>
+                                    <li class=" nav-item">
+                                        <a class="nav-link" href="#">Rolex</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 mt-6 mt-lg-0">
+                        <div class="d-flex mb-3 ">
+                            <div class="mr-2">
+                                <i class="fas fa-map ic-2x text-primary"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1 text-light">Mağazanın ünvanı</h6>
+                                <p class="mb-0 text-muted">Xətai rayonu,M.Hadi 65,Həzi Aslanov Metrosunun yanı</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="mr-2">
+                                <i class="fas fa-envelope ic-2x text-primary"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1 text-light">Email Ünvanımız</h6>
+                                <a class="text-muted" href="mailto:zodiacAze2021@gmail.com"> zodiacAze2021@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="mr-3">
+                                <i class="fas fa-mobile ic-2x text-primary"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1 text-light">Əlaqə nömrəsi</h6>
+                                <a class="text-muted" href="tel:+994709403125">+994-70-940-31-25</a>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="mr-2">
+                                <i class="fas fa-clock ic-2x text-primary"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1 text-light">İş saatları</h6>
+                                <span class="text-muted">Baz.Er - Bazar: 09:00 - 22:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-8">
+                <div class="row text-muted align-items-center">
+                    <div class="col-md-7">
+                        Copyright ©2021 Bütün hüquqlar qorunur | This Template is made by <u>
+                            <a class="text-primary" href="#">Mustafa Ahmadov</a>
+                        </u>
+                    </div>
+                    <div class="col-md-5 text-md-right mt-3 mt-md-0">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <img class="img-fluid" src="assets/images/01.png" alt="">
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <img class="img-fluid" src="assets/images/02.png" alt="">
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <img class="img-fluid" src="assets/images/03.png" alt="">
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <img class="img-fluid" src="assets/images/04.png" alt="">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - ZodiacWatchStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <!-- Cart Modal -->
+    <div class="modal cart-modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">Səbətim</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div class="row align-items-center">
+                            <div class="col-5 d-flex align-items-center">
+                                <div class="mr-4">
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <!-- Image -->
+                                <a href="product-left-image.html">
+                                    <img class="img-fluid" src="assets/images/VT-00002216-370x370.jpg" alt="product">
+                                </a>
+                            </div>
+                            <div class="col-7">
+                                <!-- Title -->
+                                <h6>
+                                    <a class="link-title" href="product-left-image.html">Men's Brand Tshirts</a>
+                                </h6>
+                                <div class="product-meta">
+                                    <span class="mr-2 text-primary">$27.00</span><span class="text-muted">x 1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-5">
+                    <div class="d-flex justify-content-between align-items-center mb-8">
+                        <span class="text-muted">Cəmi:</span> <span class="text-dark">$52.00</span>
+                    </div> <a href="product-cart.html" class="btn btn-primary btn-animated mr-2">
+                        <i class="fas fa-shopping-cart mr-1"></i>Ətraflı Bax
+                    </a>
+                    <a href="product-checkout.html" class="btn btn-dark">
+                        <i class="fas fa-money-check mr-1"></i>Ödəniş
+                        Panelinə Keç
+                    </a>
+                </div>
+            </div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="modal fade view-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0 pb-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5 col-12">
+                            <img class="img-fluid rounded" src="assets/images/VT-00002216-370x370.jpg" alt="image" />
+                        </div>
+                        <div class="col-lg-7 col-12 mt-5 mt-lg-0">
+                            <div class="product-details">
+                                <h3 class="mb-0">T-45d8678</h3>
+                                <div class="star-rating mb-4">
+                                    <i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i>
+                                </div> <span class="product-price h4">
+                                    $25.00 <del class="text-muted h6">$35.00</del>
+                                </span>
+                                <ul class="list-unstyled my-4">
+                                    <li class="mb-2">
+                                        Mövcudluq :<span class="text-muted"> Anbarda</span>
+                                    </li>
+                                    <li>
+                                        Brend :<span class="text-muted"> Tissot</span>
+                                    </li>
+                                    <li>
+                                        Kateqoriya :<span class="text-muted"> Kişi</span>
+                                    </li>
+                                </ul>
+                                <div class="d-sm-flex align-items-center mb-5">
+                                    <div class="d-flex align-items-center mr-sm-4">
+                                        <button class="btn-product btn-product-up">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input class="form-product" type="number" name="form-product" value="1">
+                                        <button class="btn-product btn-product-down">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex text-center ml-sm-4 mt-3 mt-sm-0">
+                                        <div class="form-check pl-0 mr-3">
+                                            <input type="radio" class="form-check-input" id="color-filter01"
+                                                   name="Radios">
+                                            <label class="form-check-label" for="color-filter01"
+                                                   data-bg-color="#3cb371"></label>
+                                        </div>
+                                        <div class="form-check pl-0 mr-3">
+                                            <input type="radio" class="form-check-input" id="color-filter02"
+                                                   name="Radios" checked>
+                                            <label class="form-check-label" for="color-filter02"
+                                                   data-bg-color="#4876ff"></label>
+                                        </div>
+                                        <div class="form-check pl-0 mr-3">
+                                            <input type="radio" class="form-check-input" id="color-filter03"
+                                                   name="Radios">
+                                            <label class="form-check-label" for="color-filter03"
+                                                   data-bg-color="#0a1b2b"></label>
+                                        </div>
+                                        <div class="form-check pl-0">
+                                            <input type="radio" class="form-check-input" id="color-filter04"
+                                                   name="Radios">
+                                            <label class="form-check-label" for="color-filter04"
+                                                   data-bg-color="#f94f15"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-sm-flex align-items-center mt-5">
+                                    <button class="btn btn-primary btn-animated mr-sm-4  mb-sm-0">
+                                        <i class="las la-shopping-cart mr-1"></i>Səbətə At
+                                    </button>
+                                    <a class="btn btn-animated btn-dark" href="#">
+                                        <i class="far fa-heart mr-1">
+
+                                        </i> Arzu siyahısına əlavə et
+                                    </a>
+                                </div>
+                                <div class="d-sm-flex align-items-center border-top pt-4 mt-5">
+                                    <h6 class="mb-sm-0 mr-sm-4">Paylaş:</h6>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <a class="bg-white shadow-sm rounded p-2"
+                                               href="#"><i class="fa fa-facebook"></i></a>
+                                        </li>
+
+                                        <li class="list-inline-item">
+                                            <a class="bg-white shadow-sm rounded p-2"
+                                               href="#"><i class="fa fa-instagram"></i></a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="bg-white shadow-sm rounded p-2"
+                                               href="#"><i class="fa fa-twitter"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="scroll-top"><a class="smoothscroll" href="#top"><i class="fas fa-angle-up"></i></a></div>
+
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://kit.fontawesome.com/0b80c37c76.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <!-- <script src="assets/js/theme-plugin.js"></script> -->
+    <!-- <script src="assets/js/theme-script.js"></script> -->
+
 </body>
+
+
 </html>
