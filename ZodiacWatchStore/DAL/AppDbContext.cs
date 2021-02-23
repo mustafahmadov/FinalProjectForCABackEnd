@@ -12,5 +12,6 @@ namespace ZodiacWatchStore.DAL
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options){}
 
         public DbSet<Bio> Bios { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
     }
 }
