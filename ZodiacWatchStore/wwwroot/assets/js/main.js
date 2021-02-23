@@ -1,4 +1,23 @@
-$(document).ready(function(){
+$(document).ready(function () {
+    let btnView = $(".btn-view")
+    $(document).on('click', '.fa-eye', function () {
+        let productId = $(this).parent().prev().val();
+        console.log("naxuy");
+        $.ajax({
+            url: '/Home/QuickView?id=' + productId,
+            type: 'Get',
+            success: function (res) {
+                $('.modal-content').append(res);
+                $('.close').click(function () {
+                    $('.modal-content').children('.modal-body').remove();
+                })
+            }
+        })
+    })
+
+
+
+
     $('.brands').click(function(){
         $('#brands').toggleClass('d-block');
     })

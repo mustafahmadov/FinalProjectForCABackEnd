@@ -44,5 +44,11 @@ namespace ZodiacWatchStore.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult QuickView(int? id)
+        {
+            Product product = _context.Products.Where(p => p.HasDeleted == false && p.Id == id).FirstOrDefault();
+            return PartialView("_QuickViewPartial", product);
+        }
     }
 }

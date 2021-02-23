@@ -35,5 +35,6 @@ namespace ZodiacWatchStore.ViewComponents
             }
             return View(await Task.FromResult(products));
         }
+        
     }
 }
