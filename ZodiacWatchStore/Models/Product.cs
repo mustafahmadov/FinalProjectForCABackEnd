@@ -34,7 +34,12 @@ namespace ZodiacWatchStore.Models
         public CaseThick CaseThick { get; set; }
         public int CaseThickId { get; set; }
         public GlassType GlassType { get; set; }
+        public Brand Brand { get; set; }
+        public int BrandId { get; set; }
         public int GlassTypeId { get; set; }
+        public List<ProductImage> ProductImages { get; set; }
+
+
 
 
 
