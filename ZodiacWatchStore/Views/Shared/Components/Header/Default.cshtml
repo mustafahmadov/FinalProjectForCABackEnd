@@ -1,4 +1,5 @@
-﻿<nav class="navbar-top">
+﻿@model Bio
+<nav class="navbar-top">
     <div class="container">
         <div class="topbar">
             <ul class="box-top box-top-right pull-right">
@@ -28,7 +29,7 @@
                 </li>
                 <li>
                     <i class="fas fa-phone"></i>
-                    <span>Əlaqə : +994709403125</span>
+                    <span>Əlaqə : @Model.Phone</span>
                 </li>
                 <li>
                     <a href="#">
@@ -64,7 +65,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
                     <a class="navbar-brand" href="index.html">
-                        <img src="assets/images/5a5dd993-5b7c-45ed-9f6e-969901fa048b_200x200 (1).png"
+                        <img src="assets/images/@Model.Logo"
                              alt="page-logo" class="img-fluid">
                     </a>
                 </div>
