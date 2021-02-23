@@ -6,9 +6,10 @@ using ZodiacWatchStore.Models;
 
 namespace ZodiacWatchStore.ViewModels
 {
-    public class HomeVM
+    public class HeaderFooterVM
     {
-        public List<Slider> Sliders { get; set; }
-        public List<Guarantee> Guarantees { get; set; }
+        public Bio Bio { get; set; }
+        public List<Brand> Brands { get; set; }
+        public List<Brand> MostSaledBrands { get; set; }
     }
 }

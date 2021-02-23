@@ -1,22 +1,16 @@
-﻿@model Bio
+﻿@model HeaderFooterVM
 
 <section class="p-0 mt-n11">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="d-flex flex-wrap align-items-center text-center bg-white shadow">
-                    <div class="clients-logo">
-                        <img class="img-fluid" src="assets/images/naviforce-watch-logo-large.jpg" alt="">
-                    </div>
-                    <div class="clients-logo">
-                        <img class="img-fluid" src="assets/images/TAG-Heuer-logo.jpg" alt="">
-                    </div>
-                    <div class="clients-logo">
-                        <img class="img-fluid" src="assets/images/rolex-logo.jpg" alt="">
-                    </div>
-                    <div class="clients-logo">
-                        <img class="img-fluid" src="assets/images/hublot-logo-png-6.png" alt="">
-                    </div>
+                    @foreach (Brand brand in Model.Brands)
+                    {
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/@brand.Image" alt="">
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -33,21 +27,21 @@
                     Zod<span class="text-primary">iac</span>
                 </a>
                 <p class="my-3 text-muted">
-                    @Model.Description
+                    @Model.Bio.Description
                 </p>
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item footer-social">
-                        <a class="text-light ic-2x" href="@Model.Facebook">
+                        <a class="text-light ic-2x" href="@Model.Bio.Facebook">
                             <i class="fa fa-facebook"></i>
                         </a>
                     </li>
                     <li class="list-inline-item footer-social">
-                        <a class="text-light ic-2x" href="@Model.Instagram">
+                        <a class="text-light ic-2x" href="@Model.Bio.Instagram">
                             <i class="fa fa-instagram"></i>
                         </a>
                     </li>
                     <li class="list-inline-item footer-social">
-                        <a class="text-light ic-2x" href="@Model.Youtube">
+                        <a class="text-light ic-2x" href="@Model.Bio.Youtube">
                             <i class="fa fa-youtube"></i>
                         </a>
                     </li>
@@ -98,23 +92,14 @@
                     <div class="col-12 col-sm-4 mt-6 mt-sm-0 navbar-dark">
                         <h5 class="mb-4 text-white">Brendlər</h5>
                         <ul class="navbar-nav list-unstyled mb-0">
-                            <li class=" nav-item">
-                                <a class="nav-link" href="terms-and-conditions.html">
-                                    Casio
-                                </a>
-                            </li>
-                            <li class=" nav-item">
-                                <a class="nav-link" href="privacy-policy.html">Tissot</a>
-                            </li>
-                            <li class=" nav-item">
-                                <a class="nav-link" href="#">Naviforce</a>
-                            </li>
-                            <li class=" nav-item">
-                                <a class="nav-link" href="#">Tag Heuer</a>
-                            </li>
-                            <li class=" nav-item">
-                                <a class="nav-link" href="#">Rolex</a>
-                            </li>
+                            @foreach (Brand brand in Model.MostSaledBrands)
+                            {
+                                <li class=" nav-item">
+                                    <a class="nav-link" href="terms-and-conditions.html">
+                                        @brand.Name
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -126,7 +111,7 @@
                     </div>
                     <div>
                         <h6 class="mb-1 text-light">Mağazanın ünvanı</h6>
-                        <p class="mb-0 text-muted">@Model.Address</p>
+                        <p class="mb-0 text-muted">@Model.Bio.Address</p>
                     </div>
                 </div>
                 <div class="d-flex mb-3">
@@ -135,7 +120,7 @@
                     </div>
                     <div>
                         <h6 class="mb-1 text-light">Email Ünvanımız</h6>
-                        <a class="text-muted" href="mailto:@Model.Email">@Model.Email</a>
+                        <a class="text-muted" href="mailto:@Model.Bio.Email">@Model.Bio.Email</a>
                     </div>
                 </div>
                 <div class="d-flex mb-3">
@@ -144,7 +129,7 @@
                     </div>
                     <div>
                         <h6 class="mb-1 text-light">Əlaqə nömrəsi</h6>
-                        <a class="text-muted" href="tel:@Model.Phone">@Model.Phone</a>
+                        <a class="text-muted" href="tel:@Model.Bio.Phone">@Model.Bio.Phone</a>
                     </div>
                 </div>
                 <div class="d-flex mb-3">
@@ -153,7 +138,7 @@
                     </div>
                     <div>
                         <h6 class="mb-1 text-light">İş saatları</h6>
-                        <span class="text-muted">@Model.WorkHours</span>
+                        <span class="text-muted">@Model.Bio.WorkHours</span>
                     </div>
                 </div>
             </div>

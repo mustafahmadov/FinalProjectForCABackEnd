@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ZodiacWatchStore.DAL;
 using ZodiacWatchStore.Models;
+using ZodiacWatchStore.ViewModels;
 
 namespace ZodiacWatchStore.ViewComponents
 {
@@ -18,8 +19,12 @@ namespace ZodiacWatchStore.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            Bio bio = _context.Bios.FirstOrDefault();
-            return View(await Task.FromResult(bio));
+            HeaderFooterVM viewModel = new HeaderFooterVM()
+            {
+                Bio = _context.Bios.FirstOrDefault(),
+                Brands = _context.Brands.Where(b => b.HasDeleted == false).ToList()
+            };
+            return View(await Task.FromResult(viewModel));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Bio
+﻿@model HeaderFooterVM
 <nav class="navbar-top">
     <div class="container">
         <div class="topbar">
@@ -29,7 +29,7 @@
                 </li>
                 <li>
                     <i class="fas fa-phone"></i>
-                    <span>Əlaqə : @Model.Phone</span>
+                    <span>Əlaqə : @Model.Bio.Phone</span>
                 </li>
                 <li>
                     <a href="#">
@@ -65,7 +65,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
                     <a class="navbar-brand" href="index.html">
-                        <img src="assets/images/@Model.Logo"
+                        <img src="assets/images/@Model.Bio.Logo"
                              alt="page-logo" class="img-fluid">
                     </a>
                 </div>
@@ -137,31 +137,12 @@
                     <i class="fas fa-clock ml-1"></i>
                 </div>
                 <ul id="brands" class="brandsList">
-                    <li>
-                        <a href="#">casio</a>
-                    </li>
-                    <li>
-                        <a href="#">naviforce</a>
-                    </li>
-                    <li>
-                        <a href="#">tissot</a>
-                    </li>
-                    <li>
-                        <a href="#">citizen</a>
-                    </li>
-                    <li>
-                        <a href="#">casio</a>
-                    </li>
-                    <li>
-                        <a href="#">naviforce</a>
-                    </li>
-                    <li>
-                        <a href="#">tissot</a>
-                    </li>
-                    <li>
-                        <a href="#">citizen</a>
-                    </li>
-
+                    @foreach (Brand brand in Model.Brands)
+                    {
+                        <li>
+                            <a href="#">@brand.Name</a>
+                        </li>
+                    }
                 </ul>
             </div>
             <div class="search-container">

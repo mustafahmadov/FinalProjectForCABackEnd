@@ -28,6 +28,7 @@ namespace ZodiacWatchStore.Controllers
             HomeVM homeVM = new HomeVM()
             {
                 Sliders = _context.Sliders.Where(s=>s.HasDeleted==false).ToList(),
+                Guarantees = _context.Guarantees.ToList()
             };
 
             return View(homeVM);

@@ -37,7 +37,7 @@ $('.shop').click(function(){
       
 })
 
-let stickyHeader = document.querySelector("header");
+    let stickyHeader = document.querySelector("header");
     let sticky = header.offsetTop;
     console.log(header.offsetTop);
     console.log(window.pageYOffset);
@@ -53,18 +53,6 @@ let stickyHeader = document.querySelector("header");
         makeStickyNav();
     });
     
-
-    function openNav() {
-        document.getElementById("mySidepanel").style.width = "350px";
-      }
-      
-      /* Set the width of the sidebar to 0 (hide it) */
-      function closeNav() {
-        document.getElementById("mySidepanel").style.width = "0";
-      }
-    // document.querySelector(".shop").addEventListener('click',function(){
-    //   $('cart-modal').toggleClass('show');
-    // });
       
     var email = document.getElementById('email'),
     button = document.getElementById('button');
@@ -73,7 +61,7 @@ function validateEmail(email) {
     var ex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     return ex.test(email);
 }
-$('.owl-carousel').owlCarousel({
+$('.big-carousel').owlCarousel({
   loop: true,
   margin: 10,
   nav: false,
@@ -96,6 +84,30 @@ $('.owl-carousel').owlCarousel({
           items: 5
       }
   }
+});
+$('.mini-carousel').owlCarousel({
+    loop: true,
+    margin: 10,
+    nav: false,
+    dots: true,
+    autoplay: true,
+    autoplayTimeout: 2000,
+    autoplayHoverPause: true,
+
+    responsive: {
+        0: {
+            items: 0
+        },
+        400: {
+            items: 0
+        },
+        600: {
+            items: 0
+        },
+        1000: {
+            items: 1
+        }
+    }
 });
 
 // email.addEventListener('keydown', function() {
