@@ -75,3 +75,6 @@ C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\bin\Debug\netco
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\ZodiacWatchStore.csproj.CoreCompileInputs.cache
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\ZodiacWatchStore.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Header\Default.cshtml.g.cs
+C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Footer\Default.cshtml.g.cs
+C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Subscribe\Default.cshtml.g.cs
