@@ -13,5 +13,16 @@ namespace ZodiacWatchStore.DAL
 
         public DbSet<Bio> Bios { get; set; }
         public DbSet<Slider> Sliders { get; set; }
+        public DbSet<Guarantee> Guarantees { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Mechanism> Mechanisms { get; set; }
+        public DbSet<GlassType> GlassTypes { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<CaseThick> CaseThicks { get; set; }
+        public DbSet<BandType> BandTypes { get; set; }
+        public DbSet<WaterProtection> WaterProtections { get; set; }
     }
 }

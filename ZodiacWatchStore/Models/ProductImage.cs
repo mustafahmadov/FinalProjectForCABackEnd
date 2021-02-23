@@ -13,5 +13,7 @@ namespace ZodiacWatchStore.Models
         public string Image { get; set; }
         public bool HasDeleted { get; set; }
         public DateTime? DeletedTime { get; set; }
+        public Product Product { get; set; }
+        public int ProductId { get; set; }
     }
 }
