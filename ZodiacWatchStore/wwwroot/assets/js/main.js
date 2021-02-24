@@ -20,7 +20,6 @@ $(document).ready(function () {
             url: '/Product/AddToBasket?Id=' + productId,
             type: 'Get',
             success: function (res) {
-                console.log(res);
                 $('.cart-modal .modal-body>div').children('.row').append(res);
             }
         })
@@ -136,6 +135,16 @@ $(document).ready(function () {
                 $('.cart-modal').css('display', 'none');
             }
         })
+        $('.btn-quick').click(function () {
+            console.log("jkdhkajs");
+            $(".view-modal").removeClass('show');
+        })
+
+    $(document).on('submit', '.deleteProduct', function (e) {
+        e.preventDefault();
+        $(this).parent().parent().parent().remove();
+    });
+       
 
 
 
