@@ -1,0 +1,10 @@
+.link-title{
+    &::before{
+        content: ""!important;
+        width: 15px!important;
+        height: 15px!important;
+    }
+}
+.widget{
+    margin-top: 6%;
+}

@@ -10,6 +10,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\assets\js\main.js" />
+    <None Include="wwwroot\assets\js\owl.carousel.min.js" />
+    <None Include="wwwroot\assets\js\sweetalert2.js" />
+    <None Include="wwwroot\assets\js\theme-script.js" />
+    <None Include="wwwroot\assets\scss\partials\_carouselSection.scss" />
+    <None Include="wwwroot\assets\scss\partials\_footer.scss" />
+    <None Include="wwwroot\assets\scss\partials\_galleryArea.scss" />
+    <None Include="wwwroot\assets\scss\partials\_header.scss" />
+    <None Include="wwwroot\assets\scss\partials\_mixedProducts.scss" />
+    <None Include="wwwroot\assets\scss\partials\_navbarTop.scss" />
+    <None Include="wwwroot\assets\scss\partials\_productDetail.scss" />
+    <None Include="wwwroot\assets\scss\partials\_productItem.scss" />
+    <None Include="wwwroot\assets\scss\partials\_reset.scss" />
+    <None Include="wwwroot\assets\scss\partials\_siteGuarantees.scss" />
+    <None Include="wwwroot\assets\scss\partials\_storeAdvantages.scss" />
+    <None Include="wwwroot\assets\scss\style.scss" />
+    <None Include="wwwroot\assets\scss\_base.scss" />
+    <None Include="wwwroot\assets\scss\_mixins.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">

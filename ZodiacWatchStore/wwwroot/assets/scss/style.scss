@@ -11,9 +11,18 @@
 @import '../scss/partials/productDetail';
 @import '../scss/partials/mixedProducts';
 @import '../scss/partials/storeAdvantages';
+@import '../scss/partials/filterSection';
 
 
-
+.modal-backdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 104000000;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+}
 
 
 

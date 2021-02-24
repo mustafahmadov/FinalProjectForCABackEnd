@@ -49,9 +49,9 @@ $.fn.exists = function () {
 /*------------------------------------
   HT PreLoader
 --------------------------------------*/
-// function preloader() {
-//    $('#ht-preloader').fadeOut();
-// };
+function preloader() {
+   $('#ht-preloader').fadeOut();
+};
 
 /*------------------------------------
   HT FullScreen
@@ -171,15 +171,15 @@ function scrolltop() {
 /*------------------------------------
   HT Fixed Header
 --------------------------------------*/
-function fxheader() {
-  $(window).on('scroll', function () {
-    if ($(window).scrollTop() >= 300) {
-      $('#header-wrap').addClass('fixed-header');
-    } else {
-      $('#header-wrap').removeClass('fixed-header');
-    }
-  });
-};
+// function fxheader() {
+//   $(window).on('scroll', function () {
+//     if ($(window).scrollTop() >= 300) {
+//       $('#header').addClass('fixed-header');
+//     } else {
+//       $('#header').removeClass('fixed-header');
+//     }
+//   });
+// };
 
 
 /*------------------------------------------
@@ -198,9 +198,9 @@ function databgcolor() {
 };
 
 
-/*------------------------------------
-  HT Contact Form
---------------------------------------*/
+// /*------------------------------------
+//   HT Contact Form
+// --------------------------------------*/
 // function contactform() { 
 //     $('#contact-form').validator();
 
@@ -245,12 +245,12 @@ function databgcolor() {
 /*------------------------------------
   HT Parallax
 --------------------------------------*/
-// function parallax() {
-//   $(".parallaxie").parallaxie({
-//       speed: 0.4,
-//       offset: 0,
-//   });
-// };
+function parallax() {
+  $(".parallaxie").parallaxie({
+      speed: 0.4,
+      offset: 0,
+  });
+};
 
 
 /*------------------------------------
@@ -333,13 +333,9 @@ $(document).ready(function() {
     owlcarousel(),
     dropdown(),
     scrolltop(),
-    fxheader(),
     databgcolor(),  
-    contactform(),
-    parallax(),
     countdown(),
-    btnproduct(),
-    lightSlider();
+    btnproduct();
 });
 
 
@@ -348,9 +344,8 @@ $window.resize(function() {
 
 
 $(window).on('load', function() {
-    // preloader(),
+    preloader(),
     mailmodal();
-    // wowanimation();
 });
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
