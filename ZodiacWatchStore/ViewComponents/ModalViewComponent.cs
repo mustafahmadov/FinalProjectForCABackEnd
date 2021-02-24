@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ZodiacWatchStore.DAL;
 using ZodiacWatchStore.Models;
+using ZodiacWatchStore.ViewModels;
 
 namespace ZodiacWatchStore.ViewComponents
 {
@@ -18,8 +20,13 @@ namespace ZodiacWatchStore.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            Bio bio = _context.Bios.FirstOrDefault();
-            return View(await Task.FromResult(bio));
+            List<BasketVM> products = new List<BasketVM>();
+            if (Request.Cookies["basket"] != null)
+            {
+                products = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            }
+
+            return View(await Task.FromResult(products));
         }
     }
 }

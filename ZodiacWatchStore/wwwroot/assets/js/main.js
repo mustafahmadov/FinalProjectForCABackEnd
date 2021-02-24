@@ -14,6 +14,19 @@ $(document).ready(function () {
         })
     })
 
+    $(document).on('click', "#addToBasket", function () {
+        let productId = $(this).next().val();
+        $('.cart-modal .modal-body>div').children('.row').html("");
+        $.ajax({
+            url: '/Product/AddToBasket?Id=' + productId,
+            type: 'Get',
+            success: function (res) {
+                console.log(res);
+                $('.cart-modal .modal-body>div').children('.row').append(res);
+            }
+        })
+    })
+
 
 
 

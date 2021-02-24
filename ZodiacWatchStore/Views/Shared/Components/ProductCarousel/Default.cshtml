@@ -8,15 +8,15 @@
                             data-placement="left" title="Add to wishlist">
                         <i class="far fa-heart"></i>
                     </button>
-                    <a class="card-img d-block" href="product-left-image.html">
+                    <a class="card-img d-block" asp-controller="Product" asp-action="ProductDetails" asp-route-id="@product.Id">
                         <img class="card-img-top card-img-back" src="~/assets/images/@product.Image"
-                             alt="...">
+                             alt="image">
                     </a>
                     <div class="card-info">
                         <div class="card-body">
                             <div class="product-title">
                                 <a class="link-title"
-                                   href="product-left-image.html">@product.Model</a>
+                                   asp-controller="Product" asp-action="ProductDetails" asp-route-id="@product.Id">@product.Model</a>
                             </div>
                             <div class="mt-1">
                                 @if (product.Discount > 0)
@@ -42,16 +42,18 @@
                                         title="Compare" type="button">
                                     <i class="fas fa-random"></i>
                                 </button>
-                                <button class="btn-cart btn btn-primary btn-animated mx-3" type="button">
+                                <button class="btn-cart btn btn-primary btn-animated mx-3" type="button" id="addToBasket">
                                     <i class="fas fa-shopping-cart mr-1"></i>
                                 </button>
+                                <input class="basketProduct" type="hidden" value="@product.Id" />
+
                                 <button class="btn btn-view" data-toggle="tooltip" data-placement="top"
-                                        title="Quick View" >
+                                        title="Quick View">
                                     <input class="quickProduct" type="hidden" value="@product.Id" />
                                     <span data-target="#quick-view" data-toggle="modal">
                                         <i class="fas fa-eye"></i>
                                     </span>
-                                  
+
                                 </button>
                             </div>
                         </div>

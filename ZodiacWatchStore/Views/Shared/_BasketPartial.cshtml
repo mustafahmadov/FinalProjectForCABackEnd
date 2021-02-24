@@ -1,0 +1,32 @@
+﻿@model List<BasketVM>
+@if (Model.Count == 0)
+{
+    <p>Sizin səbətiniz boşdur!</p>
+}
+else
+{
+    @foreach (BasketVM product in Model)
+    {
+        <div class="col-5 d-flex align-items-center">
+            <div class="mr-4">
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <!-- Image -->
+            <a asp-controller="Product" asp-action="ProductDetails" asp-route-id="@product.Id">
+                <img class="img-fluid" src="~/assets/images/@product.Image" alt="product">
+            </a>
+        </div>
+        <div class="col-7">
+            <!-- Title -->
+            <h6>
+                <a class="link-title" asp-controller="Product" asp-action="ProductDetails" asp-route-id="@product.Id">@product.Model</a>
+            </h6>
+            <div class="product-meta">
+                <span class="mr-2 text-primary">₼@product.Price</span><span class="text-muted">x @product.Count</span>
+            </div>
+        </div>
+    }
+
+}

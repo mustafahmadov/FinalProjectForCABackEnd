@@ -156,3 +156,4 @@ C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netco
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\ZodiacWatchStore.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Product\Index.cshtml.g.cs
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Product\ProductDetails.cshtml.g.cs
+C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_BasketPartial.cshtml.g.cs
