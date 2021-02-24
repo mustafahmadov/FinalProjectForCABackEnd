@@ -3,7 +3,7 @@
 {
     <div class="product-item d-flex">
         <div class="image ">
-            <a href="#">
+            <a asp-controller="Product" asp-action="ProductDetails" asp-route-id="@product.Id">
                 <img width="145" height="145" alt="MF0029G-03..." title="MF0029G-03"
                      class="swiper-lazy img-responsive img-mod-170-923 swiper-lazy-loaded"
                      src="~/assets/images/@product.Image">

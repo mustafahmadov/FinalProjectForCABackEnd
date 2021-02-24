@@ -1,0 +1,190 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!--product details start-->
+
+<section class="product-details-gallery">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <div class="row align-center justify-content-center">
+                    <div class="product-image-gallery">
+                        <img class="pdp-product-image" id="main-product-image"
+                             src="~/assets/images/@Model.Image" alt=""
+                             style="width: 400px; height: 420px;">
+                        <br>
+                        <ul class="menu product-thumbs align-center">
+                            <li>
+                                <a class="sim-thumb" data-image="~/assets/images/@Model.Image">
+                                    <img src="~/assets/images/@Model.Image" alt="">
+                                </a>
+                            </li>
+                            @foreach (ProductImage image in Model.ProductImages)
+                            {
+                                <li>
+                                    <a class="sim-thumb" data-image="~/assets/images/@image.Image">
+                                        <img src="~/assets/images/@image.Image" alt="">
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12 mt-5 mt-lg-0">
+                <div class="product-details">
+                    <h3 class="mb-0">
+                        @Model.Model
+                    </h3>
+                    <span class="product-price h4">₼27.00 <del class="text-muted h6"></del></span>
+                    <ul class="list-unstyled my-4">
+                        <li class="mb-2">
+                            Mövcudluq:
+
+                            @if (Model.Count > 3)
+                            {
+                                <span class="text-muted">
+                                    Anbarda
+                                </span>
+                            }
+                            else if (Model.Count > 0 && Model.Count < 3)
+                            {
+                                <span class="text-muted">
+                                    Son @Model.Count ədəd!
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="text-muted">
+                                    Stokda Yoxdur
+                                </span>
+                            }
+
+                        </li>
+                        <li class="mb-2">
+                            Brend :<span class="text-muted"> @Model.Brand.Name</span>
+                        </li>
+                        <li class="mb-2">
+                            Model: <span class="text-muted">VT-00001211</span>
+                        </li>
+                        <li>
+                            Kateqoriya :<span class="text-muted"> Kişi</span>
+                        </li>
+                    </ul>
+                    <div class="d-sm-flex align-items-center mb-5">
+                        <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
+                        <div class="input-group plus-minus-input">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle" data-quantity="minus"
+                                        data-field="quantity">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <input class="input-group-field" type="number" name="quantity" value="0">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle" data-quantity="plus"
+                                        data-field="quantity">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex align-items-center mt-5">
+                        <button class="btn btn-primary btn-animated mr-sm-4 mb-3 mb-sm-0">
+                            <i class="fas fa-shopping-cart mr-1"></i>Səbətə At
+                        </button>
+                        <a class="btn btn-animated btn-dark" href="#">
+                            <i class="fas fa-heart mr-1"></i>
+                            Arzu siyahısına əlavə et
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center border-top border-bottom py-4 mt-5">
+                        <h6 class="mb-0 mr-4">Paylaş:</h6>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a class="bg-white shadow-sm rounded p-2" href="#">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <a class="bg-white shadow-sm rounded p-2" href="#">
+                                    <i class="fa fa-instagram"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="bg-white shadow-sm rounded p-2" href="#">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--product details end-->
+<!--tab start-->
+
+<section class="p-0 product-spec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tab">
+                    <!-- Nav tabs -->
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-tab2" data-toggle="tab" href="#tab3-2"
+                               role="tab" aria-selected="false">Specification</a>
+                        </div>
+                    </nav>
+                    <!-- Tab panes -->
+                    <div class="tab-content pt-5 p-0 show">
+                        <div role="tabpanel" class="tab-panel" id="tab3-2">
+                            <table class="table table-bordered mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td>Brend</td>
+                                        <td>Tissot</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mexanizm</td>
+                                        <td>Kvars-Xronoqraf</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Qolbaq Növü</td>
+                                        <td>Paslanmaz Polad</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Su Keçirməzlik</td>
+                                        <td>3 ATM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Şüşə</td>
+                                        <td>Mineral</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Korpus Ölçüsü</td>
+                                        <td>44 mm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kateqoriya</td>
+                                        <td>Kişi</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--tab end-->
