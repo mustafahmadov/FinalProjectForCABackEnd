@@ -15,17 +15,25 @@ $(document).ready(function () {
 
     $(document).on('click', "#addToBasket", function () {
         let productId = $(this).next().val();
-        $('.cart-modal .modal-body>div').children('.row').html("");
+        $('.cart-modal .modal-content .modal-body').remove();
         $.ajax({
             url: '/Product/AddToBasket?Id=' + productId,
             type: 'Get',
             success: function (res) {
-                $('.cart-modal .modal-body>div').children('.row').append(res);
+                $('.cart-modal .modal-content').append(res);
                 swal("Səbətə Əlavə Olundu!", {
                     buttons: false,
                     timer: 1000,
                     icon: "success",
+
                 });
+                $.ajax({
+                    url: '/Product/GetBasketCount',
+                    type: 'GET',
+                    success: function (res) {
+                        basketCount.text(res);
+                    }
+                })
             }
         })
     })
@@ -33,15 +41,35 @@ $(document).ready(function () {
     $(document).on('submit', '.deleteProduct', function (e) {
         e.preventDefault();
         let productId = $(this).children('input').val();
+        let basketCount = $('.shop span');
         console.log(productId);
         $.ajax({
             url: '/Product/DeleteFromBasket/?id=' + productId,
             type: 'Get',
             success: function (res) {
                 $('.cart-modal .modal-body>div').children('.row').append(res);
+                $.ajax({
+                    url: '/Product/GetBasketCount',
+                    type: 'GET',
+                    success: function (res) {
+                        basketCount.text(res);
+                    }
+                })
             }
+
         })
+        
     })
+
+    let basketCount = $('.shop span');
+    $.ajax({
+        url: '/Product/GetBasketCount',
+        type: 'GET',
+        success: function (res) {
+            basketCount.text(res);
+        }
+    })
+
     $('.btn-wishlist').click(function () {
         $(this).children(".fa-heart").toggleClass("fas");
     })

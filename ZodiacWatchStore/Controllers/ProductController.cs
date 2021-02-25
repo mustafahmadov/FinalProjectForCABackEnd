@@ -20,6 +20,8 @@ namespace ZodiacWatchStore.Controllers
         }
         public IActionResult Index()
         {
+            List<BasketVM> products = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            ViewBag.BasketCount = products.Count();
             return View();
         }
         public IActionResult ProductDetails(int? id)
@@ -64,21 +66,34 @@ namespace ZodiacWatchStore.Controllers
                     Count = 1,
                     Image = product.Image,
                     Model = product.Model,
-                    Price = product.Price
-                };
+                    Price = product.Price,
+                 };
                 products.Add(newProduct);
             }
             else
             {
                 isExist.Count++;
             }
+            foreach (BasketVM prod in products)
+            {
+                ViewBag.BasketTotal += prod.Price * prod.Count;
+            }
+            ViewBag.BasketCount = products.Count();
             Response.Cookies.Append("basket", JsonConvert.SerializeObject(products));
             //products = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
             return PartialView("_BasketPartial", products);
         }
 
-        public async Task<IActionResult> DeleteFromBasket(int? id)
+        public IActionResult GetBasketCount()
         {
+            List<BasketVM> basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            return Content(basket.Count.ToString());
+        }
+
+
+        public IActionResult DeleteFromBasket(int? id)
+        {
+            ViewBag.Total = 0;
             List<BasketVM> oldProducts = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
             if(oldProducts == null)
             {
@@ -87,6 +102,7 @@ namespace ZodiacWatchStore.Controllers
             BasketVM deletedProduct = oldProducts.FirstOrDefault(p => p.Id == id);
             if (deletedProduct == null) return NotFound();
             oldProducts.Remove(deletedProduct);
+            
             Response.Cookies.Append("basket", JsonConvert.SerializeObject(oldProducts));
 
             return PartialView("_BasketPartial",oldProducts);
