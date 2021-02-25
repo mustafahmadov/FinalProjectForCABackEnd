@@ -3,6 +3,9 @@ $(document).ready(function () {
         let productId = $(this).parent().prev().val();
         $.ajax({
             url: '/Home/QuickView?id=' + productId,
+            data: {
+                id: productId,
+            },
             type: 'Get',
             success: function (res) {
                 $('#quick-view .modal-content').append(res);
@@ -15,12 +18,18 @@ $(document).ready(function () {
 
     $(document).on('click', "#addToBasket", function () {
         let productId = $(this).next().val();
-        $('.cart-modal .modal-content .modal-body').remove();
+        let productCount = $('#quickViewInput').val();
+        $('.cart-modal .modal-content .modal-body .row').remove();
         $.ajax({
-            url: '/Product/AddToBasket?Id=' + productId,
+            url: '/Product/AddToBasket',
+            data: {
+                id: productId,
+                count: productCount,
+            },
             type: 'Get',
             success: function (res) {
-                $('.cart-modal .modal-content').append(res);
+                console.log(res);
+                $('.cart-modal .modal-content .modal-body').prepend(res);
                 swal("Səbətə Əlavə Olundu!", {
                     buttons: false,
                     timer: 1000,
@@ -37,7 +46,7 @@ $(document).ready(function () {
                             url: '/Product/GetBasketTotal',
                             type: 'GET',
                             success: function (res) {
-                                basketTotal.text(res);
+                                basketTotal.text('₼' + res);
                             }
                         })
                     }
@@ -55,8 +64,8 @@ $(document).ready(function () {
             url: '/Product/DeleteFromBasket/?id=' + productId,
             type: 'Get',
             success: function (res) {
-                $('.cart-modal .modal-content .modal-body').remove();
-                $('.cart-modal .modal-content ').append(res);
+                $('.cart-modal .modal-content .modal-body .row').remove();
+                $('.cart-modal .modal-content .modal-body').prepend(res);
                 $.ajax({
                     url: '/Product/GetBasketCount',
                     type: 'GET',
@@ -67,7 +76,7 @@ $(document).ready(function () {
                             url: '/Product/GetBasketTotal',
                             type: 'GET',
                             success: function (res) {
-                                basketTotal.text(res);
+                                basketTotal.text('₼'+res);
                             }
                         })
                     }
@@ -92,7 +101,7 @@ $(document).ready(function () {
         url: '/Product/GetBasketTotal',
         type: 'GET',
         success: function (res) {
-            basketTotal.text(res);
+            basketTotal.text('₼' + res);
         }
     })
 
@@ -289,8 +298,24 @@ jQuery(document).ready(function () {
             $('input[name=' + fieldName + ']').val(0);
         }
     });
+    $('.minus').click(function () {
+        var $input = $(this).parent().find('input');
+        var count = parseInt($input.val()) - 1;
+        count = count < 1 ? 1 : count;
+        $input.val(count);
+        $input.change();
+        return false;
+    });
+    $('.plus').click(function () {
+        var $input = $(this).parent().find('input');
+        $input.val(parseInt($input.val()) + 1);
+        $input.change();
+        return false;
+    });
 
 });
+
+
 
 
 

@@ -37,7 +37,7 @@ namespace ZodiacWatchStore.Controllers
                         .Where(p => p.HasDeleted == false && p.Id == id).FirstOrDefault();
             return View(product);
         }
-        public async Task<IActionResult> AddToBasket(int? id)
+        public async Task<IActionResult> AddToBasket(int? id,int? count)
         {
             if (id == null)
             {
@@ -58,7 +58,7 @@ namespace ZodiacWatchStore.Controllers
                 products = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
             }
             BasketVM isExist = products.FirstOrDefault(p => p.Id == id);
-            if (isExist == null)
+            if (isExist == null && count ==null)
             {
                 BasketVM newProduct = new BasketVM()
                 {
@@ -69,6 +69,23 @@ namespace ZodiacWatchStore.Controllers
                     Price = product.Price,
                  };
                 products.Add(newProduct);
+            }
+            else if(isExist == null && count != null)
+            {
+                BasketVM newProduct = new BasketVM()
+                {
+                    Id = product.Id,
+                    Count = (int)count,
+                    Image = product.Image,
+                    Model = product.Model,
+                    Price = product.Price,
+                };
+                products.Add(newProduct);
+            }
+            else if(isExist!=null && count != null)
+            {
+
+                isExist.Count += (int)count;
             }
             else
             {
