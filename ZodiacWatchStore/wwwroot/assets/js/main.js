@@ -110,6 +110,19 @@ $(document).ready(function () {
             }
         });
     })
+
+    $(document).on('click', '#removeFromWishlist', function (e) {
+        e.preventDefault();
+        let productId = $(this).prev().val();
+        $(this).parent().parent().parent().remove();
+        $.ajax({
+            url: '/Product/RemoveFromWishList?id=' + productId,
+            type: 'Get',
+            success: function (res) {
+                $('.table').append(res);
+            }
+        })
+    })
     $.ajax({
         url: '/Product/WishListCount',
         type: 'Get',

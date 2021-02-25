@@ -1,0 +1,46 @@
+﻿@model List<WishlListVM>
+<tbody>
+    @foreach (WishlListVM product in Model)
+    {
+        <tr>
+            <td class="text-center">
+                <a href="#">
+                    <img src="~/assets/images/@product.Image" alt="@product.Model"
+                         title="@product.Model">
+                </a>
+            </td>
+            <td class="text-left">
+                <a asp-controller="Product" asp-action="ProductDetails" asp-route-id="@product.Id">
+                    @product.Model
+                </a>
+            </td>
+            <td class="text-left">@product.ProductCode</td>
+            <td class="text-right">
+                @if (product.StatusCount > 0)
+                {
+                    <span>Anbarda</span>
+                }
+                else
+                {
+                    <span>Bitib</span>
+                }
+            </td>
+            <td class="text-right">
+                <div class="price">
+                    ₼@product.Price
+                </div>
+            </td>
+            <td class="text-center">
+                <button class="btn-cart btn btn-primary" type="button" data-toggle="tooltip" data-placement="top"
+                        title="AddBasket" id="addToBasket">
+                    <i class="fas fa-shopping-cart mr-1 "></i>
+                </button>
+                <input class="basketProduct" type="hidden" value="@product.Id" />
+                <button id="removeFromWishlist" data-toggle="tooltip" title="" class="btn btn-danger"
+                   data-original-title="Sil"><i class="fa fa-times"></i>
+                </button>
+            </td>
+        </tr>
+    }
+</tbody>
+

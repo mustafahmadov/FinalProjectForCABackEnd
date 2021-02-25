@@ -160,3 +160,4 @@ C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netco
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_InWishlistPartial.cshtml.g.cs
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_OutWishlistPartial.cshtml.g.cs
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Product\WishList.cshtml.g.cs
+C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_WishListPartial.cshtml.g.cs

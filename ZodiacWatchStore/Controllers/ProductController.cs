@@ -121,6 +121,7 @@ namespace ZodiacWatchStore.Controllers
 
         public IActionResult DeleteFromBasket(int? id)
         {
+            if (id == null) return NotFound();
             ViewBag.Total = 0;
             List<BasketVM> oldProducts = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
             if(oldProducts == null)
@@ -165,6 +166,21 @@ namespace ZodiacWatchStore.Controllers
             Response.Cookies.Append("wishlist", JsonConvert.SerializeObject(viewModel));
             return Json(viewModel);
         }
+        public IActionResult RemoveFromWishList(int? id)
+        {
+            if (id == null) return NotFound();
+            List<WishlListVM> wishlist = new List<WishlListVM>();
+            if (Request.Cookies["wishlist"] != null)
+            {
+                wishlist = JsonConvert.DeserializeObject<List<WishlListVM>>(Request.Cookies["wishlist"]);
+            }
+            WishlListVM deletedProduct = wishlist.FirstOrDefault(p => p.Id == id);
+            if (deletedProduct == null) return NotFound();
+
+            wishlist.Remove(deletedProduct);
+            Response.Cookies.Append("wishlist", JsonConvert.SerializeObject(wishlist));
+            return PartialView("_WishListPartial",wishlist);
+        }
         public IActionResult WishListCount()
         {
             List<WishlListVM> wishlist = JsonConvert.DeserializeObject<List<WishlListVM>>(Request.Cookies["wishlist"]);
@@ -173,7 +189,11 @@ namespace ZodiacWatchStore.Controllers
 
         public IActionResult WishList()
         {
-            List<WishlListVM> wishlist = JsonConvert.DeserializeObject<List<WishlListVM>>(Request.Cookies["wishlist"]);
+            List<WishlListVM> wishlist = new List<WishlListVM>();
+            if (Request.Cookies["wishlist"] != null)
+            {
+                wishlist = JsonConvert.DeserializeObject<List<WishlListVM>>(Request.Cookies["wishlist"]);
+            }
             return View(wishlist);
         }
     }

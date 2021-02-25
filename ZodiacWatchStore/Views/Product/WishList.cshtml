@@ -7,7 +7,15 @@
     <div class="row">
         <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-8 offset-sm-2">
             <div id="content">
-                <h2 class="text-center mb-4" >Arzu siyahısı</h2>
+                @if (Model.Count > 0)
+                {
+                    <h2 class="text-center mb-4">Arzu siyahısı</h2>
+                }
+                else
+                {
+                    <h2 class="text-center mb-4">Arzu siyahısı boşdur</h2>
+                }
+
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -57,8 +65,10 @@
                                             <i class="fas fa-shopping-cart mr-1 "></i>
                                         </button>
                                         <input class="basketProduct" type="hidden" value="@product.Id" />
-                                        <a href="#" data-toggle="tooltip" title="" class="btn btn-danger"
-                                           data-original-title="Sil"><i class="fa fa-times"></i></a>
+                                        <button id="removeFromWishlist" data-toggle="tooltip" title="" class="btn btn-danger"
+                                                data-original-title="Sil">
+                                            <i class="fa fa-times"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             }
