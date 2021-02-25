@@ -1,5 +1,5 @@
 ﻿@model List<BasketVM>
-<div class="modal-body ">
+<div class="modal-body">
     <div>
         <div class="row align-items-center">
             @if (Model.Count == 0)
@@ -10,29 +10,33 @@
             {
                 @foreach (BasketVM product in Model)
                 {
-                    <div class="col-5 d-flex align-items-center">
-                        <div class="mr-4">
-                            <form class="deleteProduct" asp-controller="Product" asp-action="DeleteFromBasket" asp-route-id="@product.Id">
-                                <input type="hidden" value="@product.Id" />
-                                <button type="submit" class="btn btn-primary btn-sm removeFromBasket">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </form>
-                        </div>
-                        <!-- Image -->
-                        <a asp-controller="Product" asp-action="ProductDetails" asp-route-id="@product.Id">
-                            <img class="img-fluid" src="~/assets/images/@product.Image" alt="product">
-                        </a>
-                    </div>
-                    <div class="col-7">
-                        <!-- Title -->
-                        <h6>
-                            <a class="link-title" asp-controller="Product" asp-action="ProductDetails" asp-route-id="@product.Id">@product.Model</a>
-                        </h6>
-                        <div class="product-meta">
-                            <span class="mr-2 text-primary">₼@product.Price</span><span class="text-muted">x @product.Count</span>
-                        </div>
-                    </div>
+        <div>
+            <div class="col-5 d-flex align-items-center">
+                <div class="mr-4">
+                    <form class="deleteProduct" asp-controller="Product" asp-action="DeleteFromBasket" asp-route-id="@product.Id">
+                        <input type="hidden" value="@product.Id" />
+                        <button type="submit" class="btn btn-primary btn-sm removeFromBasket">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </form>
+                </div>
+                <!-- Image -->
+                <a asp-controller="Product" asp-action="ProductDetails" asp-route-id="@product.Id">
+                    <img class="img-fluid" src="~/assets/images/@product.Image" alt="product">
+                </a>
+            </div>
+            <div class="col-7">
+                <!-- Title -->
+                <h6>
+                    <a class="link-title" asp-controller="Product" asp-action="ProductDetails" asp-route-id="@product.Id">@product.Model</a>
+                </h6>
+                <div class="product-meta">
+                    <span class="mr-2 text-primary">₼@product.Price</span><span class="text-muted">x @product.Count</span>
+                </div>
+            </div>
+        </div>
+            
+                    
                 }
 
             }
@@ -44,11 +48,8 @@
     <div class="d-flex justify-content-between align-items-center mb-8">
 
 
-        <span class="text-muted">Cəmi:</span> <span class="text-dark">
-            @foreach (BasketVM item in Model)
-            {
-                @(item.Price*item.Count)
-            }
+        <span class="text-muted">Cəmi:</span> <span class="text-dark basketTotal">
+            
         </span>
 
     </div> <a href="product-cart.html" class="btn btn-primary mr-2">

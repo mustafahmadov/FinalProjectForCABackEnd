@@ -90,6 +90,17 @@ namespace ZodiacWatchStore.Controllers
             return Content(basket.Count.ToString());
         }
 
+        public IActionResult GetBasketTotal()
+        {
+            int basketTotal = 0;
+            List<BasketVM> basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            foreach (BasketVM item in basket)
+            {
+                basketTotal += (int)item.Price * item.Count;
+            }
+            return Json(basketTotal);
+        }
+
 
         public IActionResult DeleteFromBasket(int? id)
         {
