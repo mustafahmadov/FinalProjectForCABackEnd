@@ -76,5 +76,20 @@ namespace ZodiacWatchStore.Controllers
             //products = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
             return PartialView("_BasketPartial", products);
         }
+
+        public async Task<IActionResult> DeleteFromBasket(int? id)
+        {
+            List<BasketVM> oldProducts = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            if(oldProducts == null)
+            {
+                return NotFound();
+            }
+            BasketVM deletedProduct = oldProducts.FirstOrDefault(p => p.Id == id);
+            if (deletedProduct == null) return NotFound();
+            oldProducts.Remove(deletedProduct);
+            Response.Cookies.Append("basket", JsonConvert.SerializeObject(oldProducts));
+
+            return PartialView("_BasketPartial",oldProducts);
+        }
     }
 }

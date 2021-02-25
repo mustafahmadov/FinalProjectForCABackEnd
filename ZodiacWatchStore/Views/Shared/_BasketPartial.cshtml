@@ -10,7 +10,8 @@ else
 <div>
     <div class="col-5 d-flex align-items-center">
         <div class="mr-4">
-            <form class="deleteProduct">
+            <form class="deleteProduct" asp-controller="Product" asp-action="DeleteFromBasket" asp-route-id="@product.Id">
+                <input type="hidden" value="@product.Id" />
                 <button type="submit" class="btn btn-primary btn-sm removeFromBasket">
                     <i class="fas fa-times"></i>
                 </button>

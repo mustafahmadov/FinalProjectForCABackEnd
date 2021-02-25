@@ -21,45 +21,44 @@ $(document).ready(function () {
             type: 'Get',
             success: function (res) {
                 $('.cart-modal .modal-body>div').children('.row').append(res);
+                swal("Səbətə Əlavə Olundu!", {
+                    buttons: false,
+                    timer: 1000,
+                    icon: "success",
+                });
             }
         })
     })
 
-    $('.btn-cart').click(function () {
-        let timerInterval
-        Swal.fire({
-            icon: 'success',
-            html: 'Səbətə əlavə olundu',
-            timer: 1300,
-            timerProgressBar: false,
-            showConfirmButton: false,
-            didOpen: () => {
-                timerInterval = setInterval(() => {
-                    const content = Swal.getContent()
-                    if (content) {
-                        const b = content.querySelector('b')
-                        if (b) {
-                            b.textContent = Swal.getTimerLeft()
-                        }
-                    }
-                }, 100)
-            },
-            willClose: () => {
-                clearInterval(timerInterval)
-            }
-        }).then((result) => {
-            /* Read more about handling dismissals below */
-            if (result.dismiss === Swal.DismissReason.timer) {
-                console.log('I was closed by the timer')
+    $(document).on('submit', '.deleteProduct', function (e) {
+        e.preventDefault();
+        let productId = $(this).children('input').val();
+        console.log(productId);
+        $.ajax({
+            url: '/Product/DeleteFromBasket/?id=' + productId,
+            type: 'Get',
+            success: function (res) {
+                $('.cart-modal .modal-body>div').children('.row').append(res);
             }
         })
     })
+    $('.btn-wishlist').click(function () {
+        $(this).children(".fa-heart").toggleClass("fas");
+    })
+
+    //$('.btn-cart').click(function () {
+    //    swal("This modal will disappear soon!", {
+    //        buttons: false,
+    //        timer: 1000,
+    //        icon : "success",
+    //    });
+    //})
     $('.big-carousel').owlCarousel({
         loop: true,
         margin: 10,
         nav: false,
         dots: true,
-        autoplay: true,
+        autoplay: false,
         autoplayTimeout: 2000,
         autoplayHoverPause: true,
 
