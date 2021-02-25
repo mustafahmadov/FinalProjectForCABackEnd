@@ -87,6 +87,39 @@ $(document).ready(function () {
         
     })
 
+    $(document).on('click', '#addToWishlist', function () {
+        let productId = $(this).next().val();
+        $.ajax({
+            url: '/Product/AddToWishList?id=' + productId,
+            type: 'Get',
+            success: function (res) {
+                swal("Arzu siyahısına əlavə olundu!", {
+                    buttons: false,
+                    timer: 1000,
+                    icon: "success",
+
+                });
+                console.log(res);
+                $.ajax({
+                    url: '/Product/WishListCount',
+                    type: 'Get',
+                    success: function (res) {
+                        $('.heart-count').html(res);
+                    }
+                });
+            }
+        });
+    })
+    $.ajax({
+        url: '/Product/WishListCount',
+        type: 'Get',
+        success: function (res) {
+            $('.heart-count').html(res);
+        }
+    });
+
+    
+
     let basketCount = $('.shop span');
     $.ajax({
         url: '/Product/GetBasketCount',
@@ -103,10 +136,6 @@ $(document).ready(function () {
         success: function (res) {
             basketTotal.text('₼' + res);
         }
-    })
-
-    $('.btn-wishlist').click(function () {
-        $(this).children(".fa-heart").toggleClass("fas");
     })
 
     //$('.btn-cart').click(function () {

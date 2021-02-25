@@ -1221,4 +1221,18 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+
+table {
+    padding: 60px 0 !important;
+}
+
+table img{
+    width:110px;
+    height:110px;
+}
+
+#content {
+    padding: 60px 0;
+}
 			

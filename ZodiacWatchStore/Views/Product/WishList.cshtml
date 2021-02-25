@@ -1,0 +1,75 @@
+﻿@model List<WishlListVM>
+@{
+    ViewData["Title"] = "WishList";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-8 offset-sm-2">
+            <div id="content">
+                <h2 class="text-center mb-4" >Arzu siyahısı</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <td class="text-center">Şəkil</td>
+                                <td class="text-left">Məhsulun adı</td>
+                                <td class="text-left">Model</td>
+                                <td class="text-right">Anbar</td>
+                                <td class="text-right">Qiyməti</td>
+                                <td class="text-right">Hərəkət</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (WishlListVM product in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/@product.Image" alt="@product.Model"
+                                                 title="@product.Model">
+                                        </a>
+                                    </td>
+                                    <td class="text-left">
+                                        <a asp-controller="Product" asp-action="ProductDetails" asp-route-id="@product.Id">
+                                            @product.Model
+                                        </a>
+                                    </td>
+                                    <td class="text-left">@product.ProductCode</td>
+                                    <td class="text-right">
+                                        @if (product.StatusCount > 0)
+                                        {
+                                            <span>Anbarda</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Bitib</span>
+                                        }
+                                    </td>
+                                    <td class="text-right">
+                                        <div class="price">
+                                            ₼@product.Price
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn-cart btn btn-primary" type="button" data-toggle="tooltip" data-placement="top"
+                                                title="AddBasket" id="addToBasket">
+                                            <i class="fas fa-shopping-cart mr-1 "></i>
+                                        </button>
+                                        <input class="basketProduct" type="hidden" value="@product.Id" />
+                                        <a href="#" data-toggle="tooltip" title="" class="btn btn-danger"
+                                           data-original-title="Sil"><i class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

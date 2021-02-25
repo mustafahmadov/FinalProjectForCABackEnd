@@ -135,5 +135,46 @@ namespace ZodiacWatchStore.Controllers
 
             return PartialView("_BasketPartial",oldProducts);
         }
+
+        public async Task<IActionResult> AddToWishList(int? id)
+        {
+            if (id == null) return NotFound();
+            Product product = await _context.Products.FindAsync(id);
+            if (product == null) return NotFound();
+            List<WishlListVM> viewModel = new List<WishlListVM>();
+
+            if(Request.Cookies["wishlist"]==null)
+                viewModel = new List<WishlListVM>();
+            else
+                viewModel = JsonConvert.DeserializeObject<List<WishlListVM>>(Request.Cookies["wishlist"]);
+
+            WishlListVM isExist = viewModel.FirstOrDefault(wp => wp.Id == id);
+            if (isExist == null)
+            {
+                WishlListVM wl = new WishlListVM()
+                {
+                    Id = product.Id,
+                    Price = product.Price,
+                    Image = product.Image,
+                    ProductCode = product.WatchCode,
+                    Model = product.Model,
+                    StatusCount = product.Count
+                };
+                viewModel.Add(wl);
+            }
+            Response.Cookies.Append("wishlist", JsonConvert.SerializeObject(viewModel));
+            return Json(viewModel);
+        }
+        public IActionResult WishListCount()
+        {
+            List<WishlListVM> wishlist = JsonConvert.DeserializeObject<List<WishlListVM>>(Request.Cookies["wishlist"]);
+            return Content(wishlist.Count.ToString());
+        }
+
+        public IActionResult WishList()
+        {
+            List<WishlListVM> wishlist = JsonConvert.DeserializeObject<List<WishlListVM>>(Request.Cookies["wishlist"]);
+            return View(wishlist);
+        }
     }
 }
