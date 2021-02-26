@@ -20,7 +20,7 @@
                         {
                             @foreach (BasketVM product in Model)
                             {
-                    <div>
+                    <div class="d-flex justify-content-center align-items-center">
                         <div class="col-5 d-flex align-items-center">
                             <div class="mr-4">
                                 <form class="deleteProduct" asp-controller="Product" asp-action="DeleteFromBasket" asp-route-id="@product.Id">

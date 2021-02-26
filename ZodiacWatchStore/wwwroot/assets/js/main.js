@@ -120,6 +120,13 @@ $(document).ready(function () {
             type: 'Get',
             success: function (res) {
                 $('.table').append(res);
+                $.ajax({
+                    url: '/Product/WishListCount',
+                    type: 'Get',
+                    success: function (res) {
+                        $('.heart-count').html(res);
+                    }
+                });
             }
         })
     })

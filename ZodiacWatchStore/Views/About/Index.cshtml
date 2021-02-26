@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-home"></i>
+                    Əsas Səhifə
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Haqqımızda</li>
+        </ol>
+    </nav>
+</div>
+
+
+<section class="mt-5 mb-5">
+    <h2 class="text-center">
+        Ən çox verilən suallar
+    </h2>
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div id="accordion" class="accordion mt-5">
+                        <div class="card border-0 active mb-4">
+                            <div class="card-header">
+                                <h6 class="mb-0">
+                                    <a class="text-dark" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapse1" aria-expanded="true">
+                                        Biz kimik?
+                                    </a>
+                                </h6>
+                            </div>
+                            <div id="collapse1" class="collapse show" data-parent="#accordion">
+                                <div class="card-body text-muted">
+                                    Hər bir böyük biznes hekayəsi kimi bizim hekayəmiz də müştəridən, yəni səndən başlayır. Sənin istək və ehtiyacların bizim üçün çox vacibdir. Əsas məqsədimiz ən yaxşı xidmət göstərməklə səni sevindirmək və büdcənə, istəyinə uyğun, düzgün məhsul seçimi etməkdə sənə yardımçı olmaqdır.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-0  mb-4">
+                            <div class="card-header">
+                                <h6 class="mb-0">
+                                    <a class="text-dark" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapse2">
+                                        Onlayn sifariş hansı
+                                        Şəhərlərdə
+                                        keçərlidir
+                                        ?
+                                    </a>
+                                </h6>
+                            </div>
+                            <div id="collapse2" class="collapse" data-parent="#accordion">
+                                <div class="card-body text-muted">
+                                    Onlayn sifariş və çatdırılma xidməti
+                                    Bakı,
+                                    Abşeron, Sumqayıt, Gəncə (Samux, Goranboy, Goran, Gədəbəy, Daşkəsən,
+                                    Şəmkir,
+                                    Göygöl, Naftalan, Dəliməmmədli), Qəbələ (Şəki, Oğuz, İsmayıllı),
+                                    Mingəçevir
+                                    (Yevlax, Ağdaş və Göyçay) və Masallı (Cəlilabad, Yardımlı, Lerik,
+                                    Lənkəran,
+                                    Astara) daxili keçərlidir.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-0 mb-4">
+                            <div class="card-header">
+                                <h6 class="mb-0">
+                                    <a class="text-dark" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapse3">Sifariş edilən məhsul neçə günə çatdırılır?</a>
+                                </h6>
+                            </div>
+                            <div id="collapse3" class="collapse" data-parent="#accordion">
+                                <div class="card-body text-muted">
+                                    Sifarişiniz onlayn satış təmsilçisinin
+                                    zəng
+                                    edib məhsulu adınıza rəsmiləşdirməsi ilə yekunlaşır.sifarişiniz
+                                    nağddırsa 2
+                                    iş günü ərzində, hissəvi şərtlərlə və ya taksitlə alışdırsa 3 iş günü
+                                    ərzində ünvanınıza çatdırılacaq.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-0 mb-4">
+                            <div class="card-header">
+                                <h6 class="mb-0">
+                                    <a class="text-dark" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapse4">
+                                        Hissəvi alış zamanı hansı sənədlər tələb
+                                        olunur?
+                                    </a>
+                                </h6>
+                            </div>
+                            <div id="collapse4" class="collapse" data-parent="#accordion">
+                                <div class="card-body text-muted">
+                                    Sadəcə şəxsiyyət vəsiqənizlə hissə-hissə
+                                    ödəniş şərtləri ilə məhsul əldə edə bilərsiniz.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-0 mb-4">
+                            <div class="card-header">
+                                <h6 class="mb-0">
+                                    <a class="text-dark" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapse5">
+                                        Məhsulu bəyənməsəm geri qaytara bilərəm?
+                                    </a>
+                                </h6>
+                            </div>
+                            <div id="collapse5" class="collapse" data-parent="#accordion">
+                                <div class="card-body text-muted">
+                                    Zodiac mağazasından əldə etdiyiniz
+                                    məhsulu alınma günü nəzərə alınmamaq şərti ilə, 14 təqvim günü ərzində
+                                    dəyişdirə və ya qaytara bilərsiniz. Məhsul istifadə edilməyibsə, əmtəə
+                                    görünüşü pozulmayıbsa, komplektasiyası tamdırsa və satış qəbzi
+                                    mövcuddursa,
+                                    geri qaytarılması mümkündür.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-0 mb-4">
+                            <div class="card-header">
+                                <h6 class="mb-0">
+                                    <a class="text-dark" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapse6">Mağazınız harada yerləşir?</a>
+                                </h6>
+                            </div>
+                            <div id="collapse6" class="collapse" data-parent="#accordion">
+                                <div class="card-body text-muted">
+                                    Hazırda mağazalarımız Bakı şəhəri,Xətai
+                                    rayonu,M.Hadi(65) ərazisində yerləşir. Linkə keçid etməklə
+                                    mağazalamızın ünvanını xəritədə görə bilərsiniz
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-0">
+                            <div class="card-header">
+                                <h6 class="mb-0">
+                                    <a class="text-dark" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapse7">Çatdırılma ödənişsizdir?</a>
+
+                                </h6>
+                            </div>
+                            <div id="collapse7" class="collapse" data-parent="#accordion">
+                                <div class="card-body text-muted">
+                                    Onlayn sifariş və çatdırılma xidməti
+                                    pulsuzdur.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>

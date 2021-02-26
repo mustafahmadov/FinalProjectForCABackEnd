@@ -1,4 +1,4 @@
-﻿
+﻿@model Bio
 @{
     ViewData["Title"] = "Index";
 }
@@ -24,7 +24,7 @@
                     <div class="col">
                         <div class="map" style="height: 500px;">
                             <iframe class="w-100 h-100 border-0"
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48622.44099243292!2d49.946265499999996!3d40.388852099999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40306357e5b177ef%3A0x7040e87a3661bcda!2sHazi%20Aslanov!5e0!3m2!1sen!2s!4v1614347900440!5m2!1sen!2s"
+                                    src="@Model.MapAdress"
                                     width="600" height="450" style="border:0;" allowfullscreen=""></iframe>
 
                         </div>
@@ -38,49 +38,43 @@
                     </div>
                     <div class="d-flex mb-3 ">
                         <div class="mr-2">
-                            <i class="fas fa-map ic-2x text-primary"></i>
+                            <i class="fas fa-map-marker-alt ic-2x"></i>
                         </div>
                         <div>
                             <h6 class="mb-1 text-light">Mağazanın ünvanı</h6>
-                            <p class="mb-0 text-muted">Xətai rayonu,M.Hadi 65,Həzi Aslanov Metrosunun yanı</p>
+                            <p class="mb-0 text-muted">@Model.Address</p>
                         </div>
                     </div>
                     <div class="d-flex mb-3">
                         <div class="mr-2">
-                            <i class="fas fa-envelope ic-2x text-primary"></i>
+                            <i class="fas fa-envelope ic-2x"></i>
                         </div>
                         <div>
                             <h6 class="mb-1 text-light">Email Ünvanımız</h6>
-                            <a class="text-muted" href="mailto:zodiacAze2021@gmail.com">
-                                zodiacAze2021@gmail.com
-                            </a>
+                            <a class="text-muted" href="mailto:@Model.Email">@Model.Email</a>
                         </div>
                     </div>
                     <div class="d-flex mb-3">
                         <div class="mr-3">
-                            <i class="fas fa-mobile ic-2x text-primary"></i>
+                            <i class="fas fa-mobile ic-2x"></i>
                         </div>
                         <div>
                             <h6 class="mb-1 text-light">Əlaqə nömrəsi</h6>
-                            <a class="text-muted" href="tel:+994709403125">+994-70-940-31-25</a>
+                            <a class="text-muted" href="tel:@Model.Phone">@Model.Phone</a>
                         </div>
                     </div>
                     <div class="d-flex mb-3">
                         <div class="mr-2">
-                            <i class="fas fa-clock ic-2x text-primary"></i>
+                            <i class="fas fa-clock ic-2x"></i>
                         </div>
                         <div>
                             <h6 class="mb-1 text-light">İş saatları</h6>
-                            <span class="text-muted">Baz.Er - Bazar: 09:00 - 22:00</span>
+                            <span class="text-muted">@Model.WorkHours</span>
                         </div>
-                    </div>
+                    </div>`
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
 </section>
 

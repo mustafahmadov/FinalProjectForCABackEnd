@@ -10,7 +10,9 @@ namespace ZodiacWatchStore.Models
     {
         public int Id { get; set; }
         [Required]
-        public string Logo { get; set; }
+        public string LogoBlack { get; set; }
+        [Required]
+        public string LogoWhite { get; set; }
         [MaxLength(length:200)]
         public string Description { get; set; }
         public string WorkHours { get; set; }
@@ -21,5 +23,6 @@ namespace ZodiacWatchStore.Models
         public string Instagram { get; set; }
         public string Twitter { get; set; }
         public string Youtube { get; set; }
+        public string MapAdress { get; set; }
     }
 }

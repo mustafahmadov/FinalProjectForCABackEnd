@@ -65,29 +65,29 @@
                         <i class="fa fa-bars"></i>
                     </button>
                     <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                        <img src="~/assets/images/@Model.Bio.Logo"
+                        <img src="~/assets/images/@Model.Bio.LogoBlack"
                              alt="page-logo" class="img-fluid">
                     </a>
                 </div>
                 <div class="collapse navbar-collapse navbar-hover" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="productGrid.html" class="nav-link">KİŞİ</a>
+                            <a asp-controller="Shop" asp-action="Index" class="nav-link">KİŞİ</a>
                         </li>
                         <li class="nav-item">
-                            <a href="productGrid.html" class="nav-link">Qadın</a>
+                            <a asp-controller="Shop" asp-action="Index" class="nav-link">Qadın</a>
                         </li>
                         <li class="nav-item">
-                            <a href="productGrid.html" class="nav-link">DİVAR Saatı</a>
+                            <a asp-controller="Shop" asp-action="Index"class="nav-link">DİVAR Saatı</a>
                         </li>
                         <li class="nav-item">
-                            <a href="productGrid.html" class="nav-link">Brendlər</a>
+                            <a asp-controller="Brand" asp-action="Index"class="nav-link">Brendlər</a>
                         </li>
                         <li class="nav-item">
-                            <a href="about.html" class="nav-link">Haqqımızda</a>
+                            <a asp-controller="About" asp-action="Index"class="nav-link">Haqqımızda</a>
                         </li>
                         <li class="nav-item">
-                            <a href="contact.html" class="nav-link">Əlaqə</a>
+                            <a asp-controller="Contact" asp-action="Index"class="nav-link">Əlaqə</a>
                         </li>
                     </ul>
                 </div>
@@ -98,9 +98,12 @@
                                 <i class="far fa-user"></i>
                             </a>
                             <ul class="d-none">
-                                <li>Hesabım</li>
-                                <li>Qeydiyyat</li>
-                                <li>Giriş</li>
+                                <li>
+                                    <a asp-controller="Account" asp-action="Login">Giriş</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Account" asp-action="Register">Qeydiyyat</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="heart">
@@ -112,7 +115,7 @@
                         <li class="shop">
                             <a href="#">
                                 <i class="fas fa-shopping-cart"></i>
-                                <span>@ViewBag.BasketCount</span>
+                                <span>0</span>
                             </a>
                         </li>
 

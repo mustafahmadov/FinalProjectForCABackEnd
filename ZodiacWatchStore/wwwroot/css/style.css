@@ -1448,4 +1448,7 @@ footer i{
     color: #A95C00 !important;
     font-size: 20px;
 }
+.accordion a:hover{
+    color: #A95C00!important;
+}
 
