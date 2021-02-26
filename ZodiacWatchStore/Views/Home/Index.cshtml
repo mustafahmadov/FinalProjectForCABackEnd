@@ -25,7 +25,7 @@
                         @foreach (Slider slider in Model.Sliders)
                         {
                             <div class=" carousel-item @(isActive ? "active" : "")">
-                                <img class="d-block w-100" src="~/assets/images/@slider.Image"
+                                <img class="d-block w-100" src="~/assets/images/banner/@slider.Image"
                                      alt="First slide">
                             </div>
                             isActive = false;
@@ -43,22 +43,10 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-12">
-                <div class="row flex-column">
-                    <div class="col-sm-4 col-md-4 col-lg-12">
-                        <div class="pay-image">
-                            <img src="~/assets/images/hisse_hisse_ode_az.jpg" alt="" class="img-fluid">
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-4 col-lg-12">
-                        <div class="pay-image">
-                            <img src="~/assets/images/tehlukesiz_odenish_az.jpg" alt="" class="img-fluid">
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-4 col-lg-12">
-                        <div class="pay-image">
-                            <img src="~/assets/images/web_deliver_banner_az.jpg" alt="" class="img-fluid">
-                        </div>
+            <div class="col-lg-3">
+                <div class="container">
+                    <div class="owl-carousel owl-theme mini-carousel">
+                        @await Component.InvokeAsync("ProductCarousel", new { filterFor = "bestsellers" })
                     </div>
                 </div>
             </div>
@@ -66,6 +54,28 @@
     </div>
 
 
+</section>
+
+<section>
+    <div class="col-lg-12 col-md-12 mt-3">
+        <div class="row flex-row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="pay-image text-right">
+                    <img src="assets/images/hisse_hisse_ode_az.jpg" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class=" col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="pay-image text-center">
+                    <img src="assets/images/tehlukesiz_odenish_az.jpg" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="pay-image text-left">
+                    <img src="assets/images/web_deliver_banner_az.jpg" alt="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="site-guarantees">
@@ -103,43 +113,45 @@
     </div>
 </section>
 
-<!--? Gallery Area Start -->
-<div class="gallery-area">
-    <div class="container-fluid p-0 fix">
-        <div class="row">
-            <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6 pr-0 none">
-                <div class="single-gallery 0">
-                    <div class="gallery-img big-img"
-                         style="background-image: url(assets/images/gallery/gallery1.png);"></div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 pl-0 none">
-                <div class="single-gallery 0">
-                    <div class="gallery-img big-img"
-                         style="background-image: url(assets/images/gallery/gallery2.png);"></div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-12 pl-0">
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-6 col-sm-6 pl-0">
-                        <div class="single-gallery 0">
-                            <div class="gallery-img small-img"
-                                 style="background-image: url(assets/images/gallery/gallery3.png);"></div>
-                        </div>
-                    </div>
-                    <div class="col-xl-12 col-lg-12  col-md-6 col-sm-6 pl-0">
-                        <div class="single-gallery 0">
-                            <div class="gallery-img small-img"
-                                 style="background-image: url(assets/images/gallery/gallery4.png);"></div>
-                        </div>
+<section>
+    <div class="gallery-area">
+        <div class="container-fluid p-0 fix">
+            <div class="row">
+                <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6 pr-0 none">
+                    <div class="single-gallery 0">
+                        <div class="gallery-img big-img"
+                             style="background-image: url(assets/images/gallery/gallery1.png);"></div>
                     </div>
                 </div>
-            </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 pl-0 none">
+                    <div class="single-gallery 0">
+                        <div class="gallery-img big-img"
+                             style="background-image: url(assets/images/gallery/new_product1.png);"></div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-12 pl-0">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-6 col-sm-6 pl-0">
+                            <div class="single-gallery 0">
+                                <div class="gallery-img small-img"
+                                     style="background-image: url(assets/images/gallery/gallery3.png);">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-lg-12  col-md-6 col-sm-6 pl-0">
+                            <div class="single-gallery 0">
+                                <div class="gallery-img small-img"
+                                     style="background-image: url(assets/images/gallery/gallery4.png);">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
         </div>
     </div>
-</div>
-<!-- Gallery Area End -->
+</section>
 
 <section class="bestsellers">
     <div class="section-heading">
@@ -174,8 +186,6 @@
     </div>
 </section>
 
-
-
 <section class="mixedProducts">
     <div class="container">
         <div class="row">
@@ -186,7 +196,7 @@
                         <h2>Ən çox baxılanlar</h2>
                         <hr>
                     </div>
-                    @await Component.InvokeAsync("ProductSimple", new {filterFor="mostviewed"})
+                    @await Component.InvokeAsync("ProductSimple", new { filterFor = "mostviewed" })
 
                 </div>
             </div>
