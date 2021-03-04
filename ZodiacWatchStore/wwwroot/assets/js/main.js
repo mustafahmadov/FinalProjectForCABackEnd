@@ -158,6 +158,29 @@ $(document).ready(function () {
         }
     })
 
+    $('.plusBtn').click(function (e) {
+        let inputVal = $(this).parent().prev().children('.page-link');
+        e.preventDefault();
+        if (inputVal.val() > 4) {
+            inputVal.val() = 5;
+        }
+        else {
+            inputVal.val(parseInt(inputVal.val()) + 1);
+        }
+
+    })
+    $('.minBtn').click(function (e) {
+        let inputVal = $(this).parent().next().children('.page-link');
+        e.preventDefault();
+        if (inputVal.val() < 2) {
+            inputVal.val() = 1;
+        }
+        else {
+            inputVal.val(parseInt(inputVal.val()) - 1);
+        }
+
+    })
+
     //$('.btn-cart').click(function () {
     //    swal("This modal will disappear soon!", {
     //        buttons: false,
@@ -229,7 +252,8 @@ $(document).ready(function () {
             e.preventDefault();
             $('.user ul').toggleClass('d-block');
         })
-        $('.shop').click(function () {
+    $('.shop').click(function (e) {
+        e.preventDefault();
             if ($('.cart-modal').hasClass('fade')) {
                 $('.modal-backdrop').addClass('show');
                 $('.modal-backdrop').addClass('d-block');
@@ -282,30 +306,6 @@ $(document).ready(function () {
     });
 
 
-    var email = document.getElementById('email'),
-        button = document.getElementById('button');
-
-    function validateEmail(email) {
-        var ex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        return ex.test(email);
-    }
-
-    // email.addEventListener('keydown', function() {
-    //   var email = this.value;
-
-    //   if(validateEmail(email)) {
-    //     button.classList.add('is-active');
-    //   }
-    // });
-
-    // button.addEventListener('click', function(e){
-    //   e.preventDefault();
-    //   this.classList.add('is-done','is-active');
-
-    //   setTimeout(function(){ 
-    //     button.innerHTML = "Təşəkkürlər! Siz abunə oldunuz."
-    //   }, 500);
-    // });
 
     $('.sim-thumb').on('click', function () {
         $('#main-product-image').attr('src', $(this).data('image'));
@@ -361,6 +361,8 @@ jQuery(document).ready(function () {
         $input.change();
         return false;
     });
+
+    
 
 });
 

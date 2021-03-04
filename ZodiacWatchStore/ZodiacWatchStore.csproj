@@ -10,6 +10,70 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\assets\admin\css\maps\style.css.map" />
+    <None Include="wwwroot\assets\admin\images\.DS_Store" />
+    <None Include="wwwroot\assets\admin\images\auth\.DS_Store" />
+    <None Include="wwwroot\assets\admin\images\faces\.DS_Store" />
+    <None Include="wwwroot\assets\admin\images\logo-mini.svg" />
+    <None Include="wwwroot\assets\admin\images\logo.svg" />
+    <None Include="wwwroot\assets\admin\js\.DS_Store" />
+    <None Include="wwwroot\assets\admin\js\chart.js" />
+    <None Include="wwwroot\assets\admin\js\Chart.min.js" />
+    <None Include="wwwroot\assets\admin\js\dashboard.js" />
+    <None Include="wwwroot\assets\admin\js\data-table.js" />
+    <None Include="wwwroot\assets\admin\js\dataTables.bootstrap4.js" />
+    <None Include="wwwroot\assets\admin\js\documentation.js" />
+    <None Include="wwwroot\assets\admin\js\file-upload.js" />
+    <None Include="wwwroot\assets\admin\js\hoverable-collapse.js" />
+    <None Include="wwwroot\assets\admin\js\jquery.dataTables.js" />
+    <None Include="wwwroot\assets\admin\js\off-canvas.js" />
+    <None Include="wwwroot\assets\admin\js\tabs.js" />
+    <None Include="wwwroot\assets\admin\js\template.js" />
+    <None Include="wwwroot\assets\admin\scss\.DS_Store" />
+    <None Include="wwwroot\assets\admin\scss\components\.DS_Store" />
+    <None Include="wwwroot\assets\admin\scss\components\plugin-overrides\_data-tables.scss" />
+    <None Include="wwwroot\assets\admin\scss\components\_badges.scss" />
+    <None Include="wwwroot\assets\admin\scss\components\_bootstrap-progress.scss" />
+    <None Include="wwwroot\assets\admin\scss\components\_buttons.scss" />
+    <None Include="wwwroot\assets\admin\scss\components\_cards.scss" />
+    <None Include="wwwroot\assets\admin\scss\components\_checkbox-radio.scss" />
+    <None Include="wwwroot\assets\admin\scss\components\_dropdown.scss" />
+    <None Include="wwwroot\assets\admin\scss\components\_forms.scss" />
+    <None Include="wwwroot\assets\admin\scss\components\_icons.scss" />
+    <None Include="wwwroot\assets\admin\scss\components\_lists.scss" />
+    <None Include="wwwroot\assets\admin\scss\components\_tables.scss" />
+    <None Include="wwwroot\assets\admin\scss\landing-screens\_auth.scss" />
+    <None Include="wwwroot\assets\admin\scss\mixins\.DS_Store" />
+    <None Include="wwwroot\assets\admin\scss\mixins\_animation.scss" />
+    <None Include="wwwroot\assets\admin\scss\mixins\_badges.scss" />
+    <None Include="wwwroot\assets\admin\scss\mixins\_blockqoute.scss" />
+    <None Include="wwwroot\assets\admin\scss\mixins\_buttons.scss" />
+    <None Include="wwwroot\assets\admin\scss\mixins\_cards.scss" />
+    <None Include="wwwroot\assets\admin\scss\mixins\_misc.scss" />
+    <None Include="wwwroot\assets\admin\scss\style.scss" />
+    <None Include="wwwroot\assets\admin\scss\_background.scss" />
+    <None Include="wwwroot\assets\admin\scss\_demo.scss" />
+    <None Include="wwwroot\assets\admin\scss\_fonts.scss" />
+    <None Include="wwwroot\assets\admin\scss\_footer.scss" />
+    <None Include="wwwroot\assets\admin\scss\_functions.scss" />
+    <None Include="wwwroot\assets\admin\scss\_layouts.scss" />
+    <None Include="wwwroot\assets\admin\scss\_misc.scss" />
+    <None Include="wwwroot\assets\admin\scss\_navbar.scss" />
+    <None Include="wwwroot\assets\admin\scss\_reset.scss" />
+    <None Include="wwwroot\assets\admin\scss\_sidebar.scss" />
+    <None Include="wwwroot\assets\admin\scss\_typography.scss" />
+    <None Include="wwwroot\assets\admin\scss\_utilities.scss" />
+    <None Include="wwwroot\assets\admin\scss\_variables.scss" />
+    <None Include="wwwroot\assets\admin\scss\_vertical-wrapper.scss" />
+    <None Include="wwwroot\assets\admin\vendors\.DS_Store" />
+    <None Include="wwwroot\assets\admin\vendors\base\bootstrap.min.js.map" />
+    <None Include="wwwroot\assets\admin\vendors\base\vendor.bundle.base.js" />
+    <None Include="wwwroot\assets\admin\vendors\chart.js\Chart.min.js" />
+    <None Include="wwwroot\assets\admin\vendors\datatables.net-bs4\dataTables.bootstrap4.js" />
+    <None Include="wwwroot\assets\admin\vendors\datatables.net\jquery.dataTables.js" />
+    <None Include="wwwroot\assets\admin\vendors\mdi\css\materialdesignicons.min.css.map" />
+    <None Include="wwwroot\assets\admin\vendors\mdi\fonts\materialdesignicons-webfont.svg" />
+    <None Include="wwwroot\assets\admin\vendors\mdi\fonts\materialdesignicons-webfont.woff2" />
     <None Include="wwwroot\assets\js\main.js" />
     <None Include="wwwroot\assets\js\owl.carousel.min.js" />
     <None Include="wwwroot\assets\js\sweetalert2.js" />
@@ -38,6 +102,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Administrator\Data\" />
+    <Folder Include="Areas\Administrator\Models\" />
   </ItemGroup>
 
 </Project>

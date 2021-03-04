@@ -1,0 +1,143 @@
+﻿@model List<BasketVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-home"></i>
+                    Əsas Səhifə
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Səbət</li>
+        </ol>
+    </nav>
+</div>
+
+<section class="py-5">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-10 col-11 mx-auto">
+                <div class="row mt-5 gx-3">
+                    <!-- left side div -->
+                    <div class="col-md-12 col-lg-8 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow">
+                        <div class="card p-4">
+                            <h2 class="py-4 font-weight-bold">Səbət (@Model.Count məhsul)</h2>
+                            @foreach (BasketVM product in Model)
+                            {
+                                <div class="row">
+                                    <!-- cart images div -->
+                                    <div class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
+                                        <img src="assets/images/@product.Image" class="img-fluid"
+                                             alt="cart img">
+                                    </div>
+                                    <!-- cart product details -->
+                                    <div class="col-md-7 col-11 mx-auto px-4 mt-2">
+                                        <div class="row">
+                                            <!-- product name  -->
+                                            <div class="col-6 card-title">
+                                                <h1 class="mb-4 product_name">@product.Model</h1>
+                                                <h1 class="mb-4 product_name">₼@product.Price</h1>
+                                            </div>
+                                            <!-- quantity inc dec -->
+                                            <div class="col-6">
+                                                <ul class="pagination justify-content-end set_quantity">
+                                                    <li class="page-item">
+                                                        <button class="page-link  minBtn ">
+                                                            <i class="fas fa-minus"></i>
+                                                        </button>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <input type="text" name=""
+                                                               class="page-link" value="@product.Count">
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <button class="page-link plusBtn">
+                                                            <i class="fas fa-plus"></i>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- //remover move and price -->
+                                        <div class="row">
+                                            <div class="col-8 d-flex justify-content-between remove_wish">
+                                                <p><i class="fas fa-trash-alt"></i>SƏBƏTDƏN SİL</p>
+                                            </div>
+                                            <div class="col-4 d-flex justify-content-end price_money">
+                                                <h3>₼<span id="itemval">0.00 </span></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                        <hr />
+
+                    </div>
+                    <!-- right side div -->
+                    <div class="col-md-12 col-lg-4 col-11 mx-auto mt-lg-0 mt-md-5">
+                        <div class="right_side p-3 shadow bg-white">
+                            <h2 class="product_name mb-5">Məbləğ</h2>
+                            <div class="price_indiv d-flex justify-content-between">
+                                <p>Məhsulun qiyməti</p>
+                                <p>₼<span id="product_total_amt">50.00</span></p>
+                            </div>
+                            <div class="price_indiv d-flex justify-content-between">
+                                <p>Çatdırılma</p>
+                                <p>₼<span id="shipping_charge">0.00</span></p>
+                            </div>
+                            <hr />
+                            <div class="total-amt d-flex justify-content-between font-weight-bold">
+                                <p>Ümumi Məbləğ(ƏDV Daxil)</p>
+                                <p>₼<span id="total_cart_amt">50.00</span></p>
+                            </div>
+                            <button class="btn btn-primary text-uppercase">Ödəniş Səhifəsi</button>
+                        </div>
+                        <!-- discount code part -->
+                        <div class="discount_code mt-3 shadow">
+                            <div class="card">
+                                <div class="card-body">
+                                    <a class="d-flex justify-content-between" data-toggle="collapse"
+                                       href="#collapseExample" aria-expanded="false"
+                                       aria-controls="collapseExample">
+                                        Add a discount code (optional)
+                                        <span><i class="fas fa-chevron-down pt-1"></i></span>
+                                    </a>
+                                    <div class="collapse" id="collapseExample">
+                                        <div class="mt-3">
+                                            <input type="text" name="" id="discount_code1"
+                                                   class="form-control font-weight-bold"
+                                                   placeholder="Enter the discount code">
+                                            <small id="error_trw" class="text-dark mt-3">code is thapa</small>
+                                        </div>
+                                        <button class="btn btn-primary btn-sm mt-3">
+                                            Apply
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <!-- discount code ends -->
+                        <div class="mt-3 shadow p-3 bg-white">
+                            <div class="pt-4">
+                                <h5 class="mb-4">Təxmini Çatdırılma Tarixi</h5>
+                                <p>27 İyun 2020 - 29 İyul 2020</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
