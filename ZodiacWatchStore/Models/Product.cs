@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,6 +41,10 @@ namespace ZodiacWatchStore.Models
         public int GlassTypeId { get; set; }
         public List<ProductImage> ProductImages { get; set; }
         public virtual ICollection<ProductCategory> ProductCategories { get; set; }
+        [NotMapped]
+        public IFormFile MainPhoto { get; set; }
+        [NotMapped]
+        public IFormFile[] Photos { get; set; }
 
 
 
