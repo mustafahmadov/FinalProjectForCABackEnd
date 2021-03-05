@@ -174,3 +174,5 @@ C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netco
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Slider\Detail.cshtml.g.cs
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Slider\Update.cshtml.g.cs
 C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Slider\Delete.cshtml.g.cs
+C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Product\Index.cshtml.g.cs
+C:\Users\musta\Desktop\FinalProjectForCABackEnd\ZodiacWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Product\Create.cshtml.g.cs

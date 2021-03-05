@@ -13,6 +13,7 @@ using ZodiacWatchStore.Models;
 
 namespace ZodiacWatchStore.Areas.Administrator.Controllers
 {
+    [Area("Administrator")]
     public class ProductController : Controller
     {
         private readonly AppDbContext _context;
@@ -30,26 +31,27 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
             return View(Products);
         }
 
-        //GET: ProductController/Details/5
+        #region ProductDetail
         public async Task<ActionResult> Detail(int? id)
         {
             if (id == null)
             {
                 NotFound();
             }
-            Product product = _context.Products.Include(p => p.ProductImages).Include(p => p.Brand)
+            Product product = await _context.Products.Include(p => p.ProductImages).Include(p => p.Brand)
                   .Include(p => p.Mechanism).Include(p => p.WaterProtection)
                     .Include(p => p.GlassType).Include(p => p.CaseThick)
                       .Include(p => p.BandType).Include(p => p.ProductCategories).ThenInclude(p => p.Category)
-                        .Where(p => p.HasDeleted == false && p.Id == id).FirstOrDefault();
+                        .Where(p => p.HasDeleted == false && p.Id == id).FirstOrDefaultAsync();
             return View(product);
         }
+        #endregion
 
-        //GET: ProductController/Create
+        #region ProductCreate
         public IActionResult Create()
         {
             ViewBag.Mechanisms = _context.Mechanisms.Where(m => m.HasDeleted == false).ToList();
-            ViewBag.CaseThick = _context.CaseThicks.Where(m => m.HasDeleted == false).ToList();
+            ViewBag.CaseThicks = _context.CaseThicks.Where(m => m.HasDeleted == false).ToList();
             ViewBag.GlassTypes = _context.GlassTypes.Where(m => m.HasDeleted == false).ToList();
             ViewBag.BandTypes = _context.BandTypes.Where(m => m.HasDeleted == false).ToList();
             ViewBag.WaterProtection = _context.WaterProtections.ToList();
@@ -63,7 +65,7 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
                      int? MechanismId, int? WaterProtectionId, int? BandTypeId, int? CaseThickId, int? GlassTypeId)
         {
             ViewBag.Mechanisms = _context.Mechanisms.Where(m => m.HasDeleted == false).ToList();
-            ViewBag.CaseThick = _context.CaseThicks.Where(m => m.HasDeleted == false).ToList();
+            ViewBag.CaseThicks = _context.CaseThicks.Where(m => m.HasDeleted == false).ToList();
             ViewBag.GlassTypes = _context.GlassTypes.Where(m => m.HasDeleted == false).ToList();
             ViewBag.BandTypes = _context.BandTypes.Where(m => m.HasDeleted == false).ToList();
             ViewBag.WaterProtection = _context.WaterProtections.ToList();
@@ -94,30 +96,31 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
             List<ProductImage> images = new List<ProductImage>();
             foreach (IFormFile photo in Product.Photos)
             {
-                if (Product.MainPhoto == null)
+                if (photo == null)
                 {
-                    ModelState.AddModelError("Photo", "Shekil bolmesi bosh qala bilmez!");
+                    ModelState.AddModelError("Photos", "Shekil bolmesi bosh qala bilmez!");
                     return View();
                 }
 
-                if (!Product.MainPhoto.IsImage())
+                if (!photo.IsImage())
                 {
-                    ModelState.AddModelError("Photo", "Zehmet olmasa shekil formati sechin");
+                    ModelState.AddModelError("Photos", "Zehmet olmasa shekil formati sechin");
                     return View();
                 }
 
-                if (Product.MainPhoto.MaxLength(600))
+                if (photo.MaxLength(600))
                 {
-                    ModelState.AddModelError("Photo", "Sheklin maksimum olcusu 200 kb ola biler");
+                    ModelState.AddModelError("Photos", "Sheklin maksimum olcusu 600 kb ola biler");
                     return View();
                 }
 
-                string imagesFolder = Path.Combine("assets", "img");
-                string productFileName = await Product.MainPhoto.SaveImgAsync(_env.WebRootPath, folder);
-                ProductImage productImage = new ProductImage { Image = fileName, ProductId = Product.Id };
+                string imagesFolder = Path.Combine("assets", "images");
+                string productFileName = await photo.SaveImgAsync(_env.WebRootPath, imagesFolder);
+                ProductImage productImage = new ProductImage { Image = productFileName, ProductId = Product.Id, HasDeleted = false };
                 images.Add(productImage);
 
             }
+            Product.ProductImages = images;
 
             List<ProductCategory> CategoryProducts = new List<ProductCategory>();
 
@@ -179,19 +182,26 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
             newProduct.Image = fileName;
             newProduct.WaterProtectionId = (int)WaterProtectionId;
             newProduct.GlassTypeId = (int)GlassTypeId;
+            newProduct.MechanismId = (int)MechanismId;
             newProduct.BandTypeId = (int)BandTypeId;
             newProduct.CaseThickId = (int)CaseThickId;
             newProduct.BrandId = (int)BrandId;
             newProduct.Count = Product.Count;
             newProduct.WatchCode = Product.WatchCode;
             newProduct.Price = Product.Price;
+            newProduct.Model = Product.Model;
             newProduct.Discount = 0;
+            newProduct.SaleCount = 0;
+            newProduct.ViewCount = 0;
+            newProduct.ProductImages = Product.ProductImages;
 
             await _context.Products.AddAsync(newProduct);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
+
+        #endregion
 
         // GET: ProductController/Edit/5
         //        public IActionResult Update(int? id)
@@ -252,37 +262,36 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
         //            await _context.SaveChangesAsync();
         //            return RedirectToAction(nameof(Index));
         //        }
-        //        public async Task<IActionResult> Delete(int? id)
-        //        {
-        //            if (id == null) return NotFound();
-        //            Product Product = await _context.Products.FindAsync(id);
-        //            if (Product == null) return NotFound();
-        //            return View(Product);
-        //        }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return NotFound();
+            Product Product = await _context.Products.FindAsync(id);
+            if (Product == null) return NotFound();
+            return View(Product);
+        }
 
-        //        [HttpPost]
-        //        [ValidateAntiForgeryToken]
-        //        [ActionName("Delete")]
-        //        public async Task<IActionResult> DeleteProduct(int? id)
-        //        {
-        //            if (id == null) return NotFound();
-        //            Product Product = _context.Products.FirstOrDefault(c => c.Id == id);
-        //            if (Product == null) return NotFound();
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteProduct(int? id)
+        {
+            if (id == null) return NotFound();
+            Product Product = _context.Products.FirstOrDefault(c => c.Id == id);
+            if (Product == null) return NotFound();
 
-        //            if (!Product.HasDeleted)
-        //            {
-        //                Product.HasDeleted = true;
-        //                //Product.ProductDetail.HasDeleted = true;
-        //                Product.DeletedTime = DateTime.Now;
-        //                //Product.ProductDetail.DeletedTime = DateTime.Now;
-        //            }
-        //            else
-        //                Product.HasDeleted = false;
-
-        //            await _context.SaveChangesAsync();
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //    }
-        //}
+            if (!Product.HasDeleted)
+            {
+                Product.HasDeleted = true;
+                Product.DeletedTime = DateTime.Now;
+            }
+            else
+            {
+                Product.HasDeleted = false;
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
+
 }
+

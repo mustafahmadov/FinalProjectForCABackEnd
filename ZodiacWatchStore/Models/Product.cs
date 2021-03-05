@@ -39,7 +39,7 @@ namespace ZodiacWatchStore.Models
         public Brand Brand { get; set; }
         public int BrandId { get; set; }
         public int GlassTypeId { get; set; }
-        public List<ProductImage> ProductImages { get; set; }
+        public ICollection<ProductImage> ProductImages { get; set; }
         public virtual ICollection<ProductCategory> ProductCategories { get; set; }
         [NotMapped]
         public IFormFile MainPhoto { get; set; }

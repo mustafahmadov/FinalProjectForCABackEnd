@@ -1,0 +1,123 @@
+﻿@model Product
+@{ ViewData["Title"] = "Create"; }
+
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Yeni məhsul yarat</h2>
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="MainPhoto"></label>
+                        <input asp-for="MainPhoto" class="form-control" accept="image/*" placeholder="Name">
+                        <span asp-validation-for="MainPhoto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Photos"></label>
+                        <input asp-for="Photos" class="form-control" accept="image/*" placeholder="Name">
+                        <span asp-validation-for="Photos" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Model"></label>
+                        <input asp-for="Model" class="form-control" placeholder="Name">
+                        <span asp-validation-for="Model" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="WatchCode"></label>
+                        <input asp-for="WatchCode" class="form-control" placeholder="Name">
+                        <span asp-validation-for="WatchCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price"></label>
+                        <input asp-for="Price" class="form-control" placeholder="Name">
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Model"></label>
+                        <input asp-for="Model" class="form-control" placeholder="Name">
+                        <span asp-validation-for="Model" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="text-info">Kateqoriyanı seçin</h4>
+                        @foreach (Category category in ViewBag.Categories)
+                        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="CategoryId" value="@category.Id">
+                <label class="form-check-label">
+                    @category.Name
+                </label>
+            </div>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label>Brendi seçin</label>
+                        <select class="form-control" name="BrandId">
+                            <option value=""></option>
+                            @foreach (var item in ViewBag.Brands)
+                            {
+                <option value="@item.Id">@item.Name</option>}
+                        </select>
+                        <span asp-validation-for="Brand"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Mexanizmi seçin</label>
+                        <select class="form-control" name="MechanismId">
+                            <option value=""></option>
+                            @foreach (var item in ViewBag.Mechanisms)
+                            {
+                <option value="@item.Id">@item.Name</option>}
+                        </select>
+                        <span asp-validation-for="Mechanism"></span>
+                    </div>
+                           <div class="form-group">
+                               <label>Sudan muhafizə səviyyəsini seçin</label>
+                             <select class="form-control" name="WaterProtectionId">
+                            <option value=""></option>
+                            @foreach (var item in ViewBag.WaterProtection)
+                            {
+                              <option value="@item.Id">@item.Name</option>
+                            }
+                                </select>
+                               <span asp-validation-for="WaterProtection"></span>
+                               </div>
+                    <div class="form-group">
+                        <label>Qolbaq tipini seçin</label>
+                        <select class="form-control" name="BandTypeId">
+                            <option value=""></option>
+                            @foreach (var item in ViewBag.BandTypes)
+                            {
+                <option value="@item.Id">@item.Name</option>}
+                        </select>
+                        <span asp-validation-for="BandType"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Korpus qalınlığnı seçin seçin</label>
+                        <select class="form-control" name="CaseThickId">
+                            <option value=""></option>
+                            @foreach (var item in ViewBag.CaseThicks)
+                            {
+                <option value="@item.Id">@item.Name</option>}
+                        </select>
+                        <span asp-validation-for="CaseThick"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Şüşə materialını seçin</label>
+                        <select class="form-control" name="GlassTypeId">
+                            <option value=""></option>
+                            @foreach (var item in ViewBag.GlassTypes)
+                            {
+                <option value="@item.Id">@item.Name</option>}
+                        </select>
+                        <span asp-validation-for="GlassType"></span>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-success mr-2">Yarat</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_Validation" />
+}
