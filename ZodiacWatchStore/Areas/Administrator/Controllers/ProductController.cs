@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using FrontToUp.Extentions;
+﻿using FrontToUp.Extentions;
 using FrontToUp.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using ZodiacWatchStore.DAL;
 using ZodiacWatchStore.Models;
 
@@ -204,6 +203,7 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
 
         #endregion
 
+        #region ProductUpdate
         public async Task<IActionResult> Update(int? id)
         {
             if (id == null) return NotFound();
@@ -219,7 +219,7 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
                   .Include(p => p.Mechanism).Include(p => p.WaterProtection)
                     .Include(p => p.GlassType).Include(p => p.CaseThick)
                       .Include(p => p.BandType).Include(p => p.ProductCategories).ThenInclude(p => p.Category)
-                        .FirstOrDefaultAsync(p=>p.Id == id);
+                        .FirstOrDefaultAsync(p => p.Id == id);
             if (product == null) return NotFound();
             ViewBag.BrandId = product.Brand.Id;
             ViewBag.MechanismId = product.MechanismId;
@@ -231,7 +231,7 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int? id, Product Product,int? BrandId,int? MechanismId, 
+        public async Task<IActionResult> Update(int? id, Product Product, int? BrandId, int? MechanismId,
                    int? WaterProtectionId, int? BandTypeId, int? CaseThickId, int? GlassTypeId)
         {
             ViewBag.Mechanisms = _context.Mechanisms.Where(m => m.HasDeleted == false).ToList();
@@ -247,7 +247,7 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
                   .Include(p => p.Mechanism).Include(p => p.WaterProtection)
                     .Include(p => p.GlassType).Include(p => p.CaseThick)
                       .Include(p => p.BandType).Include(p => p.ProductCategories).ThenInclude(p => p.Category)
-                        .FirstOrDefaultAsync(p=>p.Id == id);
+                        .FirstOrDefaultAsync(p => p.Id == id);
             if (dbProduct == null) return NotFound();
             ViewBag.BrandId = dbProduct.Brand.Id;
             ViewBag.MechanismId = dbProduct.MechanismId;
@@ -323,12 +323,14 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
             dbProduct.Discount = 0;
             dbProduct.SaleCount = 0;
             dbProduct.ViewCount = 0;
-            
+
 
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
+        #endregion
+
         #region ProductDelete
         public async Task<IActionResult> Delete(int? id)
         {
@@ -349,10 +351,14 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
             string folder = Path.Combine("assets", "images");
             Helper.DeleteImage(_env.WebRootPath, folder, product.Image);
 
-            foreach (ProductImage image in product.ProductImages)
+            if (product.Photos != null)
             {
-                Helper.DeleteImage(_env.WebRootPath, folder, image.Image);
+                foreach (ProductImage image in product.ProductImages)
+                {
+                    Helper.DeleteImage(_env.WebRootPath, folder, image.Image);
+                }
             }
+            
 
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
@@ -360,10 +366,13 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
         }
         #endregion
 
+        #region DeleteProductImage
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteProductImage(int? id)
         {
             if (id == null) return NotFound();
-            ProductImage image =await _context.ProductImages.FindAsync(id);
+            ProductImage image = await _context.ProductImages.FindAsync(id);
             if (image == null) return NotFound();
             string folder = Path.Combine("assets", "images");
             Helper.DeleteImage(_env.WebRootPath, folder, image.Image);
@@ -372,6 +381,8 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
 
             return RedirectToAction("Update", new { id = image.ProductId });
         }
+        #endregion
+
     }
 
 }
