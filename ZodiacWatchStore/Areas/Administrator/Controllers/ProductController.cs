@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FrontToUp.Extentions;
+using FrontToUp.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -203,65 +204,132 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
 
         #endregion
 
-        // GET: ProductController/Edit/5
-        //        public IActionResult Update(int? id)
-        //        {
-        //            ViewBag.Authors = _context.Authors.ToList();
-        //            Product Product = _context.Products.Where(cr => cr.HasDeleted == false)
-        //                .Include(cr => cr.ProductDetail).FirstOrDefault(cr => cr.Id == id);
-        //            return View(Product);
-        //        }
-        //        [HttpPost]
-        //        [ValidateAntiForgeryToken]
-        //        public async Task<IActionResult> Update(int? id, Product Product, int? AuthorId)
-        //        {
-        //            ViewBag.Authors = _context.Authors.ToList();
-        //            if (id == null) return NotFound();
+        public async Task<IActionResult> Update(int? id)
+        {
+            if (id == null) return NotFound();
+            ViewBag.Mechanisms = _context.Mechanisms.Where(m => m.HasDeleted == false).ToList();
+            ViewBag.CaseThicks = _context.CaseThicks.Where(m => m.HasDeleted == false).ToList();
+            ViewBag.GlassTypes = _context.GlassTypes.Where(m => m.HasDeleted == false).ToList();
+            ViewBag.BandTypes = _context.BandTypes.Where(m => m.HasDeleted == false).ToList();
+            ViewBag.WaterProtection = _context.WaterProtections.ToList();
+            ViewBag.Categories = _context.Categories.ToList();
+            ViewBag.Brands = _context.Brands.Where(b => b.HasDeleted == false).ToList();
+            Product product = await _context.Products.Where(p => p.HasDeleted == false)
+                .Include(p => p.ProductImages).Include(p => p.Brand)
+                  .Include(p => p.Mechanism).Include(p => p.WaterProtection)
+                    .Include(p => p.GlassType).Include(p => p.CaseThick)
+                      .Include(p => p.BandType).Include(p => p.ProductCategories).ThenInclude(p => p.Category)
+                        .FirstOrDefaultAsync(p=>p.Id == id);
+            if (product == null) return NotFound();
+            ViewBag.BrandId = product.Brand.Id;
+            ViewBag.MechanismId = product.MechanismId;
+            ViewBag.WaterProtectionId = product.WaterProtectionId;
+            ViewBag.GlassTypeId = product.GlassTypeId;
+            ViewBag.CaseThickId = product.CaseThickId;
+            ViewBag.BandTypeId = product.BandTypeId;
+            return View(product);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int? id, Product Product,int? BrandId,int? MechanismId, 
+                   int? WaterProtectionId, int? BandTypeId, int? CaseThickId, int? GlassTypeId)
+        {
+            ViewBag.Mechanisms = _context.Mechanisms.Where(m => m.HasDeleted == false).ToList();
+            ViewBag.CaseThicks = _context.CaseThicks.Where(m => m.HasDeleted == false).ToList();
+            ViewBag.GlassTypes = _context.GlassTypes.Where(m => m.HasDeleted == false).ToList();
+            ViewBag.BandTypes = _context.BandTypes.Where(m => m.HasDeleted == false).ToList();
+            ViewBag.WaterProtection = _context.WaterProtections.ToList();
+            ViewBag.Categories = _context.Categories.ToList();
+            ViewBag.Brands = _context.Brands.Where(b => b.HasDeleted == false).ToList();
+            Product newProduct = new Product();
+            Product dbProduct = await _context.Products.Where(p => p.HasDeleted == false)
+                .Include(p => p.ProductImages).Include(p => p.Brand)
+                  .Include(p => p.Mechanism).Include(p => p.WaterProtection)
+                    .Include(p => p.GlassType).Include(p => p.CaseThick)
+                      .Include(p => p.BandType).Include(p => p.ProductCategories).ThenInclude(p => p.Category)
+                        .FirstOrDefaultAsync(p=>p.Id == id);
+            if (dbProduct == null) return NotFound();
+            ViewBag.BrandId = dbProduct.Brand.Id;
+            ViewBag.MechanismId = dbProduct.MechanismId;
+            ViewBag.WaterProtectionId = dbProduct.WaterProtectionId;
+            ViewBag.GlassTypeId = dbProduct.GlassTypeId;
+            ViewBag.CaseThickId = dbProduct.CaseThickId;
+            ViewBag.BandTypeId = dbProduct.BandTypeId;
+            if (Product.MainPhoto != null)
+            {
+                if (ModelState["MainPhoto"].ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid)
+                {
+                    return View();
+                }
+                if (!Product.MainPhoto.IsImage())
+                {
+                    ModelState.AddModelError("MainPhoto", "Zehmet olmasa shekil formati sechin");
+                    return View();
+                }
 
-        //            Product oldProduct = await _context.Products.Include(c => c.ProductDetail)
-        //                 .Include(b => b.Author).FirstOrDefaultAsync(c => c.Id == id);
+                if (Product.MainPhoto.MaxLength(600))
+                {
+                    ModelState.AddModelError("MainPhoto", "Sheklin maksimum olcusu 200 kb ola biler");
+                    return View();
+                }
 
-        //            Product isExist = await _context.Products.Where(cr => cr.HasDeleted == false).FirstOrDefaultAsync(cr => cr.Id == id);
+                string folder = Path.Combine("assets", "images");
+                Helper.DeleteImage(_env.WebRootPath, folder, dbProduct.Image);
 
-        //            if (isExist != null)
-        //            {
-        //                if (isExist.Id != oldProduct.Id)
-        //                {
-        //                    ModelState.AddModelError("", "Bele bir kurs artiq movcuddur .");
-        //                    return View();
-        //                }
-        //            }
-
-        //            if (Product == null) return NotFound();
-        //            if (Product.Photo != null)
-        //            {
-        //                if (!Product.Photo.IsImage())
-        //                {
-        //                    ModelState.AddModelError("Photos", $"{Product.Photo.FileName} - shekil tipi deyil");
-        //                    return View(oldProduct);
-        //                }
-
-        //                string folder = Path.Combine("assets", "img", "Product");
-        //                string fileName = await Product.Photo.SaveImgAsync(_env.WebRootPath, folder);
-        //                if (fileName == null)
-        //                {
-        //                    return NotFound();
-        //                }
-
-        //                Helper.DeleteImage(_env.WebRootPath, folder, oldProduct.Image);
-        //                oldProduct.Image = fileName;
-        //            }
-        //            oldProduct.AuthorId = (int)AuthorId;
-        //            oldProduct.Description = Product.Description;
-        //            oldProduct.ProductDetail.FirstContent = Product.ProductDetail.FirstContent;
-        //            oldProduct.ProductDetail.SecondContent = Product.ProductDetail.SecondContent;
-        //            oldProduct.ProductDetail.ThirdContent = Product.ProductDetail.ThirdContent;
-        //            oldProduct.ProductDetail.FourthContent = Product.ProductDetail.FourthContent;
+                string fileName = await Product.MainPhoto.SaveImgAsync(_env.WebRootPath, folder);
+                dbProduct.Image = fileName;
+            }
 
 
-        //            await _context.SaveChangesAsync();
-        //            return RedirectToAction(nameof(Index));
-        //        }
+            if (Product.Photos != null)
+            {
+                foreach (IFormFile photo in Product.Photos)
+                {
+                    if (photo == null)
+                    {
+                        ModelState.AddModelError("Photos", "Shekil bolmesi bosh qala bilmez!");
+                        return View();
+                    }
+
+                    if (!photo.IsImage())
+                    {
+                        ModelState.AddModelError("Photos", "Zehmet olmasa shekil formati sechin");
+                        return View();
+                    }
+
+                    if (photo.MaxLength(600))
+                    {
+                        ModelState.AddModelError("Photos", "Sheklin maksimum olcusu 600 kb ola biler");
+                        return View();
+                    }
+
+                    string imagesFolder = Path.Combine("assets", "images");
+                    string productFileName = await photo.SaveImgAsync(_env.WebRootPath, imagesFolder);
+                    ProductImage productImage = new ProductImage { Image = productFileName, ProductId = Product.Id, HasDeleted = false };
+                    _context.ProductImages.Add(productImage);
+                }
+            }
+            dbProduct.BrandId = (int)BrandId;
+            dbProduct.WaterProtectionId = (int)WaterProtectionId;
+            dbProduct.GlassTypeId = (int)GlassTypeId;
+            dbProduct.MechanismId = (int)MechanismId;
+            dbProduct.BandTypeId = (int)BandTypeId;
+            dbProduct.CaseThickId = (int)CaseThickId;
+            dbProduct.BrandId = (int)BrandId;
+            dbProduct.Count = Product.Count;
+            dbProduct.WatchCode = Product.WatchCode;
+            dbProduct.Price = Product.Price;
+            dbProduct.Model = Product.Model;
+            dbProduct.Discount = 0;
+            dbProduct.SaleCount = 0;
+            dbProduct.ViewCount = 0;
+            
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+        #region ProductDelete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -276,20 +344,33 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
         public async Task<IActionResult> DeleteProduct(int? id)
         {
             if (id == null) return NotFound();
-            Product Product = _context.Products.FirstOrDefault(c => c.Id == id);
-            if (Product == null) return NotFound();
+            Product product = await _context.Products.FindAsync(id);
+            if (product == null) return NotFound();
+            string folder = Path.Combine("assets", "images");
+            Helper.DeleteImage(_env.WebRootPath, folder, product.Image);
 
-            if (!Product.HasDeleted)
+            foreach (ProductImage image in product.ProductImages)
             {
-                Product.HasDeleted = true;
-                Product.DeletedTime = DateTime.Now;
+                Helper.DeleteImage(_env.WebRootPath, folder, image.Image);
             }
-            else
-            {
-                Product.HasDeleted = false;
-            }
+
+            _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        #endregion
+
+        public async Task<IActionResult> DeleteProductImage(int? id)
+        {
+            if (id == null) return NotFound();
+            ProductImage image =await _context.ProductImages.FindAsync(id);
+            if (image == null) return NotFound();
+            string folder = Path.Combine("assets", "images");
+            Helper.DeleteImage(_env.WebRootPath, folder, image.Image);
+            _context.ProductImages.Remove(image);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Update", new { id = image.ProductId });
         }
     }
 
