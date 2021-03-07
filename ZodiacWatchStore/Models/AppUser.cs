@@ -8,5 +8,6 @@ namespace ZodiacWatchStore.Models
 {
     public class AppUser:IdentityUser
     {
+
     }
 }
