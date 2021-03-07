@@ -32,7 +32,7 @@
                     <span>Əlaqə : @Model.Bio.Phone</span>
                 </li>
                 <li>
-                    <a href="#">
+                    <a asp-controller="Basket" asp-action="Index">
                         <span>
                             <i class="fas fa-shopping-basket"></i>
                             Səbət
@@ -97,7 +97,7 @@
                             <a href="#">
                                 <i class="far fa-user"></i>
                             </a>
-                            <ul class="d-none">
+                            <ul class="d-none userAccount">
                                 <li>
                                     <a asp-controller="Account" asp-action="Login">Giriş</a>
                                 </li>
@@ -113,7 +113,7 @@
                             </a>
                         </li>
                         <li class="shop">
-                            <a href="#">
+                            <a asp-controller="Basket" asp-action="Index">
                                 <i class="fas fa-shopping-cart"></i>
                                 <span>0</span>
                             </a>

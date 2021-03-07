@@ -1447,4 +1447,22 @@ footer i{
 .accordion a:hover{
     color: #A95C00!important;
 }
+.userAccount li a {
+    background-color: white;
+    border: 0!important;
+    border-radius: 0;
+    display: inline-block;
+    width: 100%!important;
+    height:100%!important;
+    position: relative;
+    line-height: 0!important;
+    color: black;
+    text-align: left!important;
+    font-weight: 500;
+
+}
+.userAccount li a:hover{
+    color: #A95C00!important;
+}
+
 
