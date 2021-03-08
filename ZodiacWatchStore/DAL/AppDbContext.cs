@@ -8,9 +8,9 @@ using ZodiacWatchStore.Models;
 
 namespace ZodiacWatchStore.DAL
 {
-    public class AppDbContext:IdentityDbContext<AppUser>
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options){}
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<Bio> Bios { get; set; }
         public DbSet<Slider> Sliders { get; set; }
@@ -25,5 +25,7 @@ namespace ZodiacWatchStore.DAL
         public DbSet<CaseThick> CaseThicks { get; set; }
         public DbSet<BandType> BandTypes { get; set; }
         public DbSet<WaterProtection> WaterProtections { get; set; }
+        public DbSet<Sale> Sales { get; set; }
+        public DbSet<SaleProduct> SaleProducts {get;set;}
     }
 }

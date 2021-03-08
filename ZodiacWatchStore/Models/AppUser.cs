@@ -16,5 +16,7 @@ namespace ZodiacWatchStore.Models
         public bool HasDeleted { get; set; }
         public DateTime? DeletedTime { get; set; }
         public DateTime? CreatedTime { get; set; }
+        public bool Status { get; set; }
+        public ICollection<Sale> Sales { get; set; }
     }
 }
