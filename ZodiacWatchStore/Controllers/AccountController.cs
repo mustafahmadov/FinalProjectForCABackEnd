@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ZodiacWatchStore.DAL;
 using ZodiacWatchStore.Models;
+using ZodiacWatchStore.ViewModels;
 
 namespace ZodiacWatchStore.Controllers
 {
@@ -27,14 +29,12 @@ namespace ZodiacWatchStore.Controllers
         }
         public IActionResult Login()
         {
-            TempData["controllerName"] = this.ControllerContext.RouteData.Values["controller"].ToString();
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginVM login)
         {
-            TempData["controllerName"] = this.ControllerContext.RouteData.Values["controller"].ToString();
             if (!ModelState.IsValid)
             {
                 return View();
@@ -66,33 +66,37 @@ namespace ZodiacWatchStore.Controllers
         }
         public IActionResult Register()
         {
-            TempData["controllerName"] = this.ControllerContext.RouteData.Values["controller"].ToString();
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterVM register)
         {
-            TempData["controllerName"] = this.ControllerContext.RouteData.Values["controller"].ToString();
-            if (!ModelState.IsValid) return NotFound();
-            AppUser user = new AppUser()
-            {
-                Email = register.Email,
-                UserName = register.UserName,
-                Fullname = register.FullName
-            };
-            IdentityResult identityResult = await _userManager.CreateAsync(user, register.Password);
-            if (!identityResult.Succeeded)
-            {
-                foreach (var error in identityResult.Errors)
+                if (!ModelState.IsValid) return NotFound();
+                AppUser user = new AppUser()
                 {
-                    ModelState.AddModelError("", error.Description);
+                    UserName = register.UserName,
+                    Email = register.Email,
+                    Name = register.Name,
+                    Surname = register.Surname,
+                    PhoneNumber = register.PhoneNumber,
+                    HasDeleted =false,
+                };
+                
+                IdentityResult identityResult = await _userManager.CreateAsync(user, register.Password);
+                if (!identityResult.Succeeded)
+                {
+                    foreach (var error in identityResult.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View(register);
                 }
-                return View(register);
-            }
-            await _userManager.AddToRoleAsync(user, "Member");
-            await _signInManager.SignInAsync(user, true);
-            return RedirectToAction("Index", "Home");
+            
+                await _userManager.AddToRoleAsync(user, "Member");
+                await _signInManager.SignInAsync(user, true);
+                
+                return RedirectToAction("Index", "Home");
         }
         public async Task<IActionResult> Logout()
         {
@@ -100,87 +104,83 @@ namespace ZodiacWatchStore.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult Subscribe()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Subscribe(SubscribedEmail subscribedEmail)
-        {
-            if (ModelState.IsValid)
-            {
-                SubscribedEmail subscribed = new SubscribedEmail();
-                subscribed.Email = subscribedEmail.Email.Trim().ToLower();
-                bool isExist = _context.SubscribedEmails
-                      .Any(e => e.Email.Trim().ToLower() == subscribedEmail.Email.Trim().ToLower());
-                if (isExist)
-                {
-                    ModelState.AddModelError("", "This email already subscribed");
-                }
-                else
-                {
-                    await _context.SubscribedEmails.AddAsync(subscribed);
-                    await _context.SaveChangesAsync();
-                }
-
-            }
-            return RedirectToAction("Index", "Home");
-        }
-        public IActionResult Reply()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Reply(ReplyVM replyVM)
-        {
-            if (ModelState.IsValid)
-            {
-                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient()
-                {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
-                    EnableSsl = true,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential()
-                    {
-                        UserName = "mustafaahmadov8@gmail.com",
-                        Password = "Araz2006"
-                    }
-                };
-                MailAddress fromEmail = new MailAddress("mustafaahmadov8@gmail.com", replyVM.Name);
-                MailAddress toEmail = new MailAddress("mustafa.ehmedov1999@gmail.com", replyVM.Name);
-                MailMessage message = new MailMessage()
-                {
-                    From = fromEmail,
-                    Subject = replyVM.Subject,
-                    Body = replyVM.Message
-                };
-                message.To.Add(toEmail);
-                client.Send(message);
-
-
-            }
-            return RedirectToAction("Index", "Home");
-
-        }
-
-        //public async Task CreateRole()
+        //public IActionResult Subscribe()
         //{
-        //    if (!(await _roleManager.RoleExistsAsync("Admin")))
-        //    {
-        //        await _roleManager.CreateAsync(new IdentityRole { Name = "Admin" });
-        //    }
-        //    if (!(await _roleManager.RoleExistsAsync("Member")))
-        //    {
-        //        await _roleManager.CreateAsync(new IdentityRole { Name = "Member" });
-        //    }
-        //    if (!(await _roleManager.RoleExistsAsync("CourseModerator")))
-        //    {
-        //        await _roleManager.CreateAsync(new IdentityRole { Name = "CourseModerator" });
-        //    }
+        //    return View();
         //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Subscribe(SubscribedEmail subscribedEmail)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        SubscribedEmail subscribed = new SubscribedEmail();
+        //        subscribed.Email = subscribedEmail.Email.Trim().ToLower();
+        //        bool isExist = _context.SubscribedEmails
+        //              .Any(e => e.Email.Trim().ToLower() == subscribedEmail.Email.Trim().ToLower());
+        //        if (isExist)
+        //        {
+        //            ModelState.AddModelError("", "This email already subscribed");
+        //        }
+        //        else
+        //        {
+        //            await _context.SubscribedEmails.AddAsync(subscribed);
+        //            await _context.SaveChangesAsync();
+        //        }
+
+        //    }
+        //    return RedirectToAction("Index", "Home");
+        //}
+        //public IActionResult Reply()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Reply(ReplyVM replyVM)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient()
+        //        {
+        //            Host = "smtp.gmail.com",
+        //            Port = 587,
+        //            EnableSsl = true,
+        //            DeliveryMethod = SmtpDeliveryMethod.Network,
+        //            UseDefaultCredentials = false,
+        //            Credentials = new NetworkCredential()
+        //            {
+        //                UserName = "mustafaahmadov8@gmail.com",
+        //                Password = "Araz2006"
+        //            }
+        //        };
+        //        MailAddress fromEmail = new MailAddress("mustafaahmadov8@gmail.com", replyVM.Name);
+        //        MailAddress toEmail = new MailAddress("mustafa.ehmedov1999@gmail.com", replyVM.Name);
+        //        MailMessage message = new MailMessage()
+        //        {
+        //            From = fromEmail,
+        //            Subject = replyVM.Subject,
+        //            Body = replyVM.Message
+        //        };
+        //        message.To.Add(toEmail);
+        //        client.Send(message);
+
+
+        //    }
+        //    return RedirectToAction("Index", "Home");
+
+        //}
+
+        public async Task CreateRole()
+        {
+            if (!(await _roleManager.RoleExistsAsync("Admin")))
+            {
+                await _roleManager.CreateAsync(new IdentityRole { Name = "Admin" });
+            }
+            if (!(await _roleManager.RoleExistsAsync("Member")))
+            {
+                await _roleManager.CreateAsync(new IdentityRole { Name = "Member" });
+            }
+        }
     }
 }

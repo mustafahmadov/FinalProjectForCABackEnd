@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,22 @@ namespace ZodiacWatchStore.ViewComponents
     public class HeaderViewComponent : ViewComponent
     {
         private readonly AppDbContext _context;
-        public HeaderViewComponent(AppDbContext context)
+        private readonly UserManager<AppUser> _userManager;
+        public HeaderViewComponent(AppDbContext context,
+                                    UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            ViewBag.FullName = "";
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+                ViewBag.FullName ="Xoş gəldin," + " " + user.Name+" "+user.Surname + "!";
+            }
             HeaderFooterVM viewModel = new HeaderFooterVM()
             {
                 Bio = _context.Bios.FirstOrDefault(),

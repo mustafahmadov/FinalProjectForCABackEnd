@@ -34,7 +34,6 @@ namespace ZodiacWatchStore
                 identityOptions.Password.RequiredLength = 8;
                 identityOptions.Password.RequireDigit = true;
                 identityOptions.Password.RequireUppercase = true;
-
                 identityOptions.User.RequireUniqueEmail = true;
                 identityOptions.Lockout.AllowedForNewUsers = true;
                 identityOptions.Lockout.MaxFailedAccessAttempts = 3;
@@ -64,7 +63,7 @@ namespace ZodiacWatchStore
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

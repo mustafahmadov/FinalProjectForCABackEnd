@@ -248,8 +248,8 @@ $(document).ready(function () {
             $('.bottom').removeClass("clicked");
         });
 
-        $('.user a').click(function (e) {
-            e.preventDefault();
+    $('.user>a').click(function (e) {
+        e.preventDefault();
             $('.user ul').toggleClass('d-block');
         })
     $('.shop').click(function (e) {
@@ -271,7 +271,6 @@ $(document).ready(function () {
             }
         })
         $('.btn-quick').click(function () {
-            console.log("jkdhkajs");
             $(".view-modal").removeClass('show');
         })
 

@@ -4,28 +4,13 @@
         <div class="topbar">
             <ul class="box-top box-top-right pull-right">
 
-                <li class="language-select">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="~/assets/images/az-az.png" alt="aze">
-                            Azərbaycan
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">
-                                <img src="~/assets/images/az-az.png" alt="aze">
-                                Azərbaycan
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <img src="~/assets/images/ru-ru.png" alt="aze">
-                                Русский
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <img src="~/assets/images/en-gb.png" alt="aze">
-                                English
-                            </a>
-                        </div>
-                    </div>
+                <li class="userName">
+                    
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a>@ViewBag.FullName</a>
+                        }
+                    
                 </li>
                 <li>
                     <i class="fas fa-phone"></i>
