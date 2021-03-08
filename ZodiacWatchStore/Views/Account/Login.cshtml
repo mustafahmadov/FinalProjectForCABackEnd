@@ -1,7 +1,55 @@
-﻿
+﻿@model LoginVM
 @{
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
-
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-home"></i>
+                    Əsas Səhifə
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Hesaba daxil olma</li>
+        </ol>
+    </nav>
+</div>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0">
+                <div class="col-lg-4 mx-auto">
+                    <div class="auth-form-light text-left py-5 px-4 px-sm-5 bg-light">
+                        <h2 class="font-weight-normal text-center">Hesabına daxil ol</h2>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <form class="pt-3" method="post">
+                            <div class="form-group">
+                                <input asp-for="Email" class="form-control form-control-lg" placeholder="Email ünvanı">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="Password" class="form-control form-control-lg" placeholder="Şifrə">
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            @*<div class="form-group">
+                                <p class="text-danger mb-3">Do you want to stay in page when you close browser?</p>
+                                <input asp-for="Ischecked" class="form-control form-control-lg" placeholder="Ischecked">
+                                <span asp-validation-for="Ischecked" class="text-danger"></span>
+                            </div>*@
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-block btn-login" value="Daxil ol" />
+                            </div>
+                            <div class="text-center mt-4 font-weight-light">
+                                Hesabın yoxdur? <a asp-action="Register" class="text-primary">Qeydiyyatdan keç</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>

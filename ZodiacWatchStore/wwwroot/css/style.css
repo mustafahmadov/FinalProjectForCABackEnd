@@ -1464,5 +1464,17 @@ footer i{
 .userAccount li a:hover{
     color: #A95C00!important;
 }
+.btn-login,.btn-register{
+    background-color: #A95C00;
+    color: white;
+}
+.auth-form-light,.login{
+    border: 2px solid #A95C00;
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+.login{
+    padding:20px 30px 20px 30px;
+}
 
 

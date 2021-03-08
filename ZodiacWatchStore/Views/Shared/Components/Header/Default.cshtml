@@ -83,12 +83,26 @@
                                 <i class="far fa-user"></i>
                             </a>
                             <ul class="d-none userAccount">
-                                <li>
-                                    <a asp-controller="Account" asp-action="Login">Giriş</a>
-                                </li>
-                                <li>
-                                    <a asp-controller="Account" asp-action="Register">Qeydiyyat</a>
-                                </li>
+
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li>
+                                        <a asp-controller="Account" asp-action="Login">Giriş</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Account" asp-action="Register">Qeydiyyat</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a asp-controller="Account" asp-action="UserCabinet">Hesabım</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Account" asp-action="Logout">Çıxış</a>
+                                    </li>
+                                }
+
                             </ul>
                         </li>
                         <li class="heart">
