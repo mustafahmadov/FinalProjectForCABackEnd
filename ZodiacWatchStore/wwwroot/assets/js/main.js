@@ -1,3 +1,5 @@
+//import { get } from "jquery";
+
 $(document).ready(function () {
     $(document).on('click', '.fa-eye', function () {
         let productId = $(this).parent().prev().val();
@@ -15,6 +17,57 @@ $(document).ready(function () {
             }
         })
     })
+    let WishlistCount = () => {
+        $.ajax({
+            url: '/Product/WishListCount',
+            type: 'Get',
+            success: function (res) {
+                $('.heart-count').html(res);
+            }
+        });
+    }
+    WishlistCount();
+
+
+    let cardTotal = () => {
+        $.ajax({
+            url: '/Basket/GetBasketTotal',
+            type: 'Get',
+            success: function (res) {
+                $('#total_cart_amt').html(res);
+                $('#product_total_amt').html(res);
+            }
+        });
+    }
+
+    cardTotal();
+
+
+    let getBasketCount = () => {
+        let basketCount = $('.shop span');
+        $.ajax({
+            url: '/Product/GetBasketCount',
+            type: 'GET',
+            success: function (res) {
+                basketCount.text(res);
+            }
+        })
+    }
+    getBasketCount();
+
+
+
+    let getBasketTotal = () => {
+        let basketTotal = $('.basketTotal');
+        $.ajax({
+            url: '/Product/GetBasketTotal',
+            type: 'GET',
+            success: function (res) {
+                basketTotal.text('₼' + res);
+            }
+        })
+    }
+    getBasketTotal();
 
     $(document).on('click', "#addToBasket", function () {
         let productId = $(this).next().val();
@@ -36,21 +89,7 @@ $(document).ready(function () {
                     icon: "success",
 
                 });
-                $.ajax({
-                    url: '/Product/GetBasketCount',
-                    type: 'GET',
-                    success: function (res) {
-                        basketCount.text(res);
-                        let basketTotal = $('.basketTotal');
-                        $.ajax({
-                            url: '/Product/GetBasketTotal',
-                            type: 'GET',
-                            success: function (res) {
-                                basketTotal.text('₼' + res);
-                            }
-                        })
-                    }
-                })
+                getBasketCount();
             }
         })
     })
@@ -58,7 +97,6 @@ $(document).ready(function () {
     $(document).on('submit', '.deleteProduct', function (e) {
         e.preventDefault();
         let productId = $(this).children('input').val();
-        let basketCount = $('.shop span');
         console.log(productId);
         $.ajax({
             url: '/Product/DeleteFromBasket/?id=' + productId,
@@ -66,21 +104,8 @@ $(document).ready(function () {
             success: function (res) {
                 $('.cart-modal .modal-content .modal-body .row').remove();
                 $('.cart-modal .modal-content .modal-body').prepend(res);
-                $.ajax({
-                    url: '/Product/GetBasketCount',
-                    type: 'GET',
-                    success: function (res) {
-                        basketCount.text(res);
-                        let basketTotal = $('.basketTotal');
-                        $.ajax({
-                            url: '/Product/GetBasketTotal',
-                            type: 'GET',
-                            success: function (res) {
-                                basketTotal.text('₼'+res);
-                            }
-                        })
-                    }
-                })
+                getBasketCount();
+                getBasketTotal();
             }
 
         })
@@ -100,13 +125,7 @@ $(document).ready(function () {
 
                 });
                 console.log(res);
-                $.ajax({
-                    url: '/Product/WishListCount',
-                    type: 'Get',
-                    success: function (res) {
-                        $('.heart-count').html(res);
-                    }
-                });
+                WishlistCount();
             }
         });
     })
@@ -130,55 +149,93 @@ $(document).ready(function () {
             }
         })
     })
-    $.ajax({
-        url: '/Product/WishListCount',
-        type: 'Get',
-        success: function (res) {
-            $('.heart-count').html(res);
-        }
-    });
 
+    $(document).on('click', '.plusBtn', function () {
+        let inputVal = $(this).parent().prev().children('.page-link');
+        let itemTotal = $(this).parent().parent().parent().parent().next().children(".price_money").children('.itemTotal').children('.itemVal');
+        let productId = $(this).next().val();
+        let anotherInputVal = $(this).parent().prev().prev().children('.minBtn');
+        console.log(itemTotal);
+        $.ajax({
+            url: '/Basket/IncProductCountOne?id=' + productId,
+            type: "Get",
+            success: function (res) {
+                itemTotal.html(res);
+                getBasketCount();
+                $.ajax({
+                    url: '/Basket/GetBasketTotal',
+                    type: 'Get',
+                    success: function (res) {
+                        $('#total_cart_amt').html(res);
+                        $('#product_total_amt').html(res);
+                        $.ajax({
+                            url: '/Basket/GetProductCount?id=' + productId,
+                            type: 'GET',
+                            success: function (res) {
+                                inputVal.val(res);
+                            }
+                        })
+                    }
+                });  
+            }
+        })
+    })
+
+    $(document).on('click', '.minBtn', function () {
+        let inputVal = $(this).parent().next().children('.page-link');
+        let thisVal = $(this);
+        let itemTotal = $(this).parent().parent().parent().parent().next().children(".price_money").children('.itemTotal').children('.itemVal');
+        let productId = $(this).next().val();
+        $('.productCard').children('.row').remove();
+        console.log(itemTotal);
+        $.ajax({
+            url: '/Basket/DecProductCountOne?id=' + productId,
+            type: "Get",
+            success: function (res) {
+                $('.productCard').append(res);
+                getBasketCount();
+                $.ajax({
+                    url: '/Basket/GetBasketTotal',
+                    type: 'Get',
+                    success: function (res) {
+                        $('#total_cart_amt').html(res);
+                        $('#product_total_amt').html(res);
+                    }
+                });
+            }
+        })
+    })
+
+    $(document).on('submit', '#removeFromCard', function () {
+        let productId = $(this).next().val();
+        let deletedRow = $(this).parent().parent().parent().parent();
+        $('.productCard').children('.row').remove();
+        $.ajax({
+            url: '/Basket/DeleteFromCard?id=' + productId,
+            type: 'Get',
+            success: function (res) {
+                $('.productCard').append(res);
+                let basketCount = $('.shop span');
+                $.ajax({
+                    url: '/Product/GetBasketCount',
+                    type: 'GET',
+                    success: function (res) {
+                        basketCount.text(res);
+                    }
+                })
+            }
+        })
+    })
+   
     
-
-    let basketCount = $('.shop span');
-    $.ajax({
-        url: '/Product/GetBasketCount',
-        type: 'GET',
-        success: function (res) {
-            basketCount.text(res);
-        }
-    })
-
-    let basketTotal = $('.basketTotal');
-    $.ajax({
-        url: '/Product/GetBasketTotal',
-        type: 'GET',
-        success: function (res) {
-            basketTotal.text('₼' + res);
-        }
-    })
 
     $('.plusBtn').click(function (e) {
         let inputVal = $(this).parent().prev().children('.page-link');
         e.preventDefault();
-        if (inputVal.val() > 4) {
-            inputVal.val() = 5;
-        }
-        else {
-            inputVal.val(parseInt(inputVal.val()) + 1);
-        }
-
     })
     $('.minBtn').click(function (e) {
         let inputVal = $(this).parent().next().children('.page-link');
         e.preventDefault();
-        if (inputVal.val() < 2) {
-            inputVal.val() = 1;
-        }
-        else {
-            inputVal.val(parseInt(inputVal.val()) - 1);
-        }
-
     })
 
     //$('.btn-cart').click(function () {

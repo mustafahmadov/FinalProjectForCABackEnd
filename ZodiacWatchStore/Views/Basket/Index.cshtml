@@ -25,51 +25,51 @@
                 <div class="row mt-5 gx-3">
                     <!-- left side div -->
                     <div class="col-md-12 col-lg-8 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow">
-                        <div class="card p-4">
+                        <div class="card productCard p-4">
                             <h2 class="py-4 font-weight-bold">Səbət (@Model.Count məhsul)</h2>
                             @foreach (BasketVM product in Model)
                             {
                                 <div class="row">
-                                    <!-- cart images div -->
                                     <div class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
                                         <img src="assets/images/@product.Image" class="img-fluid"
                                              alt="cart img">
                                     </div>
-                                    <!-- cart product details -->
                                     <div class="col-md-7 col-11 mx-auto px-4 mt-2">
                                         <div class="row">
-                                            <!-- product name  -->
                                             <div class="col-6 card-title">
                                                 <h1 class="mb-4 product_name">@product.Model</h1>
                                                 <h1 class="mb-4 product_name">₼@product.Price</h1>
                                             </div>
-                                            <!-- quantity inc dec -->
                                             <div class="col-6">
                                                 <ul class="pagination justify-content-end set_quantity">
                                                     <li class="page-item">
                                                         <button class="page-link  minBtn ">
                                                             <i class="fas fa-minus"></i>
                                                         </button>
+                                                        <input type="hidden" value="@product.Id"  />
                                                     </li>
                                                     <li class="page-item">
-                                                        <input type="text" name=""
+                                                        <input type="number" name="" min="0"
                                                                class="page-link" value="@product.Count">
                                                     </li>
                                                     <li class="page-item">
                                                         <button class="page-link plusBtn">
                                                             <i class="fas fa-plus"></i>
                                                         </button>
+                                                        <input type="hidden" value="@product.Id" />
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
-                                        <!-- //remover move and price -->
                                         <div class="row">
-                                            <div class="col-8 d-flex justify-content-between remove_wish">
-                                                <p><i class="fas fa-trash-alt"></i>SƏBƏTDƏN SİL</p>
-                                            </div>
+                                            <form class="removeFromCard" id="removeFromCard" asp-controller="Basket" asp-action="DeleteFromCard" asp-route-id="@product.Id">
+                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                    <i class="fas fa-trash-alt">SƏBƏTDƏN SİL</i>
+                                                </button>
+                                            </form>
+                                            <input type="hidden" value="@product.Id" />
                                             <div class="col-4 d-flex justify-content-end price_money">
-                                                <h3>₼<span id="itemval">0.00 </span></h3>
+                                                <h3 class="itemTotal">₼<span id="itemval" class="itemVal">@(product.Count*product.Price)</span></h3>
                                             </div>
                                         </div>
                                     </div>
@@ -85,7 +85,7 @@
                         <div class="right_side p-3 shadow bg-white">
                             <h2 class="product_name mb-5">Məbləğ</h2>
                             <div class="price_indiv d-flex justify-content-between">
-                                <p>Məhsulun qiyməti</p>
+                                <p>Məhsulların qiyməti</p>
                                 <p>₼<span id="product_total_amt">50.00</span></p>
                             </div>
                             <div class="price_indiv d-flex justify-content-between">
@@ -97,7 +97,7 @@
                                 <p>Ümumi Məbləğ(ƏDV Daxil)</p>
                                 <p>₼<span id="total_cart_amt">50.00</span></p>
                             </div>
-                            <button class="btn btn-primary text-uppercase">Ödəniş Səhifəsi</button>
+                            <a asp-action="CheckOut" class="btn btn-primary text-uppercase" >Ödəniş Səhifəsi</a>
                         </div>
                         <!-- discount code part -->
                         <div class="discount_code mt-3 shadow">
