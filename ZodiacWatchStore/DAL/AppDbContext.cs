@@ -27,5 +27,6 @@ namespace ZodiacWatchStore.DAL
         public DbSet<WaterProtection> WaterProtections { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleProduct> SaleProducts {get;set;}
+        public DbSet<PaymentType> PaymentTypes { get; set; }
     }
 }

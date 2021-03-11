@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZodiacWatchStore.DAL;
 
 namespace ZodiacWatchStore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210311201120_someChanging1")]
+    partial class someChanging1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -454,7 +456,7 @@ namespace ZodiacWatchStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentTypes");
+                    b.ToTable("PaymentType");
                 });
 
             modelBuilder.Entity("ZodiacWatchStore.Models.Product", b =>
@@ -590,22 +592,6 @@ namespace ZodiacWatchStore.Migrations
 
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CustomerEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerPhone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerSurname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");

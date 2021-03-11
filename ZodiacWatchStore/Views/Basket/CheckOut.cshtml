@@ -1,103 +1,104 @@
-﻿
+﻿@model Sale
 @{
     ViewData["Title"] = "CheckOut";
 }
-
-<section>
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-home"></i>
+                    Əsas Səhifə
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Ödəniş səhifəsi</li>
+        </ol>
+    </nav>
+</div>
+<section class="my-5">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-7 col-md-12">
-                <div class="checkout-form box-shadow white-bg">
-                    <h2 class="mb-4">Ödəniş səhifəsi</h2>
-                    <form class="row">
-                        <div class="col-md-8">
+        <form method="post">
+            <div class="row">
+                <div class="col-lg-5 offset-lg-1 col-md-12">
+                    <div class="checkout-form box-shadow white-bg">
+                        <h2 class="mb-4">Ödəniş səhifəsi</h2>
+
+                        <div class="col-md-10">
                             <div class="form-group">
-                                <label>Ad</label>
-                                <input type="text" id="fname" class="form-control" placeholder="Your firstname">
+                                <label asp-for="CustomerName"></label>
+                                <input asp-for="CustomerName" class="form-control" placeholder="Name">
+                                <span asp-validation-for="CustomerName" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-10">
                             <div class="form-group">
-                                <label>Soyad</label>
-                                <input type="text" id="lname" class="form-control" placeholder="Your lastname">
+                                <label asp-for="CustomerSurname"></label>
+                                <input asp-for="CustomerSurname" class="form-control" placeholder="Name">
+                                <span asp-validation-for="CustomerSurname" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-10">
                             <div class="form-group">
-                                <label>Əlaqə nömrəsi</label>
-                                <input type="text" id="phone" class="form-control" placeholder="">
+                                <label asp-for="CustomerEmail"></label>
+                                <input asp-for="CustomerEmail" class="form-control" placeholder="Name">
+                                <span asp-validation-for="CustomerEmail" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-10">
                             <div class="form-group">
-                                <label>Yaşadığınız ərazi(Çatdırılma qiyməti buna görə müəyyən olunur)</label>
-                                <select name="people" id="people" class="form-control">
-                                    <option value="#">Seçin</option>
-                                    <option value="#">Bakı,Abşeron</option>
-                                    <option value="#">Digər</option>
+                                <label asp-for="CustomerPhone"></label>
+                                <input asp-for="CustomerPhone" class="form-control" placeholder="Name">
+                                <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label asp-for="ShippingAddress">Çatdırılma adresi(Şəhər,rayon,küçə,qəsəbə,mənzil)</label>
+                                <input asp-for="ShippingAddress" class="form-control" placeholder="Name">
+                                <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 mt-5 mt-lg-0">
+                    <div class="shadow p-3 p-lg-5">
+                        <div class="p-3 p-lg-5 shadow-sm mb-5">
+                            <h3 class="mb-3">Sifariş</h3>
+                            <ul class="list-unstyled">
+                                @foreach (BasketVM item in ViewBag.Basket)
+                                {
+                                    <li class="mb-3 border-bottom pb-3"><span> @item.Count - ədəd @item.Model </span> @(item.Count*item.Price)</li>
+                                }
+
+                                <li>
+                                    <span><strong class="cart-total"> Ümumi :</strong></span>  <strong class="cart-total">$ 2830.00 </strong>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label>Ödəniş növünü seçin</label>
+                                <select class="form-control" name="PaymentTypeId">
+                                    <option value=""></option>
+                                    @foreach (var item in ViewBag.PaymentTypes)
+                                    {
+                                        <option value="@item.Id">@item.Type</option>
+                                    }
                                 </select>
+                                <span asp-validation-for="PaymentType"></span>
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label>Çatdırılma adresi(Şəhər,rayon,küçə,qəsəbə,mənzil)</label>
-                                <input type="text" id="address" class="form-control" placeholder="Enter Your Address">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-md-0">
-                                <label>Poçt indeksi</label>
-                                <input type="text" id="zippostalcode" class="form-control" placeholder="Zip / Postal">
-                            </div>
-                        </div>
-                    </form>
+                        <button type="submit" class="btn btn-primary btn-animated btn-block">Sifarişi rəsmiləşdir</button>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-5 col-md-12 mt-5 mt-lg-0">
-                <div class="shadow p-3 p-lg-5">
-                    <div class="p-3 p-lg-5 shadow-sm mb-5">
-                        <h3 class="mb-3">Sifariş</h3>
-                        <ul class="list-unstyled">
-                            <li class="mb-3 border-bottom pb-3"><span> 1 x Product Name </span> $ 2404.00</li>
-                            <li class="mb-3 border-bottom pb-3"><span> 1 x Product Name </span> $ 498.00</li>
-                            <li class="mb-3 border-bottom pb-3"><span> Shipping </span> $ 0.00</li>
-                            <li class="mb-3 border-bottom pb-3"><span> Subtotal </span> $ 2830.00</li>
-                            <li>
-                                <span><strong class="cart-total"> Total :</strong></span>  <strong class="cart-total">$ 2830.00 </strong>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="cart-detail my-5">
-                        <h3 class="mb-3">Payment Method</h3>
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadio1">Direct Bank Tranfer</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadio2">Check Payment</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadio3">Paypal Account</label>
-                            </div>
-                        </div>
-                        <div class="form-group mb-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">I have read and accept the terms and conditions</label>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary btn-animated btn-block">Proceed to Payment</button>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
 </section>
+
+@section Scripts{
+    <partial name="_Validation" />
+}
 
