@@ -180,6 +180,12 @@ namespace ZodiacWatchStore.Controllers
                     ViewBag.SelectError = "Please select PaymentType";
                     return View();
                 }
+                foreach (BasketVM item in basketProducts)
+                {
+                    var dbPro = await _context.Products.FindAsync(item.Id);
+                    dbPro.SaleCount += item.Count;
+                    dbPro.Count -= item.Count;
+                }
                 newSale.Total = total;
                 newSale.CustomerName = sale.CustomerName;
                 newSale.CustomerSurname = sale.CustomerSurname;
@@ -189,6 +195,7 @@ namespace ZodiacWatchStore.Controllers
                 newSale.PaymentTypeId = (int)PaymentTypeId;
                 newSale.Date = DateTime.Now;
                 newSale.ShippingAddress = sale.ShippingAddress;
+                Response.Cookies.Delete("basket");
 
                 await _context.Sales.AddAsync(newSale);
                 await _context.SaveChangesAsync();
