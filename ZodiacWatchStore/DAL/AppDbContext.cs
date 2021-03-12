@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using EduHomeASPNET.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,5 +29,6 @@ namespace ZodiacWatchStore.DAL
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleProduct> SaleProducts {get;set;}
         public DbSet<PaymentType> PaymentTypes { get; set; }
+        public DbSet<SubscribedEmail> SubscribedEmails { get; set; }
     }
 }

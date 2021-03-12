@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using EduHomeASPNET.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -104,72 +105,33 @@ namespace ZodiacWatchStore.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //public IActionResult Subscribe()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Subscribe(SubscribedEmail subscribedEmail)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        SubscribedEmail subscribed = new SubscribedEmail();
-        //        subscribed.Email = subscribedEmail.Email.Trim().ToLower();
-        //        bool isExist = _context.SubscribedEmails
-        //              .Any(e => e.Email.Trim().ToLower() == subscribedEmail.Email.Trim().ToLower());
-        //        if (isExist)
-        //        {
-        //            ModelState.AddModelError("", "This email already subscribed");
-        //        }
-        //        else
-        //        {
-        //            await _context.SubscribedEmails.AddAsync(subscribed);
-        //            await _context.SaveChangesAsync();
-        //        }
+        public IActionResult Subscribe()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Subscribe(SubscribedEmail subscribedEmail)
+        {
+            if (ModelState.IsValid)
+            {
+                SubscribedEmail subscribed = new SubscribedEmail();
+                subscribed.Email = subscribedEmail.Email.Trim().ToLower();
+                bool isExist = _context.SubscribedEmails
+                      .Any(e => e.Email.Trim().ToLower() == subscribedEmail.Email.Trim().ToLower());
+                if (isExist)
+                {
+                    ModelState.AddModelError("", "This email already subscribed");
+                }
+                else
+                {
+                    await _context.SubscribedEmails.AddAsync(subscribed);
+                    await _context.SaveChangesAsync();
+                }
 
-        //    }
-        //    return RedirectToAction("Index", "Home");
-        //}
-        //public IActionResult Reply()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Reply(ReplyVM replyVM)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient()
-        //        {
-        //            Host = "smtp.gmail.com",
-        //            Port = 587,
-        //            EnableSsl = true,
-        //            DeliveryMethod = SmtpDeliveryMethod.Network,
-        //            UseDefaultCredentials = false,
-        //            Credentials = new NetworkCredential()
-        //            {
-        //                UserName = "mustafaahmadov8@gmail.com",
-        //                Password = "Araz2006"
-        //            }
-        //        };
-        //        MailAddress fromEmail = new MailAddress("mustafaahmadov8@gmail.com", replyVM.Name);
-        //        MailAddress toEmail = new MailAddress("mustafa.ehmedov1999@gmail.com", replyVM.Name);
-        //        MailMessage message = new MailMessage()
-        //        {
-        //            From = fromEmail,
-        //            Subject = replyVM.Subject,
-        //            Body = replyVM.Message
-        //        };
-        //        message.To.Add(toEmail);
-        //        client.Send(message);
-
-
-        //    }
-        //    return RedirectToAction("Index", "Home");
-
-        //}
+            }
+            return RedirectToAction("Index", "Home");
+        }
 
         public async Task CreateRole()
         {

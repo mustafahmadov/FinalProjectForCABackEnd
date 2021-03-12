@@ -94,31 +94,25 @@
                         </li>
                     </ul>
                     <div class="d-sm-flex align-items-center mb-5">
-                        <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
-                        <div class="input-group plus-minus-input">
-                            <div class="input-group-button">
-                                <button type="button" class="button hollow circle" data-quantity="minus"
-                                        data-field="quantity">
-                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                </button>
+                        <div class="d-flex align-items-center mr-sm-4">
+                            <div class="number">
+                                <input type="number" value="1" id="quickViewInput" />
                             </div>
-                            <input class="input-group-field" type="number" name="quantity" value="0">
-                            <div class="input-group-button">
-                                <button type="button" class="button hollow circle" data-quantity="plus"
-                                        data-field="quantity">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                </button>
-                            </div>
+
                         </div>
                     </div>
                     <div class="d-sm-flex align-items-center mt-5">
-                        <button class="btn btn-primary btn-animated mr-sm-4 mb-3 mb-sm-0">
+                        <button class="btn btn-primary btn-animated mr-sm-4  mb-sm-0 btn-cart btn-quick" id="addToBasket">
                             <i class="fas fa-shopping-cart mr-1"></i>Səbətə At
                         </button>
-                        <a class="btn btn-animated btn-dark" href="#">
-                            <i class="fas fa-heart mr-1"></i>
-                            Arzu siyahısına əlavə et
-                        </a>
+                        <input type="hidden" value="@Model.Id" />
+                        <button class="btn btn-animated btn-dark" href="#" id="addToWishlist">
+                            <i class="far fa-heart mr-1">
+
+                            </i> Arzu siyahısına əlavə et
+                        </button>
+                        <input type="hidden" value="@Model.Id" />
+
                     </div>
                     <div class="d-flex align-items-center border-top border-bottom py-4 mt-5">
                         <h6 class="mb-0 mr-4">Paylaş:</h6>

@@ -103,14 +103,22 @@ namespace ZodiacWatchStore.Controllers
 
         public IActionResult GetBasketCount()
         {
-            List<BasketVM> basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            List<BasketVM> basket = new List<BasketVM>();
+            if (Request.Cookies["basket"] != null)
+            {
+                basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            }
             return Content(basket.Count.ToString());
         }
 
         public IActionResult GetBasketTotal()
         {
             int basketTotal = 0;
-            List<BasketVM> basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            List<BasketVM> basket = new List<BasketVM>();
+            if (Request.Cookies["basket"] != null)
+            {
+                basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            }
             foreach (BasketVM item in basket)
             {
                 basketTotal += (int)item.Price * item.Count;
@@ -183,7 +191,12 @@ namespace ZodiacWatchStore.Controllers
         }
         public IActionResult WishListCount()
         {
-            List<WishlListVM> wishlist = JsonConvert.DeserializeObject<List<WishlListVM>>(Request.Cookies["wishlist"]);
+
+            List<WishlListVM> wishlist = new List<WishlListVM>();
+            if (Request.Cookies["wishlist"] != null)
+            {
+                wishlist = JsonConvert.DeserializeObject<List<WishlListVM>>(Request.Cookies["wishlist"]);
+            }
             return Content(wishlist.Count.ToString());
         }
 
