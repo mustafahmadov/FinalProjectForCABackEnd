@@ -611,8 +611,10 @@ header .navbar-right ul li a i {
 #searchList {
     position: absolute;
     width: 100%;
-    z-index: 100000;
-    background:white;
+    z-index: 999;
+    background: white;
+    padding-bottom: 15px;
+    border-radius: 3px;
 }
 
 .second-wrap .search-container .btn-search {
@@ -1481,6 +1483,10 @@ footer i{
 }
 .login{
     padding:20px 30px 20px 30px;
+}
+
+.swal-overlay{
+    z-index: 100000000000000000;
 }
 
 

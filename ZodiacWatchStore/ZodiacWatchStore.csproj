@@ -11,6 +11,13 @@
 
   <ItemGroup>
     <None Include="wwwroot\assets\admin\css\maps\style.css.map" />
+    <None Include="wwwroot\assets\admin\fonts\.DS_Store" />
+    <None Include="wwwroot\assets\admin\fonts\Roboto\.DS_Store" />
+    <None Include="wwwroot\assets\admin\fonts\Roboto\Roboto-Black.woff2" />
+    <None Include="wwwroot\assets\admin\fonts\Roboto\Roboto-Bold.woff2" />
+    <None Include="wwwroot\assets\admin\fonts\Roboto\Roboto-Light.woff2" />
+    <None Include="wwwroot\assets\admin\fonts\Roboto\Roboto-Medium.woff2" />
+    <None Include="wwwroot\assets\admin\fonts\Roboto\Roboto-Regular.woff2" />
     <None Include="wwwroot\assets\admin\images\.DS_Store" />
     <None Include="wwwroot\assets\admin\images\auth\.DS_Store" />
     <None Include="wwwroot\assets\admin\images\faces\.DS_Store" />

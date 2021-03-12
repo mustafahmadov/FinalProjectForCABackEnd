@@ -132,7 +132,6 @@ namespace ZodiacWatchStore.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-
         public async Task CreateRole()
         {
             if (!(await _roleManager.RoleExistsAsync("Admin")))

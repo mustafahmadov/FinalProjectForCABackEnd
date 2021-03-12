@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<Product>
 @foreach (Product item in Model)
 {
-    <li class="d-flex mt-2">
-        <img src="~/assets/images/@item.Image" style=" width:60px; height: 60px"  />
-        <a asp-action="ProductDetails" asp-route-id="@item.Id" style="color: #A95C00;">@item.WatchCode</a>
+    <li class="d-flex mt-2 align-items-center pl-2">
+        <a asp-action="ProductDetails" asp-route-id="@item.Id" >
+            <img src="~/assets/images/@item.Image" style=" width:70px; height: 70px;" />
+        </a>
+        
+        <a asp-action="ProductDetails" asp-route-id="@item.Id" style="color: #A95C00;margin-left:15px;">@item.WatchCode</a>
     </li>
 }
