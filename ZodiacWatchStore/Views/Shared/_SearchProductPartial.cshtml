@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Product>
+@foreach (Product item in Model)
+{
+    <li class="d-flex mt-2">
+        <img src="~/assets/images/@item.Image" style=" width:60px; height: 60px"  />
+        <a asp-action="ProductDetails" asp-route-id="@item.Id" style="color: #A95C00;">@item.WatchCode</a>
+    </li>
+}

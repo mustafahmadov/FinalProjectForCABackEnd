@@ -226,6 +226,20 @@ $(document).ready(function () {
             }
         })
     })
+
+    $(document).on('keyup', '#input-search', function () {
+        let search = $(this).val().trim();
+        $("#searchList li").slice(1).remove();
+        if (search.length > 0) {
+            $.ajax({
+                url: "/Product/Search?search=" + search,
+                type: "Get",
+                success: function (res) {
+                    $("#searchList").append(res);
+                }
+            })
+        }
+    })
    
     
 
@@ -280,13 +294,13 @@ $(document).ready(function () {
 
         responsive: {
             0: {
-                items: 0
+                items: 1
             },
             400: {
-                items: 0
+                items: 2
             },
             600: {
-                items: 0
+                items: 2
             },
             1000: {
                 items: 1

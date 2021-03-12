@@ -209,5 +209,11 @@ namespace ZodiacWatchStore.Controllers
             }
             return View(wishlist);
         }
+
+        public IActionResult Search(string search)
+        {
+            IEnumerable<Product> model = _context.Products.Where(p => p.WatchCode.Contains(search)).OrderByDescending(p => p.Id).Take(5);
+            return PartialView("_SearchProductPartial", model);
+        }
     }
 }
