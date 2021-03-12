@@ -126,18 +126,24 @@ namespace ZodiacWatchStore.Controllers
 
         public IActionResult CheckOut()
         {
+            ViewBag.Total = 0;
             List<BasketVM> basket = new List<BasketVM>();
             if (Request.Cookies["basket"] != null)
             {
                 basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
             }
             ViewBag.Basket = basket;
+            foreach (BasketVM item in basket)
+            {
+                ViewBag.Total += item.Count * item.Price;
+            }
+            
             ViewBag.PaymentTypes = _context.PaymentTypes.ToList();
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CheckOut(Sale sale,int? PaymentTypeId)
+        public async Task<IActionResult> CheckOut(CheckOutVM sale,int? PaymentTypeId)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -155,6 +161,7 @@ namespace ZodiacWatchStore.Controllers
                 }
                 List<SaleProduct> saleProducts = new List<SaleProduct>();
                 double total = 0;
+                ViewBag.Total = 0;
                 foreach (BasketVM basketProduct in basketProducts)
                 {
                         Product dbProduct = await _context.Products.FindAsync(basketProduct.Id);
@@ -170,6 +177,7 @@ namespace ZodiacWatchStore.Controllers
                             SaleId = newSale.Id
                         };
                         total += saleProduct.Price * saleProduct.Count;
+                        ViewBag.Total = total;
                         saleProducts.Add(saleProduct);
                         await _context.SaleProducts.AddAsync(saleProduct);
                 }
@@ -187,20 +195,22 @@ namespace ZodiacWatchStore.Controllers
                     dbPro.Count -= item.Count;
                 }
                 newSale.Total = total;
-                newSale.CustomerName = sale.CustomerName;
-                newSale.CustomerSurname = sale.CustomerSurname;
-                newSale.CustomerEmail = sale.CustomerEmail;
-                newSale.CustomerPhone = sale.CustomerPhone;
+                newSale.CustomerName = sale.Name;
+                newSale.CustomerSurname = sale.Surname;
+                newSale.CustomerPhone = sale.PhoneNumber;
+                newSale.CustomerFatherName = sale.FatherName;
                 newSale.AppUserId = appUser.Id;
                 newSale.PaymentTypeId = (int)PaymentTypeId;
                 newSale.Date = DateTime.Now;
-                newSale.ShippingAddress = sale.ShippingAddress;
+                newSale.ShippingAddress = sale.City+' '+sale.District+' '+sale.DetalizedAddress;
+                newSale.SaleStatus = SaleStatus.Waiting;
+                newSale.Information = sale.Information;
                 Response.Cookies.Delete("basket");
 
                 await _context.Sales.AddAsync(newSale);
                 await _context.SaveChangesAsync();
                 TempData["success"] = "Alish-verishiniz ugurla yerine yetirildi";
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("OrderCompleted","Basket");
             }
             else
             {
@@ -212,6 +222,9 @@ namespace ZodiacWatchStore.Controllers
         //    dbProduct.Count -= basketProduct.Count;
         //    await _context.SaveChangesAsync();
         //}
-
+        public IActionResult OrderCompleted()
+        {
+            return View();
+        }
     }
 }

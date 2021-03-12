@@ -1,104 +1,214 @@
-﻿@model Sale
+﻿@model CheckOutVM
 @{
     ViewData["Title"] = "CheckOut";
+    Layout = null;
 }
-<div class="container">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a asp-controller="Home" asp-action="Index">
-                    <i class="fas fa-home"></i>
-                    Əsas Səhifə
-                </a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">Ödəniş səhifəsi</li>
-        </ol>
-    </nav>
-</div>
-<section class="my-5">
-    <div class="container">
-        <form method="post">
-            <div class="row">
-                <div class="col-lg-5 offset-lg-1 col-md-12">
-                    <div class="checkout-form box-shadow white-bg">
-                        <h2 class="mb-4">Ödəniş səhifəsi</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-                        <div class="col-md-10">
-                            <div class="form-group">
-                                <label asp-for="CustomerName"></label>
-                                <input asp-for="CustomerName" class="form-control" placeholder="Name">
-                                <span asp-validation-for="CustomerName" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="form-group">
-                                <label asp-for="CustomerSurname"></label>
-                                <input asp-for="CustomerSurname" class="form-control" placeholder="Name">
-                                <span asp-validation-for="CustomerSurname" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="form-group">
-                                <label asp-for="CustomerEmail"></label>
-                                <input asp-for="CustomerEmail" class="form-control" placeholder="Name">
-                                <span asp-validation-for="CustomerEmail" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="form-group">
-                                <label asp-for="CustomerPhone"></label>
-                                <input asp-for="CustomerPhone" class="form-control" placeholder="Name">
-                                <span asp-validation-for="CustomerPhone" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="form-group">
-                                <label asp-for="ShippingAddress">Çatdırılma adresi(Şəhər,rayon,küçə,qəsəbə,mənzil)</label>
-                                <input asp-for="ShippingAddress" class="form-control" placeholder="Name">
-                                <span asp-validation-for="ShippingAddress" class="text-danger"></span>
-                            </div>
-                        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/assets/css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link href="~/assets/css/theme.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="shortcut icon" href="~/assets/images/logoblack.png" />
+    <title>Zodiac Store</title>
+</head>
 
-
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 mt-5 mt-lg-0">
-                    <div class="shadow p-3 p-lg-5">
-                        <div class="p-3 p-lg-5 shadow-sm mb-5">
-                            <h3 class="mb-3">Sifariş</h3>
-                            <ul class="list-unstyled">
-                                @foreach (BasketVM item in ViewBag.Basket)
-                                {
-                                    <li class="mb-3 border-bottom pb-3"><span> @item.Count - ədəd @item.Model </span> @(item.Count*item.Price)</li>
-                                }
-
-                                <li>
-                                    <span><strong class="cart-total"> Ümumi :</strong></span>  <strong class="cart-total">$ 2830.00 </strong>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="form-group">
-                                <label>Ödəniş növünü seçin</label>
-                                <select class="form-control" name="PaymentTypeId">
-                                    <option value=""></option>
-                                    @foreach (var item in ViewBag.PaymentTypes)
-                                    {
-                                        <option value="@item.Id">@item.Type</option>
-                                    }
-                                </select>
-                                <span asp-validation-for="PaymentType"></span>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-animated btn-block">Sifarişi rəsmiləşdir</button>
-                    </div>
-                </div>
-            </div>
-        </form>
+<body>
+    <div id="ht-preloader">
+        <div class="loader clear-loader">
+            <img class="img-fluid" src="https://www.animatedimages.org/data/media/137/animated-clock-image-0037.gif"
+                 alt="">
+        </div>
     </div>
-</section>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-home"></i>
+                        Əsas Səhifə
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Ödəniş səhifəsi</li>
+            </ol>
+        </nav>
+    </div>
+    <section class="my-5 mb-3 pb-3">
+        <div class="container">
+            <form method="post">
+                <div class="row">
+                    <div class="col-lg-7 offset-lg-1 col-md-12">
+                        <div class="checkout-form box-shadow white-bg">
+                            <h2 class="mb-4 text-center">Ödəniş səhifəsi</h2>
+                        </div>
+                        <div class="container">
+                            <div class="col-lg-12">
+                                <button class="accordion active" type="button">Məlumatlarım</button>
+                                <div class="panel" style="display:block;">
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Name">Adınız <span>*</span></label>
+                                                <input asp-for="Name" class="form-control" placeholder="Adınız">
+                                                <span asp-validation-for="Name" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Surname">Soyadınız <span>*</span></label>
+                                                <input asp-for="Surname" class="form-control" placeholder="Soyadınız">
+                                                <span asp-validation-for="Surname" class="text-danger"></span>
+                                            </div>
+                                        </div>
 
-@section Scripts{
-    <partial name="_Validation" />
-}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="FatherName">Ata adı <span>*</span></label>
+                                                <input asp-for="FatherName" class="form-control" placeholder="Ata adı">
+                                                <span asp-validation-for="FatherName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 relative">
+                                            <div class="input-group-text">+994</div>
+                                            <div class="form-group">
+                                                <label asp-for="PhoneNumber">Əlaqə Nömrəsi <span>*</span></label>
+                                                <input asp-for="PhoneNumber" class="form-control" placeholder="Nömrə">
+                                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label asp-for="Information">Əlavə qeydiniz (varsa) </label>
+                                                <textarea asp-for="Information" type="text" class="form-control" rows="2"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <button class="accordion active" type="button">Ünvan</button>
+                                <div class="panel"style="display:block;">
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="City">Şəhər <span>*</span></label>
+                                                <input asp-for="City" class="form-control" placeholder="Şəhər">
+                                                <span asp-validation-for="City" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="District">Rayon <span></span></label>
+                                                <input asp-for="District" class="form-control" placeholder="Soyadınız">
+                                                <span asp-validation-for="District" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="DetalizedAddress">Ətraflı adres(küçə,mənzil və.s) <span>*</span></label>
+                                                <input asp-for="DetalizedAddress" class="form-control" placeholder="">
+                                                <span asp-validation-for="DetalizedAddress" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <button class="accordion active" type="button">Ödəniş forması</button>
+                                <div class="panel" style="display:block;">
+                                    <div class="col-md-10 mt-3">
+                                        <div class="form-group">
+                                            <label>Ödəniş növünü seçin</label>
+                                            <select class="form-control" name="PaymentTypeId">
+                                                <option value=""></option>
+                                                @foreach (var item in ViewBag.PaymentTypes)
+                                                {
+                                                    <option value="@item.Id">@item.Type</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 mt-5 mt-lg-0">
+                        <div class="shadow p-3 p-lg-5">
+                            <div class="p-3 p-lg-5 shadow-sm mb-5">
+                                <h3 class="mb-3">Sifariş</h3>
+                                <ul class="list-unstyled">
+                                    @foreach (BasketVM item in ViewBag.Basket)
+                                    {
+                                    <li class="mb-3 border-bottom pb-3 d-flex align-items-center ">
+                                        <img src="~/assets/images/@item.Image" style="width: 50px; height:50px" />
+                                        <span> @item.Count - ədəd @item.Model </span> ₼@(item.Count*item.Price)
+                                    </li>
+                                    }
+
+                                    <li>
+                                        <span><strong class="cart-total"> Ümumi :</strong></span>
+                                        <strong class="cart-total">₼@ViewBag.Total.00 </strong>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button type="submit" class="btn  btn-block" style="background:#c48130e6;color:white;">Sifarişi rəsmiləşdir</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    @*@section Scripts{
+        <partial name="_Validation" />
+    }*@
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+            integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0b80c37c76.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    @*<script src="~/assets/js/main.js"></script>*@
+    <script src="~/assets/js/accordion.js"></script>
+    <script src="~/assets/js/theme-plugin.js"></script>
+    <script src="~/assets/js/theme-script.js"></script>
+    <script src="~/assets/js/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/604aa0f1385de407571f39a9/1f0ho9cia';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+
+
+</html>
 

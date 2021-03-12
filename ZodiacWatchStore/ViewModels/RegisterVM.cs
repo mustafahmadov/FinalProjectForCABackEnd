@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using ZodiacWatchStore.CustomAttributes;
 
 namespace ZodiacWatchStore.ViewModels
 {
@@ -27,9 +29,11 @@ namespace ZodiacWatchStore.ViewModels
         [RegularExpression(@"^((\(?\+994\)?)|(0))?\d{2}\d{3}\d{2}\d{2}$", ErrorMessage = "Düzgün nömrə deyil!")]
         public string PhoneNumber { get; set; }
 
-        //[Required]
-        //public bool PrivacyAggrement { get; set; }
+        //[BooleanRequired(ErrorMessage = "You must accept the terms and conditions")]
+        [Required]
+        [Display(Name="Accept terms and conditions")]
+        public bool PrivacyAggrement { get; set; }
 
-        
+
     }
 }

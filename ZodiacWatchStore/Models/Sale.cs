@@ -14,9 +14,9 @@ namespace ZodiacWatchStore.Models
         [Required]
         public string CustomerSurname { get; set; }
         [Required]
-        public string CustomerPhone { get; set; }
+        public string CustomerFatherName { get; set; }
         [Required]
-        public string CustomerEmail { get; set; }
+        public string CustomerPhone { get; set; }
         public DateTime Date { get; set; }
         [Required]
         public double Total { get; set; }
@@ -29,5 +29,7 @@ namespace ZodiacWatchStore.Models
         [Required]
         public int PaymentTypeId { get; set; }
         public PaymentType PaymentType { get; set; }
+        public SaleStatus SaleStatus { get; set; }
+        public string Information { get; set; }
     }
 }

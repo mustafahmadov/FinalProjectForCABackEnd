@@ -73,6 +73,8 @@ namespace ZodiacWatchStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterVM register)
         {
+            if (register.PrivacyAggrement)
+            {
                 if (!ModelState.IsValid) return NotFound();
                 AppUser user = new AppUser()
                 {
@@ -81,9 +83,9 @@ namespace ZodiacWatchStore.Controllers
                     Name = register.Name,
                     Surname = register.Surname,
                     PhoneNumber = register.PhoneNumber,
-                    HasDeleted =false,
+                    HasDeleted = false,
                 };
-                
+
                 IdentityResult identityResult = await _userManager.CreateAsync(user, register.Password);
                 if (!identityResult.Succeeded)
                 {
@@ -93,11 +95,21 @@ namespace ZodiacWatchStore.Controllers
                     }
                     return View(register);
                 }
-            
+
                 await _userManager.AddToRoleAsync(user, "Member");
                 await _signInManager.SignInAsync(user, true);
-                
                 return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Şərtlər və qaydalarımızı qəbul etməlisiniz");
+                //return RedirectToAction("Register", "Account", new RegisterVM {Name=register.Name,
+                // Surname=register.Surname});
+                return View(register);
+            }
+                
+                
+                
         }
         public async Task<IActionResult> Logout()
         {

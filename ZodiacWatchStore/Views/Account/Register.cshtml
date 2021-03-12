@@ -28,7 +28,7 @@
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="content-wrapper d-flex align-items-center auth px-0">
                 <div class="row w-100 mx-0">
-                    <div class="col-lg-4 mx-auto">
+                    <div class="col-lg-5 mx-auto">
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
                             <div class="brand-logo text-center">
                                 <img src="~/assets/images/logoblack.png" alt="logo">
@@ -67,9 +67,18 @@
                                         <input asp-for="CheckPassword" class="form-control form-control-lg" placeholder="Şifrənin təkrarı">
                                         <span asp-validation-for="CheckPassword" class="text-danger"></span>
                                     </div>
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-primary btn-block" value="Hesabı yarat" />
-                                </div>
+                                    <div class="form-group">
+                                        <input asp-for="PrivacyAggrement" placeholder="Ischecked">
+                                        <span asp-validation-for="PrivacyAggrement" class="text-danger"></span>
+                                        <label asp-for="PrivacyAggrement" class="text-danger mb-3">Müqaviləni oxudum və razıyam</label>
+
+
+                                    </div>
+         
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary btn-block" value="Hesabı yarat">
+                      
+                                    </div>
                                     <div class="text-center mt-4 font-weight-light">
                                         Artıq hesabınız var? <a asp-action="Login" class="text-primary">Daxil ol</a>
                                     </div>
