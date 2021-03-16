@@ -13,5 +13,7 @@ namespace ZodiacWatchStore.Models
         public string Icon { get; set; }
         [Required,StringLength(maximumLength:25)]
         public string Title { get; set; }
+        public bool HasDeleted { get; set; }
+        public DateTime? DeletedTime { get; set; }
     }
 }

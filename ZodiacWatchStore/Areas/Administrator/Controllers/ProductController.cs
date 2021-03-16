@@ -1,9 +1,11 @@
 ﻿using FrontToUp.Extentions;
 using FrontToUp.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,6 +16,8 @@ using ZodiacWatchStore.Models;
 namespace ZodiacWatchStore.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
+    [Authorize(Roles = "Admin")]
+
     public class ProductController : Controller
     {
         private readonly AppDbContext _context;
@@ -27,8 +31,8 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
         // GET: ProductController
         public ActionResult Index()
         {
-            List<Product> Products = _context.Products.Where(c => c.HasDeleted == false).ToList();
-            return View(Products);
+            List<Product> products = _context.Products.Where(p => p.HasDeleted == false).ToList();
+            return View(products);
         }
 
         #region ProductDetail
@@ -320,7 +324,7 @@ namespace ZodiacWatchStore.Areas.Administrator.Controllers
             dbProduct.WatchCode = Product.WatchCode;
             dbProduct.Price = Product.Price;
             dbProduct.Model = Product.Model;
-            dbProduct.Discount = 0;
+            dbProduct.Discount = Product.Discount;
             dbProduct.SaleCount = 0;
             dbProduct.ViewCount = 0;
 

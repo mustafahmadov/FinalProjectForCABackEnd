@@ -21891,3 +21891,25 @@ tr, th, td {
 }
 
 /*# sourceMappingURL=maps/style.css.map */
+.column .card {
+    text-align: center;
+    padding: 60px 47px;
+
+}
+.column .card h3{
+    font-size: 2.5rem!important;
+    color: #4d83ff;
+}
+.column .card p{
+    font-size: 1.2rem!important;
+    color: #71c016;
+
+}
+
+.dashboardItem {
+    text-align: center;
+    display: block;
+    margin-top: 30px;
+    font-size: 35px;
+    text-decoration: none!important;
+}

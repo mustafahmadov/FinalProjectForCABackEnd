@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FrontToUp.Extentions;
 using FrontToUp.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,8 @@ using ZodiacWatchStore.Models;
 namespace ZodiacWatchStore.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
+    [Authorize(Roles = "Admin")]
+
     public class SliderController : Controller
     {
         private readonly AppDbContext _context;

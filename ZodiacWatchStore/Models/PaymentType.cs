@@ -12,5 +12,7 @@ namespace ZodiacWatchStore.Models
         [Required]
         public string Type { get; set; }
         public ICollection<Sale> Sales { get; set; }
+        public bool HasDeleted { get; set; }
+        public DateTime? DeletedTime { get; set; }
     }
 }

@@ -7,6 +7,6 @@ namespace ZodiacWatchStore.Models
 {
     public enum SaleStatus
     {
-        Waiting,Sending,Finished
+        Reject,Waiting,Sending,Finished
     }
 }

@@ -13,5 +13,6 @@ namespace ZodiacWatchStore.ViewModels
         public string ProductCode { get; set; }
         public int StatusCount { get; set; }
         public double Price { get; set; }
+        public string UserName { get; set; }
     }
 }

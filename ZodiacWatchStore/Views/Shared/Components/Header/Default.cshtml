@@ -1,40 +1,34 @@
 ﻿@model HeaderFooterVM
+@inject SignInManager<AppUser> signInManager;
+@inject UserManager<AppUser> userManager;
 <nav class="navbar-top">
     <div class="container">
         <div class="topbar">
             <ul class="box-top box-top-right pull-right">
 
-                <li class="userName">
-                    
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <a>@ViewBag.FullName</a>
-                        }
-                    
-                </li>
-                <li>
-                    <i class="fas fa-phone"></i>
-                    <span>Əlaqə : @Model.Bio.Phone</span>
-                </li>
-                <li>
-                    <a asp-controller="Basket" asp-action="Index">
-                        <span>
-                            <i class="fas fa-shopping-basket"></i>
-                            Səbət
-                        </span>
+                
 
-                    </a>
-                </li>
-                <li>
-                    <a asp-controller="Basket" asp-action="CheckOut">
-                        <span>
-                            <i class="fa fa-share"></i>
-                            Sifarişi rəsmiləşdir
-                        </span>
-                    </a>
-                </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="userName">
+                            <a asp-controller="Account" asp-action="UserCabinet">@ViewBag.UserName</a>
+                        </li>
+                    }
+                   
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>Əlaqə : @Model.Bio.Phone</span>
+                    </li>
+                    <li>
+                        <a asp-controller="Basket" asp-action="Index">
+                            <span>
+                                <i class="fas fa-shopping-basket"></i>
+                                Səbət
+                            </span>
 
-            </ul>
+                        </a>
+                    </li>
+              </ul>
         </div>
     </div>
 </nav>
@@ -57,23 +51,18 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-hover" id="navbarNavDropdown">
                     <ul class="navbar-nav">
+
                         <li class="nav-item">
-                            <a asp-controller="Shop" asp-action="Index" class="nav-link">KİŞİ</a>
+                            <a asp-controller="Product" asp-action="Index" class="nav-link">Saatlarımız</a>
                         </li>
                         <li class="nav-item">
-                            <a asp-controller="Shop" asp-action="Index" class="nav-link">Qadın</a>
+                            <a asp-controller="Brand" asp-action="Index" class="nav-link">Brendlər</a>
                         </li>
                         <li class="nav-item">
-                            <a asp-controller="Shop" asp-action="Index"class="nav-link">DİVAR Saatı</a>
+                            <a asp-controller="About" asp-action="Index" class="nav-link">Haqqımızda</a>
                         </li>
                         <li class="nav-item">
-                            <a asp-controller="Brand" asp-action="Index"class="nav-link">Brendlər</a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="About" asp-action="Index"class="nav-link">Haqqımızda</a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="Contact" asp-action="Index"class="nav-link">Əlaqə</a>
+                            <a asp-controller="Contact" asp-action="Index" class="nav-link">Əlaqə</a>
                         </li>
                     </ul>
                 </div>
@@ -99,11 +88,22 @@
                                     <li>
                                         <a asp-controller="Account" asp-action="UserCabinet">Hesabım</a>
                                     </li>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {
+                                        <li>
+                                            <a asp-area="Administrator" asp-controller="Dashboard" asp-action="Index">Admin</a>
+                                        </li>
+                                    }
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("SaleModerator"))
+                                    {
+                                        <li>
+                                            <a asp-area="Administrator" asp-controller="Sale" asp-action="Index">Admin</a>
+                                        </li>
+                                    }
                                     <li>
                                         <a asp-controller="Account" asp-action="Logout">Çıxış</a>
                                     </li>
                                 }
-
                             </ul>
                         </li>
                         <li class="heart">
@@ -139,19 +139,19 @@
                     @foreach (Brand brand in Model.Brands)
                     {
                         <li>
-                            <a href="#">@brand.Name</a>
+                            <a asp-controller="Product" asp-action="Index" asp-route-id="@brand.Id">@brand.Name</a>
                         </li>
                     }
                 </ul>
             </div>
             <div class="search-container">
-                
+
                 <ul class="searchResult" id="searchList">
                     <li>
                         <input type="text" name="search" id="input-search" value=""
                                placeholder="Bütün mağaza üzrə axtarış..." class="searchText">
                     </li>
-                    
+
                 </ul>
             </div>
             <div class="specials">

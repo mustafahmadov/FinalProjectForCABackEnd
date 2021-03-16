@@ -1,0 +1,341 @@
+﻿@model UserCabinetVM
+@{
+    ViewData["Title"] = "Kabinet";
+}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-home"></i>
+                    Əsas Səhifə
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Şəxsi Kabinet</li>
+        </ol>
+    </nav>
+</div>
+<!-- Tab links -->
+<section class="mt-5 mb-5">
+ <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="tab">
+                <button class="tablinks active" onclick="openCity(event, 'Information')">Hesab Məlumatları</button>
+                <button class="tablinks" onclick="openCity(event, 'Wishlist')">Seçilmişlər</button>
+                <button class="tablinks" onclick="openCity(event, 'Orders')">Sifarişlərim</button>
+            </div>
+
+            <!-- Tab content -->
+            <div id="Information" class="tabcontent" style="display: block">
+                <form method="post" class="mt-3">
+                    <button class="accordion active" type="button">Məlumatlarım</button>
+                    <div class="panel" style="display:block;">
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Name">Adınız <span></span></label>
+                                    <input asp-for="Name" class="form-control" placeholder="Adınız">
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Surname">Soyadınız <span></span></label>
+                                    <input asp-for="Surname" class="form-control" placeholder="Soyadınız">
+                                    <span asp-validation-for="Surname" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="FatherName">Ata adı <span></span></label>
+                                    <input asp-for="FatherName" class="form-control" placeholder="Ata adı">
+                                    <span asp-validation-for="FatherName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Email">Email ünvanı <span></span></label>
+                                    <input asp-for="Email" class="form-control" placeholder="Email ünvanı ">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserName">Istifadəçi adı <span></span></label>
+                                    <input asp-for="UserName" class="form-control" placeholder="Istifadəçi adı">
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 relative">
+                                <div class="input-group-text">+994</div>
+                                <div class="form-group">
+                                    <label asp-for="Phone">Əlaqə Nömrəsi <span>*</span></label>
+                                    <input asp-for="Phone" class="form-control" placeholder="Nömrə" style="padding-left: 76px;">
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    <label asp-for="Information">Əlavə qeydiniz (varsa) </label>
+                                    <textarea asp-for="Information" type="text" class="form-control" rows="2"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <button class="accordion active" type="button">Ünvan</button>
+                    <div class="panel" style="display:block;">
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="City">Şəhər <span></span></label>
+                                    <input asp-for="City" class="form-control" placeholder="Şəhər">
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="District">Rayon <span></span></label>
+                                    <input asp-for="District" class="form-control" placeholder="Soyadınız">
+                                    <span asp-validation-for="District" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="DetalizedAddress">Ətraflı adres(küçə,mənzil və.s) <span></span></label>
+                                    <input asp-for="DetalizedAddress" class="form-control" placeholder="">
+                                    <span asp-validation-for="DetalizedAddress" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button class="accordion active" type="button">Məlumatlarım</button>
+                    <div class="panel" style="display:block;">
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="PassportID">Şəx.vəs. seriya nömrəsi(Məs: AZExxxxxxxx) <span></span></label>
+                                    <input asp-for="PassportID" class="form-control" placeholder="Seriya">
+                                    <span asp-validation-for="PassportID" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="FIN">Şəx.vəs. FİN kodu<span></span></label>
+                                    <input asp-for="FIN" class="form-control" placeholder="Fin kod">
+                                    <span asp-validation-for="FIN" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <button class="accordion active" type="button">Şifrəni dəyiş</button>
+                    <div class="panel" style="display:block;">
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Password">Yeni şifrə <span></span></label>
+                                    <input asp-for="Password" class="form-control" placeholder="Yeni şifrə ">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="CheckPassword">Yeni şifrənin təkrarı <span></span></label>
+                                    <input asp-for="CheckPassword" class="form-control" placeholder="Yeni şifrənin təkrarı">
+                                    <span asp-validation-for="CheckPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <input type="submit" class="btn mt-3 mb-3 text-center" style="background-color: #ff6a00; color: white;" value="Dəyişiklikləri yadda saxla" />
+                </form>
+            </div>
+
+            <div id="Wishlist" class="tabcontent">
+                <div class="container">
+                    <div class="row">
+                           <div class="col-lg-12 col-md-12 col-sm-12 ">
+            <div id="content">
+                @if (Model.UserWishlist == null)
+                {
+                    <h2 class="text-center mb-4">Arzu siyahısı boşdur</h2>  
+                }
+                else
+                {
+                    <h2 class="text-center mb-4">Arzu siyahısı</h2>
+
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <td class="text-center">Şəkil</td>
+                                <td class="text-left">Məhsulun adı</td>
+                                <td class="text-left">Model</td>
+                                <td class="text-right">Anbar</td>
+                                <td class="text-right">Qiyməti</td>
+                                <td class="text-right">Hərəkət</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (WishlListVM product in Model.UserWishlist)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/@product.Image" alt="@product.Model"
+                                                 title="@product.Model">
+                                        </a>
+                                    </td>
+                                    <td class="text-left">
+                                        <a asp-controller="Product" asp-action="ProductDetails" asp-route-id="@product.Id">
+                                            @product.Model
+                                        </a>
+                                    </td>
+                                    <td class="text-left">@product.ProductCode</td>
+                                    <td class="text-right">
+                                        @if (product.StatusCount > 0)
+                                        {
+                                            <span>Anbarda</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Bitib</span>
+                                        }
+                                    </td>
+                                    <td class="text-right">
+                                        <div class="price">
+                                            ₼@product.Price
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn-cart btn btn-primary" type="button" data-toggle="tooltip" data-placement="top"
+                                                title="AddBasket" id="addToBasket">
+                                            <i class="fas fa-shopping-cart mr-1 "></i>
+                                        </button>
+                                        <input class="basketProduct" type="hidden" value="@product.Id" />
+                                        <button id="removeFromWishlist" data-toggle="tooltip" title="" class="btn btn-danger"
+                                                data-original-title="Sil">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+
+                    </table>
+                </div>
+                }
+            </div>
+        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Orders" class="tabcontent">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 ">
+                            <div id="content">
+                                @if (Model.UserSales == null)
+                                {
+                                    <h2 class="text-center mb-4">Sizin hələki sifarişiniz yoxdur</h2>
+
+                                }
+                                else
+                                {
+                                    <h2 class="text-center mb-4">Sifariş siyahısı</h2>
+                               
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td class="text-center">Sifariş tarixi</td>
+                                                <td class="text-center">Modellər və sayları</td>
+                                                <td class="text-center">Status</td>
+                                                <td class="text-center">Məbləğ</td>
+                                                <td class="text-center">Ödəmə metodu</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (Sale sale in Model.UserSales)
+                                            {
+                                                <tr>
+                                                    <td class="text-center">
+                                                        @sale.Date.ToString("MM/dd/yyyy")
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @foreach (SaleProduct product in sale.SaleProducts)
+                                                        {
+                                                            <p style="color: #c48130e6;">
+                                                                @product.Count ədəd @product.Product.WatchCode * ₼@product.Price.00
+                                                            </p>
+                                                        }
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if (sale.SaleStatus.ToString() == "Waiting")
+                                                        {
+                                                            <span>Gözləmədə</span>
+                                                        }
+                                                        else if (sale.SaleStatus.ToString() == "Sending")
+                                                        {
+                                                            <span>Göndərilib</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>Çatdırılıb</span>
+                                                        }
+
+
+                                                    </td>
+
+                                                    <td class="text-center">
+                                                        <div class="price">
+                                                            ₼@sale.Total.00
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">@sale.PaymentType.Type</td>
+                                                </tr>
+                                            }
+
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+
+@section Scripts{ 
+   <partial name="_Validation"/>
+}

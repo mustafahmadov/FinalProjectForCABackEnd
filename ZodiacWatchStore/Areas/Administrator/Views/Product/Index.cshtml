@@ -9,11 +9,11 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Məhsullar</h4>
-               
-                    <a asp-action="Create" class="btn btn-primary mt-3">YENİSİNİ YARAT</a>
+
+                <a asp-action="Create" class="btn btn-primary mt-3">YENİSİNİ YARAT</a>
 
                 <div class="table-responsive pt-3">
-                    <table class="table table-bordered">
+                    <table id="myTable" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>
@@ -39,44 +39,54 @@
                         <tbody>
                             @foreach (Product item in Model)
                             {
-                            <tr>
-                                <td class="text-center">
-                                    <img src="~/assets/images/@item.Image" style="width:80px; height:80px; border-radius:0;" />
-                                </td>
-                                <td class="text-center">
-                                    @item.Model
-                                </td>
-                                <td class="text-center">
-                                    @item.WatchCode
-                                </td>
-                                <td class="text-center">
-                                    @item.Price
-                                </td>
-                                <td class="text-center">
-                                    @item.Discount
-                                </td>
-                                <td class="text-center">
-                                    <a asp-action="Detail" asp-route-id="@item.Id" class="btn btn-success">
-                                        <i class="mdi mdi-account-card-details"></i>
-                                    </a>
-                                    <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning">
-                                        <i class="mdi mdi-table-edit"></i>
-                                    </a>
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">
-                                        <i class="mdi mdi-delete"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <img src="~/assets/images/@item.Image" style="width:80px; height:80px; border-radius:0;" />
+                                    </td>
+                                    <td class="text-center">
+                                        @item.Model
+                                    </td>
+                                    <td class="text-center">
+                                        @item.WatchCode
+                                    </td>
+                                    <td class="text-center">
+                                        @item.Price
+                                    </td>
+                                    <td class="text-center">
+                                        @item.Discount
+                                    </td>
+                                    <td class="text-center">
+                                        <a asp-action="Detail" asp-route-id="@item.Id" class="btn btn-success">
+                                            <i class="mdi mdi-account-card-details"></i>
+                                        </a>
+                                        <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning">
+                                            <i class="mdi mdi-table-edit"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">
+                                            <i class="mdi mdi-delete"></i>
+                                        </a>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
                 </div>
+
             </div>
+
         </div>
+
     </div>
 </div>
 
 
 
-
+@section Scripts{
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+    
+}
 

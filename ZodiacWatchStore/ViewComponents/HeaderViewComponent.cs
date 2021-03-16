@@ -23,11 +23,12 @@ namespace ZodiacWatchStore.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            ViewBag.FullName = "";
+            ViewBag.Brands = _context.Brands.Where(b => b.HasDeleted == false).ToList();
+            ViewBag.UserName = "";
             if (User.Identity.IsAuthenticated)
             {
                 AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
-                ViewBag.FullName ="Xoş gəldin," + " " + user.Name+" "+user.Surname + "!";
+                ViewBag.UserName ="Xoş gəldin," + " " + user.UserName + "!";
             }
             HeaderFooterVM viewModel = new HeaderFooterVM()
             {

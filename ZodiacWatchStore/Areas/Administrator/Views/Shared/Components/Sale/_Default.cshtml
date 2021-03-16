@@ -1,0 +1,78 @@
+﻿@*@model List<Sale>
+@foreach (Sale sale in Model)
+{
+    guid = "sale" + Guid.NewGuid().ToString();
+    <tr>
+        <td class="text-center">
+            @sale.AppUser.UserName
+        </td>
+        <td class="text-center">
+            @sale.Date.ToString("MM/dd/yyyy")
+        </td>
+        <td class="text-center">
+            @foreach (SaleProduct product in sale.SaleProducts)
+            {
+                <p style="color: #c48130e6;">
+                    @product.Count ədəd @product.Product.WatchCode * ₼@product.Price.00
+                </p>
+            }
+        </td>
+        <td class="text-center">
+            @if (sale.SaleStatus.ToString() == "Waiting")
+            {
+                <span>Gözləmədə</span>
+            }
+            else if (sale.SaleStatus.ToString() == "Sending")
+            {
+                <span>Göndərilib</span>
+            }
+            else
+            {
+                <span>Çatdırılıb</span>
+            }
+
+
+        </td>
+
+        <td class="text-center">
+            <div class="price">
+                ₼@sale.Total.00
+            </div>
+        </td>
+        <td class="text-center">@sale.PaymentType.Type</td>
+        <td class="text-center">
+            <button asp-action="ChangeSaleStatus" asp-route-id="@sale.Id" type="button" data-toggle="modal" data-target="#@guid" class="btn btn-danger">
+                Statusu dəyiş
+            </button>
+            <div class="modal fade" id="@guid" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center" id="exampleModalCenterTitle">İstifadəçi aktivasiyası</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row mt-3 text-center justify-content-center">
+                                <form method="post" asp-action="ChangeSaleStatus" asp-route-id="@sale.Id">
+                                    <div class="form-group">
+                                        <label>Statusu seçin</label>
+                                        <select class="form-control" name="status">
+                                            <option value="--seç"></option>
+                                            @foreach (SaleStatus status in Enum.GetValues(typeof(SaleStatus)))
+                                            {
+                                                <option value="@status">@status.ToString()</option>
+                                            }
+                                        </select>
+                                        <input type="submit" class="btn btn-success" value="Dəyiş" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+}*@

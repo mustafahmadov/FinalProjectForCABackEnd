@@ -31,7 +31,7 @@ namespace ZodiacWatchStore.ViewComponents
             else if(filterFor == "discountproducts")
             {
                 products = _context.Products.Where(p => p.HasDeleted == false && p.Discount>0)
-                                                            .Take(8).ToList();
+                                                            .Take(4).ToList();
             }
             return View(await Task.FromResult(products));
         }

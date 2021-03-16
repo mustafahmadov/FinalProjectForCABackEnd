@@ -28,8 +28,16 @@ namespace ZodiacWatchStore.Controllers
             {
                 basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
             }
-
-            return View(basket);
+            if (User.Identity.IsAuthenticated)
+            {
+                return View(basket);
+            }
+            if (Request.Cookies["basket"] == null)
+            {
+                return View(basket);
+            }
+            return RedirectToAction("Login", "Account");
+            
         }
         public IActionResult IncProductCountOne(int? id)
         {
@@ -55,12 +63,12 @@ namespace ZodiacWatchStore.Controllers
         {
             double productTotal = 0;
             if (id == null) return NotFound();
-            List<BasketVM> basket = new List<BasketVM>();
+            List<BasketVM> basketP = new List<BasketVM>();
             if (Request.Cookies["basket"] != null)
             {
-                basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+                basketP = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
             }
-            BasketVM product = basket.FirstOrDefault(p => p.Id == id);
+            BasketVM product = basketP.FirstOrDefault(p => p.Id == id);
             
             if (product != null )
             {
@@ -69,15 +77,15 @@ namespace ZodiacWatchStore.Controllers
             }
             if (product.Count == 0)
             {
-                basket.Remove(product);
+                basketP.Remove(product);
             }
 
 
 
             productTotal = Math.Abs(product.Count) * product.Price;
-            Response.Cookies.Append("basket", JsonConvert.SerializeObject(basket));
+            Response.Cookies.Append("basket", JsonConvert.SerializeObject(basketP));
 
-            return PartialView("_ProductCardPartial",basket);
+            return PartialView("_ProductCardPartial",basketP);
         }
         public IActionResult GetBasketTotal()
         {
@@ -126,20 +134,29 @@ namespace ZodiacWatchStore.Controllers
 
         public IActionResult CheckOut()
         {
-            ViewBag.Total = 0;
             List<BasketVM> basket = new List<BasketVM>();
             if (Request.Cookies["basket"] != null)
             {
                 basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
             }
-            ViewBag.Basket = basket;
-            foreach (BasketVM item in basket)
+            ViewBag.PaymentTypes = _context.PaymentTypes.ToList();
+            if (User.Identity.IsAuthenticated)
             {
-                ViewBag.Total += item.Count * item.Price;
+                ViewBag.Total = 0;
+                ViewBag.Basket = basket;
+                foreach (BasketVM item in basket)
+                {
+                    ViewBag.Total += item.Count * item.Price;
+                }
+
+                ViewBag.PaymentTypes = _context.PaymentTypes.ToList();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
             }
             
-            ViewBag.PaymentTypes = _context.PaymentTypes.ToList();
-            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -149,14 +166,25 @@ namespace ZodiacWatchStore.Controllers
             {
                 ViewBag.PaymentTypes = _context.PaymentTypes.ToList();
                 AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
-                List<BasketVM> basketProducts = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+                List<BasketVM> basketProducts = new List<BasketVM>();
+                if (Request.Cookies["basket"] != null)
+                {
+                    basketProducts = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+                }
+                ViewBag.Basket = basketProducts;
+                ViewBag.Total = 0;
+                foreach (BasketVM item in basketProducts)
+                {
+                    ViewBag.Total += item.Count * item.Price;
+                }
                 Sale newSale = new Sale();
                 foreach (BasketVM item in basketProducts)
                 {
                     var dbPro = await _context.Products.FindAsync(item.Id);
                     if (item.Count > dbPro.Count)
                     {
-                        return Content("Get qumla oyna");
+                        TempData["error"] = $"Anbarda {item.Model} məhsulundan seçdiyiniz sayda yoxdur";
+                        return View();
                     }
                 }
                 List<SaleProduct> saleProducts = new List<SaleProduct>();
@@ -205,11 +233,12 @@ namespace ZodiacWatchStore.Controllers
                 newSale.ShippingAddress = sale.City+' '+sale.District+' '+sale.DetalizedAddress;
                 newSale.SaleStatus = SaleStatus.Waiting;
                 newSale.Information = sale.Information;
-                Response.Cookies.Delete("basket");
+                
 
                 await _context.Sales.AddAsync(newSale);
                 await _context.SaveChangesAsync();
-                TempData["success"] = "Alish-verishiniz ugurla yerine yetirildi";
+
+                Response.Cookies.Delete("basket");
                 return RedirectToAction("OrderCompleted","Basket");
             }
             else

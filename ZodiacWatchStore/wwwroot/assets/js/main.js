@@ -90,6 +90,7 @@ $(document).ready(function () {
 
                 });
                 getBasketCount();
+                getBasketTotal();
             }
         })
     })
@@ -118,14 +119,18 @@ $(document).ready(function () {
             url: '/Product/AddToWishList?id=' + productId,
             type: 'Get',
             success: function (res) {
-                swal("Arzu siyahısına əlavə olundu!", {
-                    buttons: false,
-                    timer: 1000,
-                    icon: "success",
-
-                });
                 console.log(res);
+                
+                    swal(res.message, {
+                        buttons: false,
+                        timer: 1200,
+                        icon: res.icon,
+
+                    });
+                    console.log(res);
                 WishlistCount();
+                
+                
             }
         });
     })
@@ -192,7 +197,8 @@ $(document).ready(function () {
             url: '/Basket/DecProductCountOne?id=' + productId,
             type: "Get",
             success: function (res) {
-                $('.productCard').append(res);
+                setTimeout(function () { $('.productCard').append(res); }, 10);
+                
                 getBasketCount();
                 $.ajax({
                     url: '/Basket/GetBasketTotal',
@@ -297,16 +303,25 @@ $(document).ready(function () {
                 items: 1
             },
             400: {
-                items: 2
+                items: 1
             },
             600: {
-                items: 2
+                items: 1
             },
             1000: {
                 items: 1
             }
         }
     });
+
+
+    $('.navbar-toggler').click(function () {
+        $('.navbar-nav').addClass('d-none');
+        $('.navbar-collapse').toggleClass('d-block');
+        $('.navbar-collapse').toggleClass('show');
+        $('.navbar-nav').toggleClass('show');
+        $('.navbar-nav').toggleClass('d-block');
+    })
 
         $('.brands').click(function () {
             $('#brands').toggleClass('d-block');
@@ -458,4 +473,23 @@ for (i = 0; i < acc.length; i++) {
 
 
 
+function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
 
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
