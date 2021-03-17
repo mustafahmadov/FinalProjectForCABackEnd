@@ -47,7 +47,8 @@ namespace ZodiacWatchStore.Controllers
                             Model = item.Model,
                             WatchCode = item.WatchCode,
                             Price = item.Price,
-                            Image = item.Image
+                            Image = item.Image,
+                            Discount = item.Discount
                         };
                         products.Add(basketVM);
                     }
@@ -62,7 +63,8 @@ namespace ZodiacWatchStore.Controllers
                         Model = item.Model,
                         WatchCode = item.WatchCode,
                         Price = item.Price,
-                        Image = item.Image
+                        Image = item.Image,
+                        Discount = item.Discount
                     };
                     products.Add(basketVM);
                 }
@@ -122,7 +124,8 @@ namespace ZodiacWatchStore.Controllers
                         Model = item.Model,
                         WatchCode = item.WatchCode,
                         Price = item.Price,
-                        Image = item.Image
+                        Image = item.Image,
+                        Discount = item.Discount
                     };
                     products.Add(basketVM);
                 }
@@ -138,7 +141,8 @@ namespace ZodiacWatchStore.Controllers
                     Model = item.Model,
                     WatchCode = item.WatchCode,
                     Price = item.Price,
-                    Image = item.Image
+                    Image = item.Image,
+                    Discount = item.Discount
                 };
                 products.Add(basketVM);
             }
@@ -212,7 +216,8 @@ namespace ZodiacWatchStore.Controllers
                     Model = item.Model,
                     WatchCode = item.WatchCode,
                     Price = item.Price,
-                    Image = item.Image
+                    Image = item.Image,
+                    Discount=item.Discount
                 };
                 filteredProducts.Add(basketVM);
             }

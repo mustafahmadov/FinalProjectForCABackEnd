@@ -15,11 +15,11 @@
                                 <div class="row mb-4">
 
                                     <div class="col-lg-4">
-                                        <input class="form-control" type="text" id="priceFrom" style="width: 100px;" min="0" placeholder="min" />
+                                        <input class="form-control" type="text" id="priceFrom" name="PriceFrom" style="width: 100px;" min="0" placeholder="min" value="@ViewBag.PriceFrom" />
                                     </div>
                                     <div class="col-lg-4 offset-lg-2">
 
-                                        <input class="form-control" type="text" id="priceTo" style="width: 100px;" min="0" placeholder="max" />
+                                        <input class="form-control" type="text" id="priceTo"  name="PriceTo" style="width: 100px;" min="0" placeholder="max" value="@ViewBag.PriceTo" />
                                     </div>
 
                                 </div>
@@ -211,7 +211,7 @@
                                        asp-controller="Product" asp-action="ProductDetails" asp-route-id="@product.Id">@product.Model</a>
                                 </div>
                                 <div class="mt-1">
-                                    @*@if (product.Discount > 0)
+                                    @if (product.Discount > 0)
                                     {
                                         <span class="product-price">
                                             <del class="text-muted">₼@product.Price</del>
@@ -224,7 +224,7 @@
                                             <del class="text-muted"></del>
                                             ₼@product.Price
                                         </span>
-                                    }*@
+                                    }
 
                                 </div>
                             </div>
@@ -259,7 +259,7 @@
 
                     </div>
                     <nav aria-label="..." class="justify-content-center">
-                        <ul class="pagination pagination-sm">
+                        <ul class="pagination pagination-sm justify-content-center">
                             @for (int i = 1; i <= ViewBag.PageCount; i++)
                             {
                                 if (i == ViewBag.Page)
