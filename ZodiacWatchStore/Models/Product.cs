@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ZodiacWatchStore.Models
@@ -40,6 +41,7 @@ namespace ZodiacWatchStore.Models
         public int BrandId { get; set; }
         public int GlassTypeId { get; set; }
         public ICollection<ProductImage> ProductImages { get; set; }
+        [JsonIgnore]
         public virtual ICollection<ProductCategory> ProductCategories { get; set; }
         [NotMapped]
         public IFormFile MainPhoto { get; set; }

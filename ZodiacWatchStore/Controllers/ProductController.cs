@@ -27,42 +27,128 @@ namespace ZodiacWatchStore.Controllers
             ViewBag.WaterProtection = _context.WaterProtections.ToList();
             ViewBag.Categories = _context.Categories.ToList();
             ViewBag.Brands = _context.Brands.Where(b => b.HasDeleted == false).ToList();
-            List<Product> products = new List<Product>();
+            List<BasketVM> products = new List<BasketVM>();
             if (id != null)
             {
+                //Response.Cookies.Delete("filter");
+                //Response.Cookies.Append("filter",)
                 ViewBag.PageCount = Decimal.Ceiling((decimal)_context.Products
-                        .Where(t => t.HasDeleted == false&&t.BrandId==id).Count() / 8);
+                        .Where(t => t.HasDeleted == false && t.BrandId == id).Count() / 8);
                 ViewBag.Page = page;
                 if (page == null)
                 {
-                    return View(_context.Products.Where(t => t.HasDeleted == false&&t.BrandId == id).Take(8).ToList());
+                    //Response.Cookies.Append("filter",Json)
+                    var pr = _context.Products.Where(t => t.HasDeleted == false && t.BrandId == id).Take(8).ToList();
+                    foreach (Product item in pr)
+                    {
+                        BasketVM basketVM = new BasketVM
+                        {
+                            Id = item.Id,
+                            Model = item.Model,
+                            WatchCode = item.WatchCode,
+                            Price = item.Price,
+                            Image = item.Image
+                        };
+                        products.Add(basketVM);
+                    }
+                    return View(products);
                 }
-                products = _context.Products.Where(t => t.HasDeleted == false && t.BrandId == id).Skip(((int)page - 1) * 8).Take(8).ToList();
+                var pro = _context.Products.Where(t => t.HasDeleted == false && t.BrandId == id).Skip(((int)page - 1) * 8).Take(8).ToList();
+                foreach (Product item in pro)
+                {
+                    BasketVM basketVM = new BasketVM
+                    {
+                        Id = item.Id,
+                        Model = item.Model,
+                        WatchCode = item.WatchCode,
+                        Price = item.Price,
+                        Image = item.Image
+                    };
+                    products.Add(basketVM);
+                }
                 return View(products);
 
             }
-            List<BasketVM> basketproducts = new List<BasketVM>();
-            if (Request.Cookies["basket"] != null)
-            {
-                basketproducts = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
-            }
-            ViewBag.BasketCount = basketproducts.Count();
+            //List<BasketVM> basketproducts = new List<BasketVM>();
+            //if (Request.Cookies["basket"] != null)
+            //{
+            //    basketproducts = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            //}
+            //ViewBag.BasketCount = basketproducts.Count();
+            //if (Request.Cookies["filter"] != null)
+            //{
 
+            //}
+            if (Request.Cookies["filter"] != null)
+            {
+                FilterOptionsVM optionsVM = new FilterOptionsVM();
+                optionsVM = JsonConvert.DeserializeObject<FilterOptionsVM>(Request.Cookies["filterOptions"]);
+                ViewBag.PriceFrom = optionsVM.PriceFrom;
+                ViewBag.PriceTo = optionsVM.PriceTo;
+                ViewBag.CategoryId = optionsVM.CategoryId;
+                ViewBag.BrandId = optionsVM.BrandId;
+                ViewBag.MechanismId = optionsVM.MechanismId;
+                ViewBag.WaterProtectionId = optionsVM.WaterProtectionId;
+                ViewBag.BandTypeId = optionsVM.BandTypeId;
+                ViewBag.CaseThicksId = optionsVM.CaseThicksId;
+                ViewBag.GlassTypeId = optionsVM.GlassTypeId;
+
+
+
+                products = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["filter"]);
+                ViewBag.PageCount = Decimal.Ceiling((decimal)products.Count() / 8);
+                ViewBag.Page = page;
+                if (page == null)
+                {
+                    var pr = products.Take(8).ToList();
+                    return View(pr);
+                }
+                var produ = products.Skip(((int)page - 1) * 8).Take(8).ToList();
+                return View(produ);
+
+            }
 
             ViewBag.PageCount = Decimal.Ceiling((decimal)_context.Products
                         .Where(t => t.HasDeleted == false).Count() / 8);
             ViewBag.Page = page;
             if (page == null)
             {
-                return View(_context.Products.Where(t => t.HasDeleted == false).Take(8).ToList());
+                var pr = _context.Products.Where(t => t.HasDeleted == false).Take(8).ToList();
+                foreach (Product item in pr)
+                {
+                    BasketVM basketVM = new BasketVM
+                    {
+                        Id = item.Id,
+                        Model = item.Model,
+                        WatchCode = item.WatchCode,
+                        Price = item.Price,
+                        Image = item.Image
+                    };
+                    products.Add(basketVM);
+                }
+                return View(products);
             }
-            products = _context.Products.Where(t => t.HasDeleted == false).Skip(((int)page - 1) * 8).Take(8).ToList();
+            var prod = _context.Products.Where(t => t.HasDeleted == false).Skip(((int)page - 1) * 8).Take(8).ToList();
+
+            foreach (Product item in prod)
+            {
+                BasketVM basketVM = new BasketVM
+                {
+                    Id = item.Id,
+                    Model = item.Model,
+                    WatchCode = item.WatchCode,
+                    Price = item.Price,
+                    Image = item.Image
+                };
+                products.Add(basketVM);
+            }
             return View(products);
         }
 
         public IActionResult ProductFilter(int? PriceFrom, int? PriceTo, int? CategoryId,
             int? BrandId, int? MechanismId, int? WaterProtectionId, int? BandTypeId, int? CaseThickId, int? GlassTypeId)
         {
+            FilterOptionsVM optionsVM = new FilterOptionsVM();
             var result = _context.Products.Where(p => p.HasDeleted == false)
                 .Include(p => p.ProductImages).Include(p => p.Brand)
                   .Include(p => p.Mechanism).Include(p => p.WaterProtection)
@@ -70,41 +156,77 @@ namespace ZodiacWatchStore.Controllers
                       .Include(p => p.BandType).Include(p => p.ProductCategories)
                         .ThenInclude(p => p.Category).AsQueryable();
             if (PriceFrom != null)
+            {
                 result = result.Where(x => x.Price >= PriceFrom);
+                optionsVM.PriceFrom = PriceFrom;
+            }
             if (PriceTo != null)
+            {
                 result = result.Where(x => x.Price <= PriceTo);
+                optionsVM.PriceTo = PriceTo;
+            } 
             if (CategoryId != null)
-                result = result.Where(x => x.ProductCategories.Select(pc=>pc.CategoryId==CategoryId).FirstOrDefault());
+            {
+                result = result.Where(x => x.ProductCategories.Select(pc => pc.CategoryId == CategoryId).FirstOrDefault());
+                optionsVM.CategoryId = CategoryId;
+            }
             if (BrandId != null)
-                result = result.Where(x => x.BrandId==BrandId);
+            {
+                result = result.Where(x => x.BrandId == BrandId);
+                optionsVM.BrandId = BrandId;
+            }
             if (MechanismId != null)
+            {
                 result = result.Where(x => x.MechanismId == MechanismId);
+                optionsVM.MechanismId = MechanismId;
+            }
+            
             if (WaterProtectionId != null)
+            {
                 result = result.Where(x => x.WaterProtectionId == WaterProtectionId);
+                optionsVM.WaterProtectionId = WaterProtectionId;
+            }
             if (BandTypeId != null)
+            {
                 result = result.Where(x => x.BandTypeId == BandTypeId);
+                
+            }
             if (CaseThickId != null)
+            {
                 result = result.Where(x => x.CaseThickId == CaseThickId);
+                optionsVM.CaseThicksId = CaseThickId;
+            }
             if (GlassTypeId != null)
+            {
                 result = result.Where(x => x.GlassTypeId == GlassTypeId);
+                optionsVM.GlassTypeId = GlassTypeId;
+            }
 
             ProductPartialVM model = new ProductPartialVM();
-            //model.Page = page;
-            //model.PageCount = Decimal.Ceiling((decimal)result
-            //            .Where(t => t.HasDeleted == false).Count() / 8);
-            //ViewBag.PageCount = Decimal.Ceiling((decimal)result
-            //            .Where(t => t.HasDeleted == false).Count() / 8);
-            //ViewBag.Page = page;
-            //if (page == null)
-            //{
+            List<BasketVM> filteredProducts = new List<BasketVM>();
+            foreach (Product item in result)
+            {
+                BasketVM basketVM = new BasketVM
+                {
+                    Id = item.Id,
+                    Model = item.Model,
+                    WatchCode = item.WatchCode,
+                    Price = item.Price,
+                    Image = item.Image
+                };
+                filteredProducts.Add(basketVM);
+            }
+            optionsVM.BandTypeId = BandTypeId;
+            Response.Cookies.Append("filterOptions", JsonConvert.SerializeObject(optionsVM));
+            Response.Cookies.Append("filter", JsonConvert.SerializeObject(filteredProducts));
+            return RedirectToAction("Index","Product");
+        }
 
-            //    result = result.Where(t => t.HasDeleted == false).Take(8);
-            //    model.products = result;
-            //    return PartialView("_ProductPartial", model);
-            //}
-            //result = result.Where(t => t.HasDeleted == false).Skip(((int)page - 1) * 8).Take(8);
-            model.products = result.Take(16);
-            return PartialView("_ProductPartial", model);
+        public IActionResult ResetFilter()
+        {
+            Response.Cookies.Delete("filter");
+            Response.Cookies.Delete("filterOptions");
+            return RedirectToAction("Index", "Product");
         }
 
 
